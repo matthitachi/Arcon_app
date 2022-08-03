@@ -1,5 +1,8 @@
 
+import 'package:conference/Models/product.dart';
+import 'package:conference/Models/sponsor.dart';
 import 'package:conference/views/product.dart';
+import 'package:conference/widgets/events.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -9,16 +12,22 @@ import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
 
-class sponsorsSingle extends StatefulWidget {
+class SponsorsSingle extends StatefulWidget {
+  Sponsor sponsor;
+
+  SponsorsSingle(this.sponsor, {Key? key}) : super(key: key);
+
   @override
-  State<sponsorsSingle> createState() => _sponsorsSingleState();
+  State<SponsorsSingle> createState() => _SponsorsSingleState(this.sponsor);
 }
 
-class _sponsorsSingleState extends State<sponsorsSingle> {
+class _SponsorsSingleState extends State<SponsorsSingle> {
   bool obscureText = true;
   bool _isVisible = true;
   int selectedIndex = 0;
-  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  Sponsor sponsor;
+  _SponsorsSingleState(this.sponsor); // Create a key
 
 
   void onClicked(int index) {
@@ -95,10 +104,14 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image(
-                                image: AssetImage('assets/images/astra.png'),
-                                height: SizeConfig.safeBlockVertical! * 7,
+                              Image.network(
+                                sponsor.logo ?? '',
                                 fit: BoxFit.cover,
+                                height: SizeConfig.safeBlockVertical! * 4,
+                                errorBuilder:
+                                    (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                  return const Icon(Icons.error);
+                                },
                               ),
                               SizedBox(
                                 width: SizeConfig.safeBlockHorizontal! * 5,
@@ -109,7 +122,7 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                   Row(
                                     children: [
                                       Text(
-                                        "AstraZeneca",
+                                        sponsor.name??'',
                                         style: GoogleFonts.montserrat(
                                           color: Colors.white,
                                           fontSize: SizeConfig.safeBlockHorizontal! * 4,
@@ -143,7 +156,7 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                           Row(
                                             children: [
                                               Text(
-                                                "www.astrazeneca.com",
+                                                sponsor.website??"",
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.white,
@@ -172,7 +185,7 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                           Row(
                                             children: [
                                               Text(
-                                                "Nigerian",
+                                                sponsor.country??"",
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.white,
@@ -193,7 +206,7 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                           Row(
                                             children: [
                                               Text(
-                                                "Phone",
+                                                "Email",
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.montserrat(
                                                   color: Colors.white,
@@ -206,7 +219,7 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                           Row(
                                             children: [
                                               Text(
-                                                "+2349023452436",
+                                                sponsor.email??"",
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.white,
@@ -237,7 +250,7 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                               Container(
                                                 width: SizeConfig.safeBlockHorizontal! * 25,
                                                 child: Text(
-                                                  "4th floor, El shedai plaza, Abuja, Nigeria.",
+                                                  sponsor.address??"",
                                                   textAlign: TextAlign.left,
                                                   style: GoogleFonts.dmSans(
                                                     color: Colors.white,
@@ -293,10 +306,7 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                 height: SizeConfig.safeBlockVertical! * .5,
                               ),
                               Text(
-                                "Lorem Ipsum is simply dummy text of the printing"
-                                    " and typesetting industry. Lorem Ipsum has been"
-                                    " the industry's standard dummy text ever since"
-                                    " the 1500s, when an unknown printer took a galley",
+                                sponsor.details??"",
                                 textAlign: TextAlign.left,
                                 style: GoogleFonts.dmSans(
                                   color: mainColor,
@@ -335,68 +345,8 @@ class _sponsorsSingleState extends State<sponsorsSingle> {
                                     crossAxisSpacing: 14.0,
                                     mainAxisSpacing: 10,
                                     children: [
-                                      GestureDetector(
-                                        onTap: () async {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(builder: (context) => product()));
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: grayColor,
-                                            borderRadius: BorderRadius.all(Radius.circular(
-                                                SizeConfig.safeBlockVertical! * 2)),
-                                          ),
-                                          child: Center(
-                                            child: Image(
-                                              image: AssetImage('assets/images/astra.png'),
-                                              height: SizeConfig.safeBlockVertical! * 7,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: grayColor,
-                                          borderRadius: BorderRadius.all(Radius.circular(
-                                              SizeConfig.safeBlockVertical! * 2)),
-                                        ),
-                                        child: Center(
-                                          child: Image(
-                                            image: AssetImage('assets/images/astra.png'),
-                                            height: SizeConfig.safeBlockVertical! * 7,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: grayColor,
-                                          borderRadius: BorderRadius.all(Radius.circular(
-                                              SizeConfig.safeBlockVertical! * 2)),
-                                        ),
-                                        child: Center(
-                                          child: Image(
-                                            image: AssetImage('assets/images/astra.png'),
-                                            height: SizeConfig.safeBlockVertical! * 7,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: grayColor,
-                                          borderRadius: BorderRadius.all(Radius.circular(
-                                              SizeConfig.safeBlockVertical! * 2)),
-                                        ),
-                                        child: Center(
-                                          child: Image(
-                                            image: AssetImage('assets/images/astra.png'),
-                                            height: SizeConfig.safeBlockVertical! * 7,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
+                                      for(Product product in sponsor.products??[])
+                                      productsWidget(context, product),
                                     ]
                                 ),
                               )

@@ -60,7 +60,7 @@ class _NavigationState extends State<Navigation> {
           case 0: Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => home()));
+                  builder: (context) => Home()));
           break;
           case 1: Navigator.pushReplacement(
               context,
@@ -75,7 +75,7 @@ class _NavigationState extends State<Navigation> {
           case 3: Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) => welcome()));
+                  builder: (context) => Welcome()));
         }
       },
       unselectedItemColor: Colors.white,

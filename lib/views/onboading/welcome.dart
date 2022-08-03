@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import '../../utils/SizeConfig.dart';
 import '../../utils/constants.dart';
 
-class welcome extends StatefulWidget {
+class Welcome extends StatefulWidget {
   @override
-  State<welcome> createState() => _welcomeState();
+  State<Welcome> createState() => _WelcomeState();
 }
 
-class _welcomeState extends State<welcome> {
+class _WelcomeState extends State<Welcome> {
   bool cirAn = false;
   @override
   void initState(){
@@ -76,7 +76,7 @@ class _welcomeState extends State<welcome> {
                               padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockVertical! * 4),
                               child: SolidButton(
                                   name: "Join now",
-                                  page: signup(),
+                                  page: SignUp(),
                                   size: 3.5,
                                   context: context
                               ),
@@ -98,7 +98,7 @@ class _welcomeState extends State<welcome> {
                                   GestureDetector(
                                     onTap: () async {
                                       Navigator.of(context).pushReplacement(
-                                          MaterialPageRoute(builder: (context) => signin()));
+                                          MaterialPageRoute(builder: (context) => SignIn()));
                                     },
                                     child: Text(
                                       "Log in",

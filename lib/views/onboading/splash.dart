@@ -1,15 +1,17 @@
+import 'package:conference/Service/authdata.dart';
+import 'package:conference/routes.dart';
 import 'package:conference/views/onboading/welcome.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/SizeConfig.dart';
 
 
-class splash extends StatefulWidget {
+class Splash extends StatefulWidget {
   @override
-  State<splash> createState() => _splashState();
+  State<Splash> createState() => _SplashState();
 }
 
-class _splashState extends State<splash> {
+class _SplashState extends State<Splash> {
   bool cirAn = false;
   @override
   void initState(){
@@ -17,9 +19,19 @@ class _splashState extends State<splash> {
     _navigatetohome();
   }
 
+
+  void navigationToNextPage() async{
+    String? token  = await AuthData.getToken();
+    if(token == null){
+      Navigator.of(context).pushReplacementNamed(WELCOME);
+    }else{
+      Navigator.of(context).pushReplacementNamed(HOME);
+    }
+
+  }
   _navigatetohome() async{
-    await Future.delayed(Duration(milliseconds: 5000), () {});
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>welcome()));
+    await Future.delayed(const Duration(milliseconds: 5000), () {});
+    navigationToNextPage();
   }
 
 

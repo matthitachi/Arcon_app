@@ -6,7 +6,6 @@ import 'package:conference/Service/authdata.dart';
 import 'package:conference/Service/locatorService.dart';
 import 'package:conference/Service/navigationService.dart';
 import 'package:conference/routes.dart';
-import 'package:conference/views/onboading/forgot.dart';
 import 'package:conference/views/onboading/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -16,18 +15,18 @@ import '../../utils/SizeConfig.dart';
 import '../../utils/constants.dart';
 import '../home.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class Reset extends StatefulWidget {
+  const Reset({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Reset> createState() => _ResetState();
 }
 
-class _SignInState extends State<SignIn> {
+class _ResetState extends State<Reset> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   bool obscureText = true;
   @override
   void initState(){
@@ -41,6 +40,7 @@ class _SignInState extends State<SignIn> {
 
   Widget build(BuildContext context)  {
     SizeConfig().init(context);
+    final User user = ModalRoute.of(context)?.settings.arguments as User;
     return Scaffold(
       key: scaffoldKey,
         body: Container(
@@ -99,7 +99,7 @@ class _SignInState extends State<SignIn> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Welcome Back",
+                                      "Reset Password",
                                       textAlign: TextAlign.left,
                                       style: GoogleFonts.montserrat(
                                         color: textColor,
@@ -112,7 +112,7 @@ class _SignInState extends State<SignIn> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Get access to every conference, ",
+                                      "Reset your password to regain access to your account, ",
                                       textAlign: TextAlign.left,
                                       style: GoogleFonts.dmSans(
                                         color: textColor,
@@ -126,68 +126,6 @@ class _SignInState extends State<SignIn> {
                                   height: SizeConfig.safeBlockVertical! * 2,
                                 ),
 
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Email Address",
-                                            style: GoogleFonts.montserrat(
-                                              color:mainColor,
-                                              fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: SizeConfig.safeBlockVertical! * 1.5,
-                                      ),
-                                      Container(
-                                        height: SizeConfig.safeBlockVertical! * 5,
-                                        child: TextFormField(
-                                          controller: emailController,
-                                          validator: (value) {
-                                            List isEmpty = Validator.isEmpty(value);
-                                            if (isEmpty[0]) {
-                                              return isEmpty[1].toString();
-                                            }
-                                            return null;
-                                          },
-                                          style: GoogleFonts.montserrat(
-                                            color: mainColor,
-                                            fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                          keyboardType: TextInputType.name,
-                                          cursorColor: mainColor,
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.transparent,
-                                            contentPadding:
-                                            const EdgeInsets.only(left: 14.0, bottom: 5.0, top: 5.0),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0xFFECE2DC),
-                                                width: 0.8,
-                                              ),
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0xFFECE2DC),
-                                                width: 0.8,
-                                              ),
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Column(
@@ -216,12 +154,12 @@ class _SignInState extends State<SignIn> {
                                           controller: passwordController,
                                           validator: (value) {
                                             List isEmpty = Validator.isEmpty(value);
-                                            List min = Validator.min(value, 8);
+                                            List notMatch = Validator.notMatch(value, confirmPasswordController.text);
                                             if (isEmpty[0]) {
                                               return isEmpty[1].toString();
                                             }
-                                            if (min[0]) {
-                                              return min[1].toString();
+                                            if (notMatch[0]) {
+                                              return notMatch[1].toString();
                                             }
                                             return null;
                                           },
@@ -263,27 +201,82 @@ class _SignInState extends State<SignIn> {
                                           ),
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: SizeConfig.safeBlockVertical! * 1,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "Confirm Password",
+                                            style: GoogleFonts.montserrat(
+                                              color:mainColor,
+                                              fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                       SizedBox(
                                         height: SizeConfig.safeBlockVertical! * 1.5,
                                       ),
-                                      GestureDetector(
-                                        onTap: (){
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(builder: (context) => const Forgot()));
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(),
-                                            Text(
-                                              "Forgot password",
-                                              style: GoogleFonts.montserrat(
-                                                color:secondaryColor,
-                                                fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                fontWeight: FontWeight.w300,
-                                              ),
+                                      Container(
+                                        height: SizeConfig.safeBlockVertical! * 5,
+                                        child: TextFormField(
+                                          controller: confirmPasswordController,
+                                          validator: (value)  {
+                                            List isEmpty = Validator.isEmpty(value);
+                                            List notMatch = Validator.notMatch(value, passwordController.text);
+                                            if (isEmpty[0]) {
+                                              return isEmpty[1].toString();
+                                            }
+                                            if (notMatch[0]) {
+                                              return notMatch[1].toString();
+                                            }
+                                            return null;
+                                          },
+                                          obscureText: obscureText,
+                                          style: GoogleFonts.montserrat(
+                                            color: mainColor,
+                                            fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                            fontWeight: FontWeight.w300,
+                                          ),
+                                          keyboardType: TextInputType.visiblePassword,
+                                          cursorColor: mainColor,
+                                          decoration: InputDecoration(
+                                            suffixIcon: IconButton(
+                                              onPressed: (){
+                                                setState(() {
+                                                  obscureText = !obscureText;
+                                                });
+                                              },
+                                              icon: Icon(obscureText ? Icons.visibility_rounded
+                                                  : Icons.visibility_off_rounded, color: mainColor, size: 15,),
                                             ),
-                                          ],
+                                            filled: true,
+                                            fillColor: Colors.transparent,
+                                            contentPadding: const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 13.0),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0xFFECE2DC),
+                                                width: 0.8,
+                                              ),
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0xFFECE2DC),
+                                                width: 0.8,
+                                              ),
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -338,46 +331,44 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 RawMaterialButton(
                                   onPressed: () async {
+                                    FocusScope.of(context).requestFocus(FocusNode());
                                     if (formKey.currentState!.validate()) {
+                                      // If the form is valid, display a Snackbar.
                                       initLoading();
                                       Map<String, dynamic> formInfo = {
-                                        'email': emailController.text,
+                                        'id':user.id,
+                                        'email':user.email,
                                         'password': passwordController.text,
                                       };
-                                      print(formInfo);
                                       Auth auth = Auth();
-                                      Response rs = await auth.Login(formInfo);
-                                      print(rs.toJson());
+                                      Response rs =
+                                      await auth.Reset(formInfo);
                                       closeLoading();
                                       if (rs.status == 200) {
-
+                                        String token = rs.data['token'];
+                                        displaySnackbar(
+                                            scaffoldKey, 'Password Changed successfully!!!',
+                                            Colors.greenAccent);
                                         User user =
                                         User.fromJson(rs.data['user']);
-                                          displaySnackbar(
-                                              scaffoldKey,
-                                              "Login Successful.",
-                                              Colors.greenAccent);
-                                          String token = rs.data['token'];
-                                          AuthData.setUser(user);
-                                          AuthData.setToken(token);
-                                          startTime(
-                                              1,
-                                                  () =>
-                                              //     locator<NavigationService>()
-                                              // .navigateTo(
-                                              // HOME));
-                                              locator<NavigationService>()
-                                                  .pushNamedAndRemoveUntil(
-                                                  HOME));
+                                        AuthData.setUser(user);
+                                        AuthData.setToken(token);
 
-
-
+                                        // startTime(
+                                        //     1,
+                                        //         () => locator<NavigationService>()
+                                        //         .pushReplacementNamed(
+                                        //         HOME));
+                                        startTime(1, ()=>Navigator.pushNamedAndRemoveUntil(context, HOME, ModalRoute.withName('/loginpage')));
                                       } else {
                                         passwordController.clear();
+                                        confirmPasswordController.clear();
                                         print('err');
-                                        displaySnackbar(scaffoldKey, rs.message,
-                                            Colors.orange.withOpacity(0.6));
+                                        displaySnackbar(scaffoldKey,
+                                            rs.message, Colors.orange);
                                       }
+                                    }else{
+                                      print('failed invalidation');
                                     }
                                   },
                                   elevation: 2.0,

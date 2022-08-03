@@ -337,8 +337,8 @@ class _exhibitorSingleState extends State<exhibitorSingle> {
                                     children: [
                                       GestureDetector(
                                         onTap: () async {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(builder: (context) => product()));
+                                          // Navigator.of(context).push(
+                                          //     MaterialPageRoute(builder: (context) => ProductPage()));
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(

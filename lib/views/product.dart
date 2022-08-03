@@ -1,4 +1,5 @@
 
+import 'package:conference/Models/product.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -8,16 +9,22 @@ import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
 
-class product extends StatefulWidget {
+class ProductPage extends StatefulWidget {
+  Product product;
+
+  ProductPage(this.product, {Key? key}) : super(key: key);
+
   @override
-  State<product> createState() => _productState();
+  State<ProductPage> createState() => _ProductPageState(this.product);
 }
 
-class _productState extends State<product> {
+class _ProductPageState extends State<ProductPage> {
   bool obscureText = true;
   bool _isVisible = true;
   int selectedIndex = 0;
-  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+Product product;
+  _ProductPageState(this.product); // Create a key
 
 
   void onClicked(int index) {
@@ -94,17 +101,21 @@ class _productState extends State<product> {
                           Column(
                             children: [
                               Center(
-                                child: Image(
-                                  image: AssetImage('assets/images/astra.png'),
-                                  height: SizeConfig.safeBlockVertical! * 7,
+                                child: Image.network(
+                                  product.image ?? '',
                                   fit: BoxFit.cover,
+                                  height: SizeConfig.safeBlockVertical! * 7,
+                                  errorBuilder:
+                                      (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                    return const Icon(Icons.error);
+                                  },
                                 ),
                               ),
                               SizedBox(
                                 height: SizeConfig.safeBlockVertical! * 2,
                               ),
                               Text(
-                                "AstraZeneca",
+                                product.name??'',
                                 style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: SizeConfig.safeBlockHorizontal! * 4,
@@ -148,10 +159,7 @@ class _productState extends State<product> {
                                 height: SizeConfig.safeBlockVertical! * .5,
                               ),
                               Text(
-                                "Lorem Ipsum is simply dummy text of the printing"
-                                    " and typesetting industry. Lorem Ipsum has been"
-                                    " the industry's standard dummy text ever since"
-                                    " the 1500s, when an unknown printer took a galley",
+                                product.details??'',
                                 textAlign: TextAlign.left,
                                 style: GoogleFonts.dmSans(
                                   color: mainColor,

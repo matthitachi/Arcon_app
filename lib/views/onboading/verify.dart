@@ -6,7 +6,7 @@ import 'package:conference/Service/authdata.dart';
 import 'package:conference/Service/locatorService.dart';
 import 'package:conference/Service/navigationService.dart';
 import 'package:conference/routes.dart';
-import 'package:conference/views/onboading/forgot.dart';
+import 'package:conference/views/onboading/signin.dart';
 import 'package:conference/views/onboading/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -16,18 +16,17 @@ import '../../utils/SizeConfig.dart';
 import '../../utils/constants.dart';
 import '../home.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class Verify extends StatefulWidget {
+  const Verify({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Verify> createState() => _VerifyState();
 }
 
-class _SignInState extends State<SignIn> {
+class _VerifyState extends State<Verify> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final pinController = TextEditingController();
   bool obscureText = true;
   @override
   void initState(){
@@ -41,6 +40,8 @@ class _SignInState extends State<SignIn> {
 
   Widget build(BuildContext context)  {
     SizeConfig().init(context);
+    final Map? args = ModalRoute.of(context)?.settings.arguments as Map;
+    final String? email = args?['email'];
     return Scaffold(
       key: scaffoldKey,
         body: Container(
@@ -99,7 +100,7 @@ class _SignInState extends State<SignIn> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Welcome Back",
+                                      "Verify Email",
                                       textAlign: TextAlign.left,
                                       style: GoogleFonts.montserrat(
                                         color: textColor,
@@ -112,7 +113,7 @@ class _SignInState extends State<SignIn> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Get access to every conference, ",
+                                      "Enter the code sent to your email. ",
                                       textAlign: TextAlign.left,
                                       style: GoogleFonts.dmSans(
                                         color: textColor,
@@ -133,7 +134,7 @@ class _SignInState extends State<SignIn> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Email Address",
+                                            "Pin Code",
                                             style: GoogleFonts.montserrat(
                                               color:mainColor,
                                               fontSize: SizeConfig.safeBlockHorizontal! * 3,
@@ -148,7 +149,7 @@ class _SignInState extends State<SignIn> {
                                       Container(
                                         height: SizeConfig.safeBlockVertical! * 5,
                                         child: TextFormField(
-                                          controller: emailController,
+                                          controller: pinController,
                                           validator: (value) {
                                             List isEmpty = Validator.isEmpty(value);
                                             if (isEmpty[0]) {
@@ -161,7 +162,7 @@ class _SignInState extends State<SignIn> {
                                             fontSize: SizeConfig.safeBlockHorizontal! * 3,
                                             fontWeight: FontWeight.w300,
                                           ),
-                                          keyboardType: TextInputType.name,
+                                          keyboardType: TextInputType.text,
                                           cursorColor: mainColor,
                                           decoration: InputDecoration(
                                             filled: true,
@@ -187,108 +188,7 @@ class _SignInState extends State<SignIn> {
                                       ),
                                     ],
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: SizeConfig.safeBlockVertical! * 1,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Password",
-                                            style: GoogleFonts.montserrat(
-                                              color:mainColor,
-                                              fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: SizeConfig.safeBlockVertical! * 1.5,
-                                      ),
-                                      Container(
-                                        height: SizeConfig.safeBlockVertical! * 5,
-                                        child: TextFormField(
-                                          controller: passwordController,
-                                          validator: (value) {
-                                            List isEmpty = Validator.isEmpty(value);
-                                            List min = Validator.min(value, 8);
-                                            if (isEmpty[0]) {
-                                              return isEmpty[1].toString();
-                                            }
-                                            if (min[0]) {
-                                              return min[1].toString();
-                                            }
-                                            return null;
-                                          },
-                                          obscureText: obscureText,
-                                          style: GoogleFonts.montserrat(
-                                            color: mainColor,
-                                            fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                          keyboardType: TextInputType.visiblePassword,
-                                          cursorColor: mainColor,
-                                          decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              onPressed: (){
-                                                setState(() {
-                                                  obscureText = !obscureText;
-                                                });
-                                              },
-                                              icon: Icon(obscureText ? Icons.visibility_rounded
-                                                  : Icons.visibility_off_rounded, color: mainColor, size: 15,),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.transparent,
-                                            contentPadding: const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 13.0),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0xFFECE2DC),
-                                                width: 0.8,
-                                              ),
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0xFFECE2DC),
-                                                width: 0.8,
-                                              ),
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: SizeConfig.safeBlockVertical! * 1.5,
-                                      ),
-                                      GestureDetector(
-                                        onTap: (){
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(builder: (context) => const Forgot()));
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(),
-                                            Text(
-                                              "Forgot password",
-                                              style: GoogleFonts.montserrat(
-                                                color:secondaryColor,
-                                                fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                )
                               ],
                             ),
                             Row(
@@ -301,7 +201,7 @@ class _SignInState extends State<SignIn> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Sign In",
+                                          "Verify",
                                           textAlign: TextAlign.left,
                                           style: GoogleFonts.montserrat(
                                             color: textColor,
@@ -319,10 +219,10 @@ class _SignInState extends State<SignIn> {
                                         GestureDetector(
                                           onTap: () async {
                                             Navigator.of(context).pushReplacement(
-                                                MaterialPageRoute(builder: (context) => SignUp()));
+                                                MaterialPageRoute(builder: (context) => const SignIn()));
                                           },
                                           child: Text(
-                                            "Sign up",
+                                            "Sign in",
                                             textAlign: TextAlign.left,
                                             style: GoogleFonts.dmSans(
                                               decoration: TextDecoration.underline,
@@ -341,40 +241,27 @@ class _SignInState extends State<SignIn> {
                                     if (formKey.currentState!.validate()) {
                                       initLoading();
                                       Map<String, dynamic> formInfo = {
-                                        'email': emailController.text,
-                                        'password': passwordController.text,
+                                        'token': pinController.text,
+                                        'email': email
                                       };
                                       print(formInfo);
                                       Auth auth = Auth();
-                                      Response rs = await auth.Login(formInfo);
+                                      Response rs = await auth.Verify(formInfo);
                                       print(rs.toJson());
                                       closeLoading();
                                       if (rs.status == 200) {
-
                                         User user =
-                                        User.fromJson(rs.data['user']);
-                                          displaySnackbar(
-                                              scaffoldKey,
-                                              "Login Successful.",
-                                              Colors.greenAccent);
-                                          String token = rs.data['token'];
-                                          AuthData.setUser(user);
-                                          AuthData.setToken(token);
-                                          startTime(
-                                              1,
-                                                  () =>
-                                              //     locator<NavigationService>()
-                                              // .navigateTo(
-                                              // HOME));
-                                              locator<NavigationService>()
-                                                  .pushNamedAndRemoveUntil(
-                                                  HOME));
-
-
+                                        User.fromJson(rs.data);
+                                        displaySnackbar(
+                                            scaffoldKey,
+                                            "Pin Verified!!!",
+                                            Colors.greenAccent);
+                                        startTime(
+                                            1,
+                                                () => locator<NavigationService>()
+                                                .pushReplacementNamed(RESETSCREEN, arguments: user));
 
                                       } else {
-                                        passwordController.clear();
-                                        print('err');
                                         displaySnackbar(scaffoldKey, rs.message,
                                             Colors.orange.withOpacity(0.6));
                                       }

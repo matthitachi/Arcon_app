@@ -1,9 +1,7 @@
-import 'package:conference/Helpers/helper.dart';
-import 'package:conference/Models/response.dart';
-import 'package:conference/Models/sponsor.dart';
-import 'package:conference/Service/event.dart';
-import 'package:conference/views/sponsorsingle.dart';
-import 'package:conference/widgets/events.dart';
+
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'package:conference/views/liveevent.dart';
+import 'package:conference/views/speakersingle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -13,22 +11,22 @@ import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
 
-class Sponsors extends StatefulWidget {
-  int id;
-
-  Sponsors(this.id, {Key? key}) : super(key: key);
+class FloorPlan extends StatefulWidget {
+  String pdfUrl;
+   FloorPlan(this.pdfUrl, {Key? key}) : super(key: key);
 
   @override
-  State<Sponsors> createState() => _SponsorsState(id);
+  State<FloorPlan> createState() => _FloorPlanState(this.pdfUrl);
 }
 
-class _SponsorsState extends State<Sponsors> {
+class _FloorPlanState extends State<FloorPlan> {
   bool obscureText = true;
-
+  bool _isVisible = true;
   int selectedIndex = 0;
+  bool _isLoading = true;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-  int id;
-  _SponsorsState(this.id); // Create a key
+  String pdfUrl;
+  _FloorPlanState(this.pdfUrl); // Create a key
 
 
   void onClicked(int index) {
@@ -37,80 +35,45 @@ class _SponsorsState extends State<Sponsors> {
     });
   }
 
+  double _height = SizeConfig.safeBlockVertical! * 5;
+  double _width = SizeConfig.safeBlockHorizontal! * 10;
+  Color _dateBckColor = Color(0x000D605C);
+  Color _dateTxtColor = textColor;
+  double _minHeights = SizeConfig.safeBlockVertical! * 0;
+  double _bottomLeft = SizeConfig.safeBlockVertical! * 1.5;
+  double _bottomRight = SizeConfig.safeBlockVertical! * 1.5;
+  late PDFDocument doc;
+
+  void showToast() {
+    setState(() {
+      _isVisible = !_isVisible;
+      _height = SizeConfig.safeBlockVertical! * 8;
+      _width = SizeConfig.safeBlockHorizontal! * 12;
+      _dateBckColor = Color(0xFF0D605C);
+      _dateTxtColor = Colors.white;
+    });
+  }
+  loadPDF() async {
+    setState((){
+      _isLoading = true;
+    });
+    doc = await PDFDocument.fromURL(pdfUrl);
+    setState((){
+      _isLoading = false;
+    });
+  }
+
   @override
   void initState(){
     super.initState();
-    initList();
-    initScrollController();
+    loadPDF();
   }
-
-  List<Sponsor> sponsorList = [];
-  int page = 1;
-  int lastPage = 0;
-  bool moreLoading = false;
-
-  Future<bool> initList() async {
-    initLoading();
-    List<Sponsor> val = await getSponsorList();
-    closeLoading();
-    setState(() {
-      sponsorList = val;
-    });
-    return true;
-  }
-
-  final ScrollController _scrollController = ScrollController();
-  initScrollController() {
-    _scrollController.addListener(() {
-      if (_scrollController.position.hasViewportDimension &&
-          _scrollController.position.pixels >=
-              _scrollController.position.maxScrollExtent - 0.01 &&
-          page <= lastPage) {
-        moreLists();
-      }
-    });
-  }
-
-  moreLists() {
-    page++;
-    if (page <= lastPage) {
-      moreLoading = true;
-      getSponsorList(page: page).then((val) {
-        setState(() {
-          print(val);
-          sponsorList.addAll(val);
-          moreLoading = false;
-        });
-      });
-    }
-    print('more List {$page} {$lastPage}');
-  }
-
-  Future<List<Sponsor>> getSponsorList({int page: 1}) async {
-    Map<String, dynamic> param = {'id':id, 'page': page};
-    EventService service = EventService();
-    Response rs = await service.getSponsors(param);
-    if (rs.status == 200) {
-      Map paginateData = rs.data;
-      lastPage = paginateData['last_page'];
-      List dataList = paginateData['data'];
-
-      if (dataList != null) {
-        return List.from(dataList).map((elem) {
-          return Sponsor.fromJson(elem);
-        }).toList();
-      } else {
-        return <Sponsor>[];
-      }
-    } else {
-      return <Sponsor>[];
-    }
-  }
-
 
 
 
   @override
+
+
   Widget build(BuildContext context)  {
     SizeConfig().init(context);
     return Scaffold(
@@ -157,7 +120,7 @@ class _SponsorsState extends State<Sponsors> {
                                 ),
                               ),
                               Text(
-                                "sponsors",
+                                "",
                                 style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: SizeConfig.safeBlockHorizontal! * 5,
@@ -180,26 +143,11 @@ class _SponsorsState extends State<Sponsors> {
                     height: SizeConfig.safeBlockVertical! * 96.9,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 5, vertical: 0),
-                      child: RefreshIndicator(
-                          onRefresh: initList,
-                          child: ListView.builder(
-                            padding: EdgeInsets.only(top: SizeConfig.safeBlockVertical! * 2),
-                            shrinkWrap: true,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            controller: _scrollController,
-                            itemCount: sponsorList.length,
-                            itemBuilder: (BuildContext context, int index) =>sponsorsWidgetFull(context, sponsorList[index])
-                            ,
-                            // children: [
-                            //   SizedBox(
-                            //     height: SizeConfig.safeBlockVertical! * 2,
-                            //   ),
-                            //
-                            // ],
-                          )),
-                    ),
+                    child: Center(
+                        child: _isLoading
+                            ? Center(child: CircularProgressIndicator())
+                            : PDFViewer(document: doc)),
+
 
                   )
                 ],
@@ -219,7 +167,7 @@ class _SponsorsState extends State<Sponsors> {
                             color: mainColorSub,
                             borderRadius: BorderRadius.all(
                                 Radius.circular(
-                                SizeConfig.safeBlockVertical! * 6)
+                                    SizeConfig.safeBlockVertical! * 6)
                             ),
                           ),
                           child: Navigation(selectedIndex: selectedIndex, onClicked: onClicked,)
