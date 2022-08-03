@@ -703,8 +703,8 @@ class _liveEventState extends State<liveEvent> {
                                                                                 children: [
                                                                                   GestureDetector(
                                                                                       onTap: () async {
-                                                                                        Navigator.of(context).push(
-                                                                                            MaterialPageRoute(builder: (context) => speakerSingle()));
+                                                                                        // Navigator.of(context).push(
+                                                                                        //     MaterialPageRoute(builder: (context) => SpeakerSingle()));
                                                                                       },
                                                                                       child: Avatar(urlImage: 'https://via.placeholder.com/150', radius: SizeConfig.safeBlockHorizontal! * 5)),
                                                                                   SizedBox(

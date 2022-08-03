@@ -1,9 +1,34 @@
+import 'package:conference/routes.dart';
+import 'package:conference/utils/custom_animation.dart';
 import 'package:conference/views/onboading/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import 'Service/locatorService.dart';
+import 'Service/navigationService.dart';
 
 
 void main() {
+  configLoading();
+  setupLocator();
   runApp(const MyApp());
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = false
+    ..dismissOnTap = false
+    ..customAnimation = CustomAnimation();
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +51,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: splash(),
+
+      builder: EasyLoading.init(),
+      initialRoute: SPLASHSCREEN,
+      routes: routes,
+      navigatorKey: locator<NavigationService>().navigatorKey,
     );
   }
 }

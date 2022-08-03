@@ -1,11 +1,9 @@
-import 'package:conference/Helpers/helper.dart';
-import 'package:conference/Models/event.dart';
-import 'package:conference/Models/response.dart';
-import 'package:conference/Service/event.dart';
-import 'package:conference/views/eventsingle.dart';
-import 'package:conference/widgets/events.dart';
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'package:conference/views/liveevent.dart';
+import 'package:conference/views/speakersingle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../Helpers/validator.dart';
 import '../../utils/SizeConfig.dart';
@@ -13,16 +11,22 @@ import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
 
-class events extends StatefulWidget {
+class LiveStream extends StatefulWidget {
+  String streamUrl;
+  LiveStream(this.streamUrl, {Key? key}) : super(key: key);
+
   @override
-  State<events> createState() => _eventsState();
+  State<LiveStream> createState() => _LiveStreamState(this.streamUrl);
 }
 
-class _eventsState extends State<events> {
+class _LiveStreamState extends State<LiveStream> {
   bool obscureText = true;
-
+  bool _isVisible = true;
   int selectedIndex = 0;
-  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+  bool _isLoading = true;
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  String streamUrl;
+  _LiveStreamState(this.streamUrl); // Create a key
 
   void onClicked(int index) {
     setState(() {
@@ -30,74 +34,37 @@ class _eventsState extends State<events> {
     });
   }
 
+  double _height = SizeConfig.safeBlockVertical! * 5;
+  double _width = SizeConfig.safeBlockHorizontal! * 10;
+  Color _dateBckColor = Color(0x000D605C);
+  Color _dateTxtColor = textColor;
+  double _minHeights = SizeConfig.safeBlockVertical! * 0;
+  double _bottomLeft = SizeConfig.safeBlockVertical! * 1.5;
+  double _bottomRight = SizeConfig.safeBlockVertical! * 1.5;
+  late PDFDocument doc;
+
+  void showToast() {
+    setState(() {
+      _isVisible = !_isVisible;
+      _height = SizeConfig.safeBlockVertical! * 8;
+      _width = SizeConfig.safeBlockHorizontal! * 12;
+      _dateBckColor = Color(0xFF0D605C);
+      _dateTxtColor = Colors.white;
+    });
+  }
+
+  late final YoutubePlayerController controller;
+
   @override
   void initState() {
     super.initState();
-    initScrollController();
-    initList();
-  }
-
-  List<Event> eventList = [];
-  int page = 1;
-  int lastPage = 0;
-  bool moreLoading = false;
-
-  Future<bool> initList() async {
-    initLoading();
-    List<Event> val = await getEventList();
-    closeLoading();
-    setState(() {
-      eventList = val;
-    });
-    return true;
-  }
-
-  final ScrollController _scrollController = ScrollController();
-  initScrollController() {
-    _scrollController.addListener(() {
-      if (_scrollController.position.hasViewportDimension &&
-          _scrollController.position.pixels >=
-              _scrollController.position.maxScrollExtent - 0.01 &&
-          page <= lastPage) {
-        moreLists();
-      }
-    });
-  }
-
-  moreLists() {
-    page++;
-    if (page <= lastPage) {
-      moreLoading = true;
-      getEventList(page: page).then((val) {
-        setState(() {
-          print(val);
-          eventList.addAll(val);
-          moreLoading = false;
-        });
-      });
-    }
-    print('more List {$page} {$lastPage}');
-  }
-
-  Future<List<Event>> getEventList({int page: 1}) async {
-    Map<String, dynamic> param = {'page': page};
-    EventService service = EventService();
-    Response rs = await service.allEvents(param);
-    if (rs.status == 200) {
-      Map paginateData = rs.data;
-      lastPage = paginateData['last_page'];
-      List dataList = paginateData['data'];
-
-      if (dataList != null) {
-        return List.from(dataList).map((elem) {
-          return Event.fromJson(elem);
-        }).toList();
-      } else {
-        return <Event>[];
-      }
-    } else {
-      return <Event>[];
-    }
+    controller = YoutubePlayerController(
+      initialVideoId: streamUrl,
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
   }
 
   @override
@@ -148,9 +115,17 @@ class _eventsState extends State<events> {
                                 width: SizeConfig.safeBlockHorizontal! * 7,
                               ),
                             ),
+                            Text(
+                              "",
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: SizeConfig.safeBlockHorizontal! * 5,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                             Image(
                               image: AssetImage('assets/images/logo.png'),
-                              width: SizeConfig.safeBlockHorizontal! * 23,
+                              width: SizeConfig.safeBlockHorizontal! * 15,
                             ),
                           ],
                         ),
@@ -161,25 +136,23 @@ class _eventsState extends State<events> {
 
                 // body
                 Container(
-                  height: SizeConfig.safeBlockVertical! * 95,
+                  height: SizeConfig.safeBlockVertical! * 96.9,
                   width: SizeConfig.safeBlockHorizontal! * 100,
                   color: Colors.white,
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: SizeConfig.safeBlockHorizontal! * 5,
-                          vertical: 0),
-                      child: RefreshIndicator(
-                        onRefresh: initList,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          controller: _scrollController,
-                          padding: EdgeInsets.zero,
-                          itemCount: eventList.length,
-                          itemBuilder: (BuildContext ctx, index) =>
-                              eventWidgetFull(eventList[index], ctx),
-                        ),
-                      )),
+                  child: Center(
+                      child: YoutubePlayerBuilder(
+                          player: YoutubePlayer(
+                            controller: controller,
+                          ),
+                          builder: (context, player) {
+                            return Column(
+                              children: [
+                                // some widgets
+                                player,
+                                //some other widgets
+                              ],
+                            );
+                          })),
                 )
               ],
             ),

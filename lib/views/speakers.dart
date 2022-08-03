@@ -1,4 +1,9 @@
+import 'package:conference/Helpers/helper.dart';
+import 'package:conference/Models/response.dart';
+import 'package:conference/Models/speaker.dart';
+import 'package:conference/Service/event.dart';
 import 'package:conference/views/speakersingle.dart';
+import 'package:conference/widgets/events.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -8,16 +13,21 @@ import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
 
-class speakers extends StatefulWidget {
+class Speakers extends StatefulWidget {
+  int id;
+  Speakers(this.id, {Key? key}) : super(key: key);
+
   @override
-  State<speakers> createState() => _speakersState();
+  State<Speakers> createState() => _SpeakersState(id);
 }
 
-class _speakersState extends State<speakers> {
+class _SpeakersState extends State<Speakers> {
   bool obscureText = true;
-
+  int id;
   int selectedIndex = 0;
-  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  _SpeakersState(this.id); // Create a key
 
 
   void onClicked(int index) {
@@ -29,13 +39,75 @@ class _speakersState extends State<speakers> {
   @override
   void initState(){
     super.initState();
+    initScrollController();
+    initList();
   }
 
 
+  List<Speaker> speakerList = [];
+  int page = 1;
+  int lastPage = 0;
+  bool moreLoading = false;
+
+  Future<bool> initList() async {
+    initLoading();
+    List<Speaker> val = await getSpeakerList();
+    closeLoading();
+    setState(() {
+      speakerList = val;
+    });
+    return true;
+  }
+
+  final ScrollController _scrollController = ScrollController();
+  initScrollController() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.hasViewportDimension &&
+          _scrollController.position.pixels >=
+              _scrollController.position.maxScrollExtent - 0.01 &&
+          page <= lastPage) {
+        moreLists();
+      }
+    });
+  }
+
+  moreLists() {
+    page++;
+    if (page <= lastPage) {
+      moreLoading = true;
+      getSpeakerList(page: page).then((val) {
+        setState(() {
+          print(val);
+          speakerList.addAll(val);
+          moreLoading = false;
+        });
+      });
+    }
+    print('more List {$page} {$lastPage}');
+  }
+
+  Future<List<Speaker>> getSpeakerList({int page: 1}) async {
+    Map<String, dynamic> param = {'id':id, 'page': page};
+    EventService service = EventService();
+    Response rs = await service.getSpeakers(param);
+    if (rs.status == 200) {
+      Map paginateData = rs.data;
+      lastPage = paginateData['last_page'];
+      List dataList = paginateData['data'];
+
+      if (dataList != null) {
+        return List.from(dataList).map((elem) {
+          return Speaker.fromJson(elem);
+        }).toList();
+      } else {
+        return <Speaker>[];
+      }
+    } else {
+      return <Speaker>[];
+    }
+  }
 
   @override
-
-
   Widget build(BuildContext context)  {
     SizeConfig().init(context);
     return Scaffold(
@@ -107,174 +179,23 @@ class _speakersState extends State<speakers> {
                     color: Colors.white,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 5, vertical: 0),
-                      child: ListView(
-                        padding: EdgeInsets.zero,
-                        children: [
-                          SizedBox(
-                            height: SizeConfig.safeBlockVertical! * 2,
-                          ),
-
-                          // each speaker
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 2),
-                            child: Container(
-                              width: SizeConfig.safeBlockHorizontal! * 100,
-                              child: GestureDetector(
-                                onTap: () async {
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) => speakerSingle()));
-                                },
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () async {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(builder: (context) => speakerSingle()));
-                                            },
-                                            child: Avatar(urlImage: 'https://via.placeholder.com/150', radius: SizeConfig.safeBlockHorizontal! * 7)),
-                                        SizedBox(
-                                          width: SizeConfig.safeBlockHorizontal! * 2,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Dr. Peter Ahmed",
-                                                  style: GoogleFonts.montserrat(
-                                                    color: textColor,
-                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: SizeConfig.safeBlockHorizontal! * 60,
-                                                  child: Text(
-                                                    "HOD physio department, University of michigan",
-                                                    textAlign: TextAlign.left,
-                                                    style: GoogleFonts.dmSans(
-                                                      color: textColor,
-                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                      fontWeight: FontWeight.w300,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    // horizontal line
-                                    Padding(
-                                        padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 5),
-                                        child: Container(
-                                          width: SizeConfig.safeBlockVertical! * 90,
-                                          child: Divider(
-                                            height: 1,
-                                            thickness:
-                                            SizeConfig.safeBlockHorizontal! *
-                                                .2,
-                                            color:Colors.black38,
-                                          ),
-                                        )
-                                    ),
-                                    // horizontal line end
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // each speaker
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 2),
-                            child: Container(
-                              width: SizeConfig.safeBlockHorizontal! * 100,
-                              child: GestureDetector(
-                                onTap: () async {
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) => speakerSingle()));
-                                },
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () async {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(builder: (context) => speakerSingle()));
-                                            },
-                                            child: Avatar(urlImage: 'https://via.placeholder.com/150', radius: SizeConfig.safeBlockHorizontal! * 7)),
-                                        SizedBox(
-                                          width: SizeConfig.safeBlockHorizontal! * 2,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Dr. Peter Ahmed",
-                                                  style: GoogleFonts.montserrat(
-                                                    color: textColor,
-                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: SizeConfig.safeBlockHorizontal! * 60,
-                                                  child: Text(
-                                                    "HOD physio department, University of michigan",
-                                                    textAlign: TextAlign.left,
-                                                    style: GoogleFonts.dmSans(
-                                                      color: textColor,
-                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                      fontWeight: FontWeight.w300,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    // horizontal line
-                                    Padding(
-                                        padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 5),
-                                        child: Container(
-                                          width: SizeConfig.safeBlockVertical! * 90,
-                                          child: Divider(
-                                            height: 1,
-                                            thickness:
-                                            SizeConfig.safeBlockHorizontal! *
-                                                .2,
-                                            color:Colors.black38,
-                                          ),
-                                        )
-                                    ),
-                                    // horizontal line end
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: RefreshIndicator(
+                          onRefresh: initList,
+                          child: ListView.builder(
+                        padding: EdgeInsets.only(top: SizeConfig.safeBlockVertical! * 2),
+                            shrinkWrap: true,
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            controller: _scrollController,
+                        itemCount: speakerList.length,
+                        itemBuilder: (BuildContext context, int index) =>speakersWidget(context, speakerList[index])
+                            ,
+                        // children: [
+                        //   SizedBox(
+                        //     height: SizeConfig.safeBlockVertical! * 2,
+                        //   ),
+                        //
+                        // ],
+                      )),
                     ),
 
                   )
@@ -308,7 +229,7 @@ class _speakersState extends State<speakers> {
             ],
           ),
         ),
-      drawer: drawer(),
+      drawer: const drawer(),
       // bottomNavigationBar: Navigation(selectedIndex: selectedIndex, onClicked: onClicked,),
     );
   }

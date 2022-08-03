@@ -109,7 +109,7 @@ class _myEventsState extends State<myEvents> {
                               child: GestureDetector(
                                 onTap: () async {
                                   Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) => eventSingle()));
+                                      MaterialPageRoute(builder: (context) => EventSingle(1)));
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -305,7 +305,7 @@ class _myEventsState extends State<myEvents> {
                             child: GestureDetector(
                               onTap: () async {
                                 Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => eventSingle()));
+                                    MaterialPageRoute(builder: (context) => EventSingle(1)));
                               },
                               child: Container(
                                   decoration: BoxDecoration(

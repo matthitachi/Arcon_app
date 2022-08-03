@@ -1,3 +1,6 @@
+import 'package:conference/Helpers/helper.dart';
+import 'package:conference/Models/response.dart';
+import 'package:conference/Service/auth.dart';
 import 'package:conference/views/onboading/signin.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -6,27 +9,30 @@ import '../../Helpers/validator.dart';
 import '../../utils/SizeConfig.dart';
 import '../../utils/constants.dart';
 
-
-class signup extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  State<signup> createState() => _signupState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _signupState extends State<signup> {
+class _SignUpState extends State<SignUp> {
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   bool obscureText = true;
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 
-
-
   @override
-
-
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+        key: scaffoldKey,
         body: Container(
           child: Stack(
             children: [
@@ -65,11 +71,13 @@ class _signupState extends State<signup> {
                         ],
                       ),
                     ),
-                    Container(
+                    Form(key: formKey,
+                        child:Container(
                       height: SizeConfig.safeBlockVertical! * 60,
                       color: Colors.white,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 5),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.safeBlockHorizontal! * 5),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -86,7 +94,9 @@ class _signupState extends State<signup> {
                                       textAlign: TextAlign.left,
                                       style: GoogleFonts.montserrat(
                                         color: textColor,
-                                        fontSize: SizeConfig.safeBlockHorizontal! * 7.5,
+                                        fontSize:
+                                            SizeConfig.safeBlockHorizontal! *
+                                                7.5,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -99,7 +109,9 @@ class _signupState extends State<signup> {
                                       textAlign: TextAlign.left,
                                       style: GoogleFonts.dmSans(
                                         color: textColor,
-                                        fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                        fontSize:
+                                            SizeConfig.safeBlockHorizontal! *
+                                                3.5,
                                         fontWeight: FontWeight.w300,
                                       ),
                                     ),
@@ -114,7 +126,8 @@ class _signupState extends State<signup> {
                                       children: [
                                         Expanded(
                                           child: Padding(
-                                            padding: const EdgeInsets.only(right: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
                                             child: Container(
                                               child: Column(
                                                 children: [
@@ -122,52 +135,86 @@ class _signupState extends State<signup> {
                                                     children: [
                                                       Text(
                                                         "First Name",
-                                                        style: GoogleFonts.montserrat(
-                                                          color:mainColor,
-                                                          fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                          fontWeight: FontWeight.w300,
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                          color: mainColor,
+                                                          fontSize: SizeConfig
+                                                                  .safeBlockHorizontal! *
+                                                              3,
+                                                          fontWeight:
+                                                              FontWeight.w300,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                   SizedBox(
-                                                    height: SizeConfig.safeBlockVertical! * 1.5,
+                                                    height: SizeConfig
+                                                            .safeBlockVertical! *
+                                                        1.5,
                                                   ),
                                                   Container(
-                                                    height: SizeConfig.safeBlockVertical! * 5,
+                                                    height: SizeConfig
+                                                            .safeBlockVertical! *
+                                                        5,
                                                     child: TextFormField(
+                                                      controller:
+                                                          firstNameController,
                                                       validator: (value) {
-                                                        List isEmpty = Validator.isEmpty(value);
+                                                        List isEmpty =
+                                                            Validator.isEmpty(
+                                                                value);
                                                         if (isEmpty[0]) {
-                                                          return isEmpty[1].toString();
+                                                          return isEmpty[1]
+                                                              .toString();
                                                         }
                                                         return null;
                                                       },
-                                                      style: GoogleFonts.montserrat(
+                                                      style: GoogleFonts
+                                                          .montserrat(
                                                         color: mainColor,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                        fontWeight: FontWeight.w300,
+                                                        fontSize: SizeConfig
+                                                                .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight:
+                                                            FontWeight.w300,
                                                       ),
-                                                      keyboardType: TextInputType.name,
+                                                      keyboardType:
+                                                          TextInputType.name,
                                                       cursorColor: mainColor,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         filled: true,
-                                                        fillColor: Colors.transparent,
+                                                        fillColor:
+                                                            Colors.transparent,
                                                         contentPadding:
-                                                        const EdgeInsets.only(left: 14.0, bottom: 5.0, top: 5.0),
-                                                        focusedBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                            color: Color(0xFFECE2DC),
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 14.0,
+                                                                bottom: 5.0,
+                                                                top: 5.0),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0xFFECE2DC),
                                                             width: 0.8,
                                                           ),
-                                                          borderRadius: BorderRadius.circular(5),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
                                                         ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                            color: Color(0xFFECE2DC),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0xFFECE2DC),
                                                             width: 0.8,
                                                           ),
-                                                          borderRadius: BorderRadius.circular(5),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
                                                         ),
                                                       ),
                                                     ),
@@ -179,7 +226,8 @@ class _signupState extends State<signup> {
                                         ),
                                         Expanded(
                                           child: Padding(
-                                            padding: const EdgeInsets.only(right: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
                                             child: Container(
                                               child: Column(
                                                 children: [
@@ -187,52 +235,86 @@ class _signupState extends State<signup> {
                                                     children: [
                                                       Text(
                                                         "Last Name",
-                                                        style: GoogleFonts.montserrat(
-                                                          color:mainColor,
-                                                          fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                          fontWeight: FontWeight.w300,
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                          color: mainColor,
+                                                          fontSize: SizeConfig
+                                                                  .safeBlockHorizontal! *
+                                                              3,
+                                                          fontWeight:
+                                                              FontWeight.w300,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                   SizedBox(
-                                                    height: SizeConfig.safeBlockVertical! * 1.5,
+                                                    height: SizeConfig
+                                                            .safeBlockVertical! *
+                                                        1.5,
                                                   ),
                                                   Container(
-                                                    height: SizeConfig.safeBlockVertical! * 5,
+                                                    height: SizeConfig
+                                                            .safeBlockVertical! *
+                                                        5,
                                                     child: TextFormField(
+                                                      controller:
+                                                          lastNameController,
                                                       validator: (value) {
-                                                        List isEmpty = Validator.isEmpty(value);
+                                                        List isEmpty =
+                                                            Validator.isEmpty(
+                                                                value);
                                                         if (isEmpty[0]) {
-                                                          return isEmpty[1].toString();
+                                                          return isEmpty[1]
+                                                              .toString();
                                                         }
                                                         return null;
                                                       },
-                                                      style: GoogleFonts.montserrat(
+                                                      style: GoogleFonts
+                                                          .montserrat(
                                                         color: mainColor,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                        fontWeight: FontWeight.w300,
+                                                        fontSize: SizeConfig
+                                                                .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight:
+                                                            FontWeight.w300,
                                                       ),
-                                                      keyboardType: TextInputType.name,
+                                                      keyboardType:
+                                                          TextInputType.name,
                                                       cursorColor: mainColor,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         filled: true,
-                                                        fillColor: Colors.transparent,
+                                                        fillColor:
+                                                            Colors.transparent,
                                                         contentPadding:
-                                                        const EdgeInsets.only(left: 14.0, bottom: 5.0, top: 5.0),
-                                                        focusedBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                            color: Color(0xFFECE2DC),
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 14.0,
+                                                                bottom: 5.0,
+                                                                top: 5.0),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0xFFECE2DC),
                                                             width: 0.8,
                                                           ),
-                                                          borderRadius: BorderRadius.circular(5),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
                                                         ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                            color: Color(0xFFECE2DC),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0xFFECE2DC),
                                                             width: 0.8,
                                                           ),
-                                                          borderRadius: BorderRadius.circular(5),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
                                                         ),
                                                       ),
                                                     ),
@@ -245,13 +327,14 @@ class _signupState extends State<signup> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: SizeConfig.safeBlockVertical! * 1.5,
+                                      height:
+                                          SizeConfig.safeBlockVertical! * 1.5,
                                     ),
                                   ],
                                 ),
-
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Column(
                                     children: [
                                       Row(
@@ -259,21 +342,27 @@ class _signupState extends State<signup> {
                                           Text(
                                             "Email Address",
                                             style: GoogleFonts.montserrat(
-                                              color:mainColor,
-                                              fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                              color: mainColor,
+                                              fontSize: SizeConfig
+                                                      .safeBlockHorizontal! *
+                                                  3,
                                               fontWeight: FontWeight.w300,
                                             ),
                                           ),
                                         ],
                                       ),
                                       SizedBox(
-                                        height: SizeConfig.safeBlockVertical! * 1.5,
+                                        height:
+                                            SizeConfig.safeBlockVertical! * 1.5,
                                       ),
                                       Container(
-                                        height: SizeConfig.safeBlockVertical! * 5,
+                                        height:
+                                            SizeConfig.safeBlockVertical! * 5,
                                         child: TextFormField(
+                                          controller: emailController,
                                           validator: (value) {
-                                            List isEmpty = Validator.isEmpty(value);
+                                            List isEmpty =
+                                                Validator.isEmpty(value);
                                             if (isEmpty[0]) {
                                               return isEmpty[1].toString();
                                             }
@@ -281,7 +370,9 @@ class _signupState extends State<signup> {
                                           },
                                           style: GoogleFonts.montserrat(
                                             color: mainColor,
-                                            fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                            fontSize: SizeConfig
+                                                    .safeBlockHorizontal! *
+                                                3,
                                             fontWeight: FontWeight.w300,
                                           ),
                                           keyboardType: TextInputType.name,
@@ -290,20 +381,25 @@ class _signupState extends State<signup> {
                                             filled: true,
                                             fillColor: Colors.transparent,
                                             contentPadding:
-                                            const EdgeInsets.only(left: 14.0, bottom: 5.0, top: 5.0),
+                                                const EdgeInsets.only(
+                                                    left: 14.0,
+                                                    bottom: 5.0,
+                                                    top: 5.0),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: Color(0xFFECE2DC),
                                                 width: 0.8,
                                               ),
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: Color(0xFFECE2DC),
                                                 width: 0.8,
                                               ),
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                           ),
                                         ),
@@ -312,32 +408,40 @@ class _signupState extends State<signup> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        height: SizeConfig.safeBlockVertical! * 1,
+                                        height:
+                                            SizeConfig.safeBlockVertical! * 1,
                                       ),
                                       Row(
                                         children: [
                                           Text(
                                             "Password",
                                             style: GoogleFonts.montserrat(
-                                              color:mainColor,
-                                              fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                              color: mainColor,
+                                              fontSize: SizeConfig
+                                                      .safeBlockHorizontal! *
+                                                  3,
                                               fontWeight: FontWeight.w300,
                                             ),
                                           ),
                                         ],
                                       ),
                                       SizedBox(
-                                        height: SizeConfig.safeBlockVertical! * 1.5,
+                                        height:
+                                            SizeConfig.safeBlockVertical! * 1.5,
                                       ),
                                       Container(
-                                        height: SizeConfig.safeBlockVertical! * 5,
+                                        height:
+                                            SizeConfig.safeBlockVertical! * 5,
                                         child: TextFormField(
+                                          controller: passwordController,
                                           validator: (value) {
-                                            List isEmpty = Validator.isEmpty(value);
+                                            List isEmpty =
+                                                Validator.isEmpty(value);
                                             List min = Validator.min(value, 8);
                                             if (isEmpty[0]) {
                                               return isEmpty[1].toString();
@@ -350,37 +454,52 @@ class _signupState extends State<signup> {
                                           obscureText: obscureText,
                                           style: GoogleFonts.montserrat(
                                             color: mainColor,
-                                            fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                            fontSize: SizeConfig
+                                                    .safeBlockHorizontal! *
+                                                3,
                                             fontWeight: FontWeight.w300,
                                           ),
-                                          keyboardType: TextInputType.visiblePassword,
+                                          keyboardType:
+                                              TextInputType.visiblePassword,
                                           cursorColor: mainColor,
                                           decoration: InputDecoration(
                                             suffixIcon: IconButton(
-                                              onPressed: (){
+                                              onPressed: () {
                                                 setState(() {
                                                   obscureText = !obscureText;
                                                 });
                                               },
-                                              icon: Icon(obscureText ? Icons.visibility_rounded
-                                                  : Icons.visibility_off_rounded, color: mainColor, size: 15,),
+                                              icon: Icon(
+                                                obscureText
+                                                    ? Icons.visibility_rounded
+                                                    : Icons
+                                                        .visibility_off_rounded,
+                                                color: mainColor,
+                                                size: 15,
+                                              ),
                                             ),
                                             filled: true,
                                             fillColor: Colors.transparent,
-                                            contentPadding: const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 13.0),
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    left: 14.0,
+                                                    bottom: 8.0,
+                                                    top: 13.0),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: Color(0xFFECE2DC),
                                                 width: 0.8,
                                               ),
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: Color(0xFFECE2DC),
                                                 width: 0.8,
                                               ),
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                           ),
                                         ),
@@ -394,7 +513,8 @@ class _signupState extends State<signup> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
@@ -404,7 +524,9 @@ class _signupState extends State<signup> {
                                           textAlign: TextAlign.left,
                                           style: GoogleFonts.montserrat(
                                             color: textColor,
-                                            fontSize: SizeConfig.safeBlockHorizontal! * 5.5,
+                                            fontSize: SizeConfig
+                                                    .safeBlockHorizontal! *
+                                                5.5,
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
@@ -417,16 +539,23 @@ class _signupState extends State<signup> {
                                       children: [
                                         GestureDetector(
                                           onTap: () async {
-                                            Navigator.of(context).pushReplacement(
-                                                MaterialPageRoute(builder: (context) => signin()));
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder:
+                                                        (context) =>
+                                                        SignIn()));
                                           },
                                           child: Text(
                                             "Sign in",
                                             textAlign: TextAlign.left,
                                             style: GoogleFonts.dmSans(
-                                              decoration: TextDecoration.underline,
+                                              decoration:
+                                                  TextDecoration.underline,
                                               color: textColor,
-                                              fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                              fontSize: SizeConfig
+                                                      .safeBlockHorizontal! *
+                                                  3.5,
                                               fontWeight: FontWeight.w300,
                                             ),
                                           ),
@@ -436,7 +565,48 @@ class _signupState extends State<signup> {
                                   ],
                                 ),
                                 RawMaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    if (formKey.currentState!
+                                        .validate()) {
+                                      initLoading();
+                                      Map<String, dynamic> formInfo = {
+                                        'first_name':
+                                        firstNameController.text,
+                                        'last_name':
+                                        lastNameController.text,
+                                        'email': emailController.text,
+                                        'password':
+                                        passwordController.text,
+                                      };
+                                      print(formInfo);
+                                      Auth auth = Auth();
+                                      Response rs =
+                                          await auth.Register(formInfo);
+                                      closeLoading();
+                                      if (rs.status == 200) {
+                                        displaySnackbar(
+                                            scaffoldKey,
+                                            "Sign Up successful.",
+                                            Colors.greenAccent);
+
+                                        startTime(
+                                            1,
+                                                () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder:
+                                                        (context) =>
+                                                        SignIn())));
+                                      } else {
+                                        passwordController.clear();
+                                        displaySnackbar(
+                                            scaffoldKey,
+                                            rs.message,
+                                            Colors.orange
+                                                .withOpacity(0.6));
+                                      }
+                                    }
+                                  },
                                   elevation: 2.0,
                                   fillColor: secondaryColor,
                                   child: Icon(
@@ -452,13 +622,12 @@ class _signupState extends State<signup> {
                           ],
                         ),
                       ),
-                    )
+                    ))
                   ],
                 ),
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 }
