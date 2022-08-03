@@ -10,7 +10,9 @@ import 'package:conference/views/eventsingle.dart';
 import 'package:conference/views/exhibitors.dart';
 import 'package:conference/views/floor_plan.dart';
 import 'package:conference/views/members.dart';
+import 'package:conference/views/policy.dart';
 import 'package:conference/views/sponsor.dart';
+import 'package:conference/views/terms.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -323,7 +325,7 @@ class _drawerState extends State<drawer> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Speakers(1)));
+                                builder: (context) => policy()));
                       },
                       child: Row(
                         children: [
@@ -347,7 +349,7 @@ class _drawerState extends State<drawer> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Speakers(1)));
+                                builder: (context) => Terms()));
                       },
                       child: Row(
                         children: [

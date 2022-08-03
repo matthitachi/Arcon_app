@@ -174,7 +174,7 @@ class _SpeakersState extends State<Speakers> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 96.9,
+                    height: SizeConfig.safeBlockVertical! * 96.5,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
                     child: Padding(

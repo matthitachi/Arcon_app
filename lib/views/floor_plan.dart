@@ -140,9 +140,9 @@ class _FloorPlanState extends State<FloorPlan> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 96.9,
+                    height: SizeConfig.safeBlockVertical! * 96.5,
                     width: SizeConfig.safeBlockHorizontal! * 100,
-                    color: Colors.white,
+                    color: Colors.red,
                     child: Center(
                         child: _isLoading
                             ? Center(child: CircularProgressIndicator())

@@ -1,5 +1,6 @@
 import 'package:conference/views/events.dart';
 import 'package:conference/views/myevents.dart';
+import 'package:conference/views/profile.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/SizeConfig.dart';
@@ -75,7 +76,7 @@ class _NavigationState extends State<Navigation> {
           case 3: Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) => Welcome()));
+                  builder: (context) => Profile()));
         }
       },
       unselectedItemColor: Colors.white,

@@ -16,7 +16,7 @@ class myEvents extends StatefulWidget {
 class _myEventsState extends State<myEvents> {
   bool obscureText = true;
 
-  int selectedIndex = 0;
+  int selectedIndex = 2;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
 
 
