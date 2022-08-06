@@ -541,43 +541,7 @@ class _EventSingleState extends State<EventSingle> {
                                                               FontWeight.w700,
                                                         ),
                                                       ),
-                                                      GestureDetector(
-                                                        child: Row(
-                                                          children: [
-                                                            ImageIcon(
-                                                              AssetImage(
-                                                                  "assets/images/location.png"),
-                                                              size: SizeConfig
-                                                                      .safeBlockHorizontal! *
-                                                                  3.5,
-                                                              color:
-                                                                  secondaryColor,
-                                                            ),
-                                                            SizedBox(
-                                                              width: SizeConfig
-                                                                      .safeBlockHorizontal! *
-                                                                  1,
-                                                            ),
-                                                            Text(
-                                                              "${event?.location ?? ''}, ${event?.state ?? ''} ${event?.country ?? ''} ",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                color:
-                                                                    textColor,
-                                                                fontSize: SizeConfig
-                                                                        .safeBlockHorizontal! *
-                                                                    3,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
+
                                                     ],
                                                   ),
                                                   SizedBox(
@@ -586,32 +550,40 @@ class _EventSingleState extends State<EventSingle> {
                                                         .5,
                                                   ),
                                                   GestureDetector(
-                                                    child: Container(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical! *
-                                                          20,
-                                                      child: Center(
-                                                        child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius.circular(
-                                                                    SizeConfig
-                                                                            .safeBlockVertical! *
-                                                                        1.5),
-                                                            child: Container(
-                                                              height: SizeConfig
-                                                                      .safeBlockVertical! *
-                                                                  20,
-                                                              width: SizeConfig
-                                                                      .safeBlockHorizontal! *
-                                                                  100,
-                                                              child: Image(
-                                                                image: AssetImage(
-                                                                    'assets/images/map.png'),
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            )),
-                                                      ),
+                                                    child: Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              "assets/images/location.png"),
+                                                          size: SizeConfig
+                                                              .safeBlockHorizontal! *
+                                                              3.5,
+                                                          color:
+                                                          secondaryColor,
+                                                        ),
+                                                        SizedBox(
+                                                          width: SizeConfig
+                                                              .safeBlockHorizontal! *
+                                                              1,
+                                                        ),
+                                                        Text(
+                                                          "${event?.location ?? ''}, ${event?.state ?? ''} ${event?.country ?? ''} ",
+                                                          textAlign:
+                                                          TextAlign
+                                                              .left,
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            color:
+                                                            textColor,
+                                                            fontSize: SizeConfig
+                                                                .safeBlockHorizontal! *
+                                                                3,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .w300,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
