@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:conference/views/liveevent.dart';
 import 'package:conference/views/speakersingle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
+import 'dart:math' as math;
 import '../../Helpers/validator.dart';
 import '../../utils/SizeConfig.dart';
 import '../../utils/constants.dart';
@@ -135,24 +137,30 @@ class _LiveStreamState extends State<LiveStream> {
                 ),
 
                 // body
+
                 Container(
-                  height: SizeConfig.safeBlockVertical! * 96.9,
+                  height: SizeConfig.safeBlockVertical! * 96.5,
                   width: SizeConfig.safeBlockHorizontal! * 100,
                   color: Colors.white,
-                  child: Center(
-                      child: YoutubePlayerBuilder(
-                          player: YoutubePlayer(
-                            controller: controller,
-                          ),
-                          builder: (context, player) {
-                            return Column(
-                              children: [
-                                // some widgets
-                                player,
-                                //some other widgets
-                              ],
-                            );
-                          })),
+                  child: Transform.rotate(
+                    angle: 90 * pi/180,
+                    child: Center(
+                        child: YoutubePlayerBuilder(
+                            player: YoutubePlayer(
+                              controller: controller,
+                            ),
+                            builder: (context, player) {
+                              return Column(
+                                children: [
+                                  // some widgets
+                                  player,
+                                  //some other widgets
+                                ],
+                              );
+                            }
+                            )
+                    ),
+                  ),
                 )
               ],
             ),

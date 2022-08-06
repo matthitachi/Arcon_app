@@ -1,6 +1,7 @@
 
 import 'package:conference/Models/Itinerary.dart';
 import 'package:conference/Models/speaker.dart';
+import 'package:conference/views/editProfile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -86,154 +87,191 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                           SizedBox(
-                            height: SizeConfig.safeBlockVertical! * 7,
+                            height: SizeConfig.safeBlockVertical! * 3,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Column(
                             children: [
-                              Avatar(urlImage: 'https://via.placeholder.com/150', radius: SizeConfig.safeBlockHorizontal! * 10),
-                              SizedBox(
-                                width: SizeConfig.safeBlockHorizontal! * 5,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                  EditProfile()));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Edit profile",
+                                          style: GoogleFonts.montserrat(
+                                            color: Colors.white,
+                                            fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        ),
+                                        Icon( Icons.edit, color: Colors.white, size: 15,),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Column(
+                              Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
+                                  Column(
                                     children: [
-                                      Text(
-                                        "Michel Eze",
-                                        style: GoogleFonts.montserrat(
-                                          color: Colors.white,
-                                          fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
+                                      Avatar(urlImage: 'https://huber.ghostpool.com/wp-content/uploads/avatars/3/596dfc2058143-bpfull.png', radius: SizeConfig.safeBlockHorizontal! * 10),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: SizeConfig.safeBlockVertical! * 1,
+                                    width: SizeConfig.safeBlockHorizontal! * 5,
                                   ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: SizeConfig.safeBlockHorizontal! * 50,
-                                        child: Text(
-                                          'Gynecologist',
-                                          textAlign: TextAlign.left,
-                                          style: GoogleFonts.dmSans(
-                                            color: Colors.white,
-                                            fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: SizeConfig.safeBlockVertical! * 3,
-                                  ),
-                                  Row(
+                                  Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                      Row(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Email",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'micheleze@gmail.com',
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: SizeConfig.safeBlockVertical! * 1,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Country",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'nigeria',
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
+                                          Text(
+                                            "Michel Eze",
+                                            style: GoogleFonts.montserrat(
+                                              color: Colors.white,
+                                              fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ],
                                       ),
                                       SizedBox(
-                                        width: SizeConfig.safeBlockHorizontal! * 5,
+                                        height: SizeConfig.safeBlockVertical! * 1,
                                       ),
-                                      Column(
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: SizeConfig.safeBlockHorizontal! * 50,
+                                            child: Text(
+                                              'Gynecologist',
+                                              textAlign: TextAlign.left,
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.white,
+                                                fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: SizeConfig.safeBlockVertical! * 3,
+                                      ),
+                                      Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Row(
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                "Phone",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Email",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.montserrat(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'micheleze@gmail.com',
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.dmSans(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: SizeConfig.safeBlockVertical! * 1,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Country",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.montserrat(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'nigeria',
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.dmSans(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
-                                          Row(
+                                          SizedBox(
+                                            width: SizeConfig.safeBlockHorizontal! * 5,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                '08109028211',
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Phone",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.montserrat(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    '08109028211',
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.dmSans(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
                                         ],
-                                      ),
+                                      )
                                     ],
-                                  )
+                                  ),
+
                                 ],
                               ),
-
                             ],
                           ),
 
