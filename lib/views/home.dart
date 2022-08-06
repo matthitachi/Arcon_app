@@ -148,11 +148,8 @@ class _HomeState extends State<Home> {
                                     children: [
                                       Container(),
                                       Avatar(
-                                          urlImage:
-                                              'https://via.placeholder.com/150',
-                                          radius:
-                                              SizeConfig.safeBlockHorizontal! *
-                                                  6)
+                                          urlImage: 'https://i.ibb.co/NrvcLXH/noAvatar.png',
+                                          radius: SizeConfig.safeBlockHorizontal! * 6)
                                     ],
                                   ),
                                   Row(
@@ -163,8 +160,7 @@ class _HomeState extends State<Home> {
                                         style: GoogleFonts.dmSans(
                                           color: Colors.white,
                                           fontSize:
-                                              SizeConfig.safeBlockHorizontal! *
-                                                  3.5,
+                                              SizeConfig.safeBlockHorizontal! * 3.5,
                                           fontWeight: FontWeight.w300,
                                         ),
                                       ),
@@ -175,15 +171,17 @@ class _HomeState extends State<Home> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(
-                                        "Experience the best Oncology \nconference",
-                                        textAlign: TextAlign.left,
-                                        style: GoogleFonts.montserrat(
-                                          color: Colors.white,
-                                          fontSize:
-                                              SizeConfig.safeBlockHorizontal! *
-                                                  4,
-                                          fontWeight: FontWeight.w600,
+                                      SizedBox(
+                                        width: SizeConfig.safeBlockHorizontal! * 90,
+                                        child: Text(
+                                          "Experience the best Oncology conference conference",
+                                          textAlign: TextAlign.left,
+                                          style: GoogleFonts.montserrat(
+                                            color: Colors.white,
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal! * 4,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                       ),
                                     ],
