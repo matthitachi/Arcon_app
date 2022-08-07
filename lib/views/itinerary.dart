@@ -310,7 +310,7 @@ class _ItineryState extends State<Itinery> {
                                                         height: SizeConfig.safeBlockVertical! * 2,
                                                       ),
                                                       Text(
-                                                        "${DateFormat('d MMM yyyy').format(DateTime.parse(itinerary.day ?? ''))} ${itinerary.startTime} - ${itinerary.endTime}",
+                                                        "${DateFormat('d MMM yyyy').format(DateTime.parse(itinerary.day))} ${itinerary.startTime} - ${itinerary.endTime}",
                                                         textAlign: TextAlign.left,
                                                         style: GoogleFonts.montserrat(
                                                           color: textColor,

@@ -164,7 +164,7 @@ class _eventsState extends State<events> {
                   height: SizeConfig.safeBlockVertical! * 95,
                   width: SizeConfig.safeBlockHorizontal! * 100,
                   color: Colors.white,
-                  child: Padding(
+                  child:(eventList.isNotEmpty)? Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: SizeConfig.safeBlockHorizontal! * 5,
                           vertical: 0),
@@ -179,7 +179,7 @@ class _eventsState extends State<events> {
                           itemBuilder: (BuildContext ctx, index) =>
                               eventWidgetFull(eventList[index], ctx),
                         ),
-                      )),
+                      )):const Center(child: Text("No Event found"),),
                 )
               ],
             ),

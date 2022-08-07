@@ -6,6 +6,8 @@ class User{
   String? last_name;
   String email;
   String? phone;
+  String? profession;
+  String? speciality;
   String? location;
   String? address;
   String? gender;
@@ -15,7 +17,7 @@ class User{
   String? country;
 
   User(this.id, this.email, this.phone,
-      {this.last_name, this.first_name, this.address, this.city, this.state,
+      {this.last_name, this.first_name, this.address,this.profession,this.speciality, this.city, this.state,
         this.country, this.gender,this.location, this.occupation});
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
@@ -25,6 +27,8 @@ class User{
         first_name: parsedJson['first_name'] ?? "",
         last_name: parsedJson['last_name'] ?? "",
         address: parsedJson['address'] ?? "",
+        profession: parsedJson['profession'] ?? "",
+        speciality: parsedJson['speciality'] ?? "",
         state: parsedJson['state']??"",
         city: parsedJson['city'] ?? "",
         country: parsedJson['country'] ?? "",
@@ -41,6 +45,8 @@ class User{
       "phone": phone,
       "first_name": first_name ?? "",
       "address":address ?? "",
+      "profession":profession ?? "",
+      "speciality":speciality ?? "",
       "get_state":state?? "null",
       "city":city ?? "",
       "country":country ?? "",

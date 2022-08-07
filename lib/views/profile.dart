@@ -1,6 +1,9 @@
 
 import 'package:conference/Models/Itinerary.dart';
+import 'package:conference/Models/response.dart';
 import 'package:conference/Models/speaker.dart';
+import 'package:conference/Models/user.dart';
+import 'package:conference/Service/auth.dart';
 import 'package:conference/views/editProfile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -22,19 +25,33 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   int selectedIndex = 3;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-
+User? user;
 
   void onClicked(int index) {
     setState(() {
       selectedIndex = index;
     });
   }
+  getUserProfile() async {
+    // initLoading();
 
+    Auth service = Auth();
+    Response rs = await service.getUser();
+    // closeLoading();
+    if (rs.status == 200) {
+      setState(() {
+        user = User.fromJson(rs.data);
+      });
+    }
+  }
 
 
   @override
+  void initState() {
+    getUserProfile();
+  }
 
-
+  @override
   Widget build(BuildContext context)  {
     SizeConfig().init(context);
     return Scaffold(
@@ -137,7 +154,7 @@ class _ProfileState extends State<Profile> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Michel Eze",
+                                            "${(user != null)?user!.first_name  :''} ${(user != null)?user!.last_name  :''}",
                                             style: GoogleFonts.montserrat(
                                               color: Colors.white,
                                               fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
@@ -154,7 +171,7 @@ class _ProfileState extends State<Profile> {
                                           Container(
                                             width: SizeConfig.safeBlockHorizontal! * 50,
                                             child: Text(
-                                              'Gynecologist',
+                                              '${(user != null)?user!.profession  :''}',
                                               textAlign: TextAlign.left,
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.white,
@@ -190,7 +207,7 @@ class _ProfileState extends State<Profile> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    'micheleze@gmail.com',
+                                                    '${(user != null)?user!.email  :''}',
                                                     textAlign: TextAlign.left,
                                                     style: GoogleFonts.dmSans(
                                                       color: Colors.white,
@@ -219,7 +236,7 @@ class _ProfileState extends State<Profile> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    'nigeria',
+                                                    '${(user != null)?user!.country  :''}',
                                                     textAlign: TextAlign.left,
                                                     style: GoogleFonts.dmSans(
                                                       color: Colors.white,
@@ -253,7 +270,7 @@ class _ProfileState extends State<Profile> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    '08109028211',
+                                                    '${(user != null)?user!.phone  :''}',
                                                     textAlign: TextAlign.left,
                                                     style: GoogleFonts.dmSans(
                                                       color: Colors.white,

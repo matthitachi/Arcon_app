@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Event{
   int id;
   String name;
+  String? header;
   String? description;
   String? image;
   String? startDate;
@@ -25,7 +26,7 @@ class Event{
   List<Itinerary>? itineraries;
 
   Event(this.id, this.name,
-      {this.description, this.image, this.startDate, this.endDate, this.state,
+      {this.header, this.description, this.image, this.startDate, this.endDate, this.state,
         this.country, this.isMembership,this.location, this.isPaid,
         this.longitude, this.latitude, this.createdAt, this.speakers, this.amount,
         this.transaction, this.floorPlan, this.streamId, this.itineraries});
@@ -34,6 +35,7 @@ class Event{
     return  Event(
         parsedJson['id'], parsedJson['name'],
       description: parsedJson['description']??"",
+      header: parsedJson['header']??"",
         image: parsedJson['image'] ?? "",
         startDate: parsedJson['start_date'] ?? "",
         endDate: parsedJson['end_date'] ?? "",
@@ -41,7 +43,7 @@ class Event{
       isMembership: (parsedJson['is_membership'] == 1) ? true: false,
       amount: double.parse(parsedJson['amount'].toString()),
       location: parsedJson['location'] ?? "",
-      floorPlan: parsedJson['floor_plan'] ?? "",
+      floorPlan: parsedJson['floor_plan'],
       streamId: parsedJson['stream_id'] ?? "",
       longitude: parsedJson['longitude'] ?? "",
       latitude: parsedJson['latitude'] ?? "",
@@ -63,11 +65,12 @@ class Event{
     return {
       "id": id,
       "name": name,
+      "header": header,
       "description": description,
       "image": image ?? "",
       "startDate":startDate ?? "",
       "endDate":endDate?? "",
-      "floor_plan":floorPlan?? "",
+      "floor_plan":floorPlan,
       "stream_id":streamId?? "",
       "isMembership": isMembership ?? false,
       "isPaid": isPaid ?? false,

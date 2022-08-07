@@ -22,6 +22,13 @@ class EventService {
 //     print(data);
     return Response.fromJson(Map<String, dynamic>.from(data));
   }
+  myEvents(Map<String, dynamic> body) async {
+    String path = 'myevents';
+    Api api = Api();
+    Map data = await api.get(path, body: body);
+//     print(data);
+    return Response.fromJson(Map<String, dynamic>.from(data));
+  }
   getEvent(Map<String, dynamic> body) async {
     String path = 'getevent';
     Api api = Api();

@@ -58,7 +58,7 @@ class _NavigationState extends State<Navigation> {
       currentIndex: selectedIndex,
       onTap: (onClicked){
         switch(onClicked){
-          case 0: Navigator.push(
+          case 0: Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => Home()));

@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
   User? user;
   int selectedIndex = 0;
   List<Event> latestEvents = [];
+  Event? event;
   List<Sponsor> sponsors = [];
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
   getUser() async {
@@ -70,10 +71,24 @@ class _HomeState extends State<Home> {
     closeLoading();
   }
 
+  getCurrentEvent() async {
+    // initLoading();
+
+    EventService service = EventService();
+    Response rs = await service.getCurrentEvent();
+    // closeLoading();
+    if (rs.status == 200) {
+      setState(() {
+        event = Event.fromJson(rs.data);
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     getUser();
+    getCurrentEvent();
     initHomeIndex();
   }
 
@@ -176,7 +191,7 @@ class _HomeState extends State<Home> {
                                   Row(
                                     children: [
                                       Text(
-                                        "Experience the best Oncology \nconference",
+                                        "${(event != null)?event!.header :''}",
                                         textAlign: TextAlign.left,
                                         style: GoogleFonts.montserrat(
                                           color: Colors.white,

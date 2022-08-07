@@ -239,6 +239,8 @@ class _drawerState extends State<drawer> {
 
                     GestureDetector(
                       onTap: () {
+                        print('floor plan');
+                        print(event?.floorPlan);
                         if (event?.floorPlan != null) {
                           Navigator.pushReplacement(
                               context,

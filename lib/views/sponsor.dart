@@ -180,7 +180,7 @@ class _SponsorsState extends State<Sponsors> {
                     height: SizeConfig.safeBlockVertical! * 96.5,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
-                    child: Padding(
+                    child:(sponsorList.isNotEmpty)? Padding(
                       padding: EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 5, vertical: 0),
                       child: RefreshIndicator(
                           onRefresh: initList,
@@ -199,7 +199,7 @@ class _SponsorsState extends State<Sponsors> {
                             //
                             // ],
                           )),
-                    ),
+                    ):const Center(child: Text("No Speaker found"),),
 
                   )
                 ],
