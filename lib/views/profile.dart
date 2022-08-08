@@ -1,4 +1,5 @@
 
+import 'package:conference/Helpers/helper.dart';
 import 'package:conference/Models/Itinerary.dart';
 import 'package:conference/Models/response.dart';
 import 'package:conference/Models/speaker.dart';
@@ -25,13 +26,25 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   int selectedIndex = 3;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  final GlobalKey<FormState> _formkey = GlobalKey();
 User? user;
+bool obscureText = true;
 
   void onClicked(int index) {
     setState(() {
       selectedIndex = index;
     });
   }
+  final firstName = TextEditingController();
+  final lastName = TextEditingController();
+  final email = TextEditingController();
+  final phone = TextEditingController();
+  final speciality = TextEditingController();
+  final profession = TextEditingController();
+  final address = TextEditingController();
+  final state = TextEditingController();
+  final country = TextEditingController();
+
   getUserProfile() async {
     // initLoading();
 
@@ -41,10 +54,18 @@ User? user;
     if (rs.status == 200) {
       setState(() {
         user = User.fromJson(rs.data);
+        firstName.text = user?.first_name??'';
+        lastName .text= user?.last_name??'';
+        email .text= user?.email??'';
+        phone .text= user?.phone??'';
+        address .text= user?.address??'';
+        speciality .text= user?.speciality??'';
+        profession .text= user?.profession??'';
+        state .text= user?.state??'';
+        country .text= user?.country??'';
       });
     }
   }
-
 
   @override
   void initState() {
@@ -301,7 +322,7 @@ User? user;
                                 SizedBox(
                                   height: SizeConfig.safeBlockVertical! * 2,
                                 ),
-                                Form(
+                                Form(key: _formkey,
                                     child:Container(
                                       height: SizeConfig.safeBlockVertical! * 90,
                                       color: Colors.white,
@@ -351,6 +372,7 @@ User? user;
                                                                         .safeBlockVertical! *
                                                                         5,
                                                                     child: TextFormField(
+                                                                      controller: firstName,
                                                                       validator: (value) {
                                                                         List isEmpty =
                                                                         Validator.isEmpty(
@@ -447,6 +469,7 @@ User? user;
                                                                         .safeBlockVertical! *
                                                                         5,
                                                                     child: TextFormField(
+                                                                      controller: lastName,
                                                                       validator: (value) {
                                                                         List isEmpty =
                                                                         Validator.isEmpty(
@@ -547,6 +570,7 @@ User? user;
                                                         height:
                                                         SizeConfig.safeBlockVertical! * 5,
                                                         child: TextFormField(
+                                                          controller: email,
                                                           validator: (value) {
                                                             List isEmpty =
                                                             Validator.isEmpty(value);
@@ -563,6 +587,81 @@ User? user;
                                                             fontWeight: FontWeight.w300,
                                                           ),
                                                           keyboardType: TextInputType.name,
+                                                          cursorColor: mainColor,
+                                                          decoration: InputDecoration(
+                                                            filled: true,
+                                                            fillColor: Colors.transparent,
+                                                            contentPadding:
+                                                            const EdgeInsets.only(
+                                                                left: 14.0,
+                                                                bottom: 5.0,
+                                                                top: 5.0),
+                                                            focusedBorder: OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                color: Color(0xFFECE2DC),
+                                                                width: 0.8,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(5),
+                                                            ),
+                                                            enabledBorder: OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                color: Color(0xFFECE2DC),
+                                                                width: 0.8,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(5),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.symmetric(vertical: 8.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Phone Number",
+                                                            style: GoogleFonts.montserrat(
+                                                              color: mainColor,
+                                                              fontSize: SizeConfig
+                                                                  .safeBlockHorizontal! *
+                                                                  3,
+                                                              fontWeight: FontWeight.w300,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height:
+                                                        SizeConfig.safeBlockVertical! * 1.5,
+                                                      ),
+                                                      Container(
+                                                        height:
+                                                        SizeConfig.safeBlockVertical! * 5,
+                                                        child: TextFormField(
+                                                          controller: phone,
+                                                          validator: (value) {
+                                                            List isEmpty =
+                                                            Validator.isEmpty(value);
+                                                            if (isEmpty[0]) {
+                                                              return isEmpty[1].toString();
+                                                            }
+                                                            return null;
+                                                          },
+                                                          style: GoogleFonts.montserrat(
+                                                            color: mainColor,
+                                                            fontSize: SizeConfig
+                                                                .safeBlockHorizontal! *
+                                                                3,
+                                                            fontWeight: FontWeight.w300,
+                                                          ),
+                                                          keyboardType: TextInputType.number,
                                                           cursorColor: mainColor,
                                                           decoration: InputDecoration(
                                                             filled: true,
@@ -621,6 +720,82 @@ User? user;
                                                         height:
                                                         SizeConfig.safeBlockVertical! * 5,
                                                         child: TextFormField(
+                                                          controller: profession,
+                                                          validator: (value) {
+                                                            List isEmpty =
+                                                            Validator.isEmpty(value);
+                                                            if (isEmpty[0]) {
+                                                              return isEmpty[1].toString();
+                                                            }
+                                                            return null;
+                                                          },
+                                                          style: GoogleFonts.montserrat(
+                                                            color: mainColor,
+                                                            fontSize: SizeConfig
+                                                                .safeBlockHorizontal! *
+                                                                3,
+                                                            fontWeight: FontWeight.w300,
+                                                          ),
+                                                          keyboardType: TextInputType.name,
+                                                          cursorColor: mainColor,
+                                                          decoration: InputDecoration(
+                                                            filled: true,
+                                                            fillColor: Colors.transparent,
+                                                            contentPadding:
+                                                            const EdgeInsets.only(
+                                                                left: 14.0,
+                                                                bottom: 5.0,
+                                                                top: 5.0),
+                                                            focusedBorder: OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                color: Color(0xFFECE2DC),
+                                                                width: 0.8,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(5),
+                                                            ),
+                                                            enabledBorder: OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                color: Color(0xFFECE2DC),
+                                                                width: 0.8,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(5),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.symmetric(vertical: 8.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Speciality",
+                                                            style: GoogleFonts.montserrat(
+                                                              color: mainColor,
+                                                              fontSize: SizeConfig
+                                                                  .safeBlockHorizontal! *
+                                                                  3,
+                                                              fontWeight: FontWeight.w300,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height:
+                                                        SizeConfig.safeBlockVertical! * 1.5,
+                                                      ),
+                                                      Container(
+                                                        height:
+                                                        SizeConfig.safeBlockVertical! * 5,
+                                                        child: TextFormField(
+                                                          controller: speciality,
                                                           validator: (value) {
                                                             List isEmpty =
                                                             Validator.isEmpty(value);
@@ -695,6 +870,7 @@ User? user;
                                                         height:
                                                         SizeConfig.safeBlockVertical! * 5,
                                                         child: TextFormField(
+                                                          controller: address,
                                                           validator: (value) {
                                                             List isEmpty =
                                                             Validator.isEmpty(value);
@@ -747,14 +923,10 @@ User? user;
                                                   const EdgeInsets.symmetric(vertical: 8.0),
                                                   child: Column(
                                                     children: [
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1,
-                                                      ),
                                                       Row(
                                                         children: [
                                                           Text(
-                                                            "Password",
+                                                            "State",
                                                             style: GoogleFonts.montserrat(
                                                               color: mainColor,
                                                               fontSize: SizeConfig
@@ -773,19 +945,15 @@ User? user;
                                                         height:
                                                         SizeConfig.safeBlockVertical! * 5,
                                                         child: TextFormField(
+                                                          controller: state,
                                                           validator: (value) {
                                                             List isEmpty =
                                                             Validator.isEmpty(value);
-                                                            List min = Validator.min(value, 8);
                                                             if (isEmpty[0]) {
                                                               return isEmpty[1].toString();
                                                             }
-                                                            if (min[0]) {
-                                                              return min[1].toString();
-                                                            }
                                                             return null;
                                                           },
-                                                          obscureText: obscureText,
                                                           style: GoogleFonts.montserrat(
                                                             color: mainColor,
                                                             fontSize: SizeConfig
@@ -793,32 +961,16 @@ User? user;
                                                                 3,
                                                             fontWeight: FontWeight.w300,
                                                           ),
-                                                          keyboardType:
-                                                          TextInputType.visiblePassword,
+                                                          keyboardType: TextInputType.name,
                                                           cursorColor: mainColor,
                                                           decoration: InputDecoration(
-                                                            suffixIcon: IconButton(
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  obscureText = !obscureText;
-                                                                });
-                                                              },
-                                                              icon: Icon(
-                                                                obscureText
-                                                                    ? Icons.visibility_rounded
-                                                                    : Icons
-                                                                    .visibility_off_rounded,
-                                                                color: mainColor,
-                                                                size: 15,
-                                                              ),
-                                                            ),
                                                             filled: true,
                                                             fillColor: Colors.transparent,
                                                             contentPadding:
                                                             const EdgeInsets.only(
                                                                 left: 14.0,
-                                                                bottom: 8.0,
-                                                                top: 13.0),
+                                                                bottom: 5.0,
+                                                                top: 5.0),
                                                             focusedBorder: OutlineInputBorder(
                                                               borderSide: BorderSide(
                                                                 color: Color(0xFFECE2DC),
@@ -841,6 +993,82 @@ User? user;
                                                     ],
                                                   ),
                                                 ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.symmetric(vertical: 8.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Country",
+                                                            style: GoogleFonts.montserrat(
+                                                              color: mainColor,
+                                                              fontSize: SizeConfig
+                                                                  .safeBlockHorizontal! *
+                                                                  3,
+                                                              fontWeight: FontWeight.w300,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height:
+                                                        SizeConfig.safeBlockVertical! * 1.5,
+                                                      ),
+                                                      Container(
+                                                        height:
+                                                        SizeConfig.safeBlockVertical! * 5,
+                                                        child: TextFormField(
+                                                          controller: country,
+                                                          validator: (value) {
+                                                            List isEmpty =
+                                                            Validator.isEmpty(value);
+                                                            if (isEmpty[0]) {
+                                                              return isEmpty[1].toString();
+                                                            }
+                                                            return null;
+                                                          },
+                                                          style: GoogleFonts.montserrat(
+                                                            color: mainColor,
+                                                            fontSize: SizeConfig
+                                                                .safeBlockHorizontal! *
+                                                                3,
+                                                            fontWeight: FontWeight.w300,
+                                                          ),
+                                                          keyboardType: TextInputType.name,
+                                                          cursorColor: mainColor,
+                                                          decoration: InputDecoration(
+                                                            filled: true,
+                                                            fillColor: Colors.transparent,
+                                                            contentPadding:
+                                                            const EdgeInsets.only(
+                                                                left: 14.0,
+                                                                bottom: 5.0,
+                                                                top: 5.0),
+                                                            focusedBorder: OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                color: Color(0xFFECE2DC),
+                                                                width: 0.8,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(5),
+                                                            ),
+                                                            enabledBorder: OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                color: Color(0xFFECE2DC),
+                                                                width: 0.8,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(5),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+
                                               ],
                                             ),
                                             Row(
@@ -869,7 +1097,48 @@ User? user;
                                                   ],
                                                 ),
                                                 RawMaterialButton(
-                                                  onPressed: () { },
+                                                  onPressed: () async {
+                                                    if (_formkey.currentState!
+                                                        .validate()) {
+                                                      initLoading();
+                                                      Map<String, dynamic> formInfo = {
+                                                        'first_name':
+                                                        firstName.text,
+                                                        'last_name':
+                                                        lastName.text,
+                                                        'email': email.text,
+                                                        'phone':
+                                                        phone.text,
+                                                        'speciality':
+                                                        speciality.text,
+                                                        'profession':
+                                                        profession.text,
+                                                        'country':
+                                                        country.text,
+                                                        'state':
+                                                        state.text,
+                                                      };
+                                                      print(formInfo);
+                                                      Auth auth = Auth();
+                                                      Response rs =
+                                                          await auth.updateProfile(formInfo);
+                                                      closeLoading();
+                                                      if (rs.status == 200) {
+                                                        displaySnackbar(
+                                                            _key,
+                                                            "Profile update successful.",
+                                                            Colors.greenAccent);
+
+                                                      } else {
+
+                                                        displaySnackbar(
+                                                            _key,
+                                                            rs.message,
+                                                            Colors.orange
+                                                                .withOpacity(0.6));
+                                                      }
+                                                    }
+                                                  },
                                                   elevation: 2.0,
                                                   fillColor: secondaryColor,
                                                   child: Icon(

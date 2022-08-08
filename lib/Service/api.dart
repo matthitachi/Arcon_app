@@ -6,8 +6,8 @@ class Api {
   Dio http = Dio();
 
   // String Host = 'http://10.0.2.2:8000/api/';
-  // String Host = 'http://192.168.81.160:8000/api/';
-  String Host = 'http://192.168.8.101:8000/api/';
+  String Host = 'http://192.168.87.160:8000/api/';
+  // String Host = 'http://192.168.8.101:8000/api/';
   // String Host = 'http://192.168.100.69:8000/api/';
   // String Host = 'http://192.168.0.150:8000/api/';
  // String Host = 'https://conference.arconigeria.org/api/';
@@ -28,11 +28,13 @@ class Api {
       http.interceptors.add(
           InterceptorsWrapper(onRequest: (RequestOptions options, handler) {
         // Do something before request is sent
-        print(token);
+        // print(token);
         options.headers["Authorization"] = "Bearer $token";
         return handler.next(options);
       }, onResponse: (Response response, handler) {
         // Do something with response data
+            print('response.statusCode');
+            print(response.statusCode);
         if (response.statusCode == 403) {
           print(response.data);
          print('unauthenticated');
@@ -42,9 +44,9 @@ class Api {
         return handler.next(response); // continue
       }, onError: (DioError error, handler) async {
 
-            print(error.response?.statusCode );
+            // print(error.response?.statusCode );
         // Do something with response error
-       // print(error.response);
+       print(error.response);
         if (error.response?.statusCode == 403) {
            print('unauthenticated');
         print(error.message);

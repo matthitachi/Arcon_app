@@ -553,7 +553,7 @@ class _EventSingleState extends State<EventSingle> {
                                                     child: Row(
                                                       children: [
                                                         ImageIcon(
-                                                          AssetImage(
+                                                          const AssetImage(
                                                               "assets/images/location.png"),
                                                           size: SizeConfig
                                                               .safeBlockHorizontal! *

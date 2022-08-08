@@ -123,16 +123,10 @@ class Auth {
     Map data = await api.postFormData(path, body: body);
     return Response.fromJson(Map<String, dynamic>.from(data));
   }
-  getProfile() async {
-    String path = 'profile';
+  updateProfile(Map body) async {
+    String path = 'update_profile';
     Api api = Api();
-    Map data = await api.get(path);
-    return Response.fromJson(Map<String, dynamic>.from(data));
-  }
-  visitorList(Map body) async {
-    String path = 'db/VisitorList';
-    Api api = Api();
-    Map data = await api.get(path, body: Map<String, dynamic>.from(body));
+    Map data = await api.post(path, body: Map<String, dynamic>.from(body));
     return Response.fromJson(Map<String, dynamic>.from(data));
   }
 }
