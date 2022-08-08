@@ -567,7 +567,7 @@ class _EventSingleState extends State<EventSingle> {
                                                               1,
                                                         ),
                                                         Text(
-                                                          "${event?.location ?? ''}, ${event?.state ?? ''} ${event?.country ?? ''} ",
+                                                          "${event?.address ?? ''}, ${event?.state ?? ''} ${event?.country ?? ''} ",
                                                           textAlign:
                                                           TextAlign
                                                               .left,

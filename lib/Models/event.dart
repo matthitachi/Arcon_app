@@ -16,6 +16,7 @@ class Event{
   double? amount;
   bool? isPaid;
   String? location;
+  String? address;
   String? longitude;
   String? latitude;
   String? state;
@@ -27,7 +28,7 @@ class Event{
 
   Event(this.id, this.name,
       {this.header, this.description, this.image, this.startDate, this.endDate, this.state,
-        this.country, this.isMembership,this.location, this.isPaid,
+        this.country, this.isMembership,this.location,this.address, this.isPaid,
         this.longitude, this.latitude, this.createdAt, this.speakers, this.amount,
         this.transaction, this.floorPlan, this.streamId, this.itineraries});
 
@@ -42,6 +43,7 @@ class Event{
       isPaid: (parsedJson['is_paid'] == 1) ? true: false,
       isMembership: (parsedJson['is_membership'] == 1) ? true: false,
       amount: double.parse(parsedJson['amount'].toString()),
+      address: parsedJson['address'] ?? "",
       location: parsedJson['location'] ?? "",
       floorPlan: parsedJson['floor_plan'],
       streamId: parsedJson['stream_id'] ?? "",
@@ -79,6 +81,7 @@ class Event{
       "state": state ?? "",
       "country":country ?? "",
       "location": location ?? "",
+      "address": address ?? "",
     };
   }
 
