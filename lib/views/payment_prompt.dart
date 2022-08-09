@@ -71,23 +71,6 @@ class _PaymentPromptState extends State<PaymentPrompt> {
     });
     // print(getUser.attr!['address']);
   }
-  double _height = SizeConfig.safeBlockVertical! * 5;
-  double _width = SizeConfig.safeBlockHorizontal! * 10;
-  Color _dateBckColor = Color(0x000D605C);
-  Color _dateTxtColor = textColor;
-  double _minHeights = SizeConfig.safeBlockVertical! * 0;
-  double _bottomLeft = SizeConfig.safeBlockVertical! * 1.5;
-  double _bottomRight = SizeConfig.safeBlockVertical! * 1.5;
-
-  void showToast() {
-    setState(() {
-      _isVisible = !_isVisible;
-      _height = SizeConfig.safeBlockVertical! * 8;
-      _width = SizeConfig.safeBlockHorizontal! * 12;
-      _dateBckColor = Color(0xFF0D605C);
-      _dateTxtColor = Colors.white;
-    });
-  }
 
   @override
   void initState() {
@@ -191,10 +174,10 @@ class _PaymentPromptState extends State<PaymentPrompt> {
       return null;
     }
   }
-
+  paymentOptions? _character = paymentOptions.Consultants;
   @override
   Widget build(BuildContext context) {
-    paymentOptions? _character = paymentOptions.Consultants;
+
     SizeConfig().init(context);
     return Scaffold(
       key: _key,
