@@ -552,35 +552,10 @@ class _PaymentPromptState extends State<PaymentPrompt> {
             ),
 
             // Navigation
-            Positioned(
-              bottom: 0,
-              left: SizeConfig.safeBlockHorizontal! * 2.5,
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    Container(
-                        width: SizeConfig.safeBlockHorizontal! * 95,
-                        height: SizeConfig.safeBlockVertical! * 9,
-                        decoration: BoxDecoration(
-                          color: mainColorSub,
-                          borderRadius: BorderRadius.all(Radius.circular(
-                              SizeConfig.safeBlockVertical! * 6)),
-                        ),
-                        child: Navigation(
-                          selectedIndex: selectedIndex,
-                          onClicked: onClicked,
-                        )),
-                    SizedBox(
-                      height: SizeConfig.safeBlockVertical! * 1,
-                    )
-                  ],
-                ),
-              ),
-            ),
+
           ],
         ),
       ),
-      drawer: drawer(),
       // bottomNavigationBar: Navigation(selectedIndex: selectedIndex, onClicked: onClicked,),
     );
   }
