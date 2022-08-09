@@ -12,7 +12,7 @@ class Fee{
 
   factory Fee.fromJson(Map<String, dynamic> parsedJson) {
     return  Fee(
-        parsedJson['id'], parsedJson['name'], parsedJson['fee'],
+        parsedJson['id'], parsedJson['name'], double.parse(parsedJson['fee'].toString()),
       currency: parsedJson['currency']??"Naira",
     );
   }

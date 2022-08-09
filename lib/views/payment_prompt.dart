@@ -93,7 +93,7 @@ class _PaymentPromptState extends State<PaymentPrompt> {
       // publicKey = "pk_test_4f379241e6b21392538e63bc6888ddd96945aa3e";
       paystackPlugin.initialize(publicKey: publicKey);
       dynamic response =
-      await paystackPayment(context, event.amount.toString(), user!.email);
+      await paystackPayment(context, _character?.fee.toString()??'0.00', user!.email);
       if (response != null) {
         print(response);
         CheckoutResponse resp = response;
@@ -105,10 +105,10 @@ class _PaymentPromptState extends State<PaymentPrompt> {
           Map<String, dynamic> payInfo = {
             'event_id': event.id,
             'reference': reference,
-            'amount': event.amount,
+            'amount': _character?.fee.toString()??'0.00',
             'status': TRANSACTION_COMPLETED,
             'payment_method': PAYMENT_METHOD_PAYSTACK,
-            'description': 'Paid ₦${event.amount} via Paystack',
+            'description': 'Paid ₦${_character?.fee.toString()??'0.00'} via Paystack',
           };
           print(payInfo);
           sendPayment(payInfo);
@@ -141,8 +141,8 @@ class _PaymentPromptState extends State<PaymentPrompt> {
 
   paystackPayment(context, amountStr, email) async {
     // int amount = (amount + vat.toInt()) * 100 ;
-    print(amountStr);
-    int amount = (double.parse(amountStr) * 100).toInt();
+
+    int amount = (_character?.currency == 'Naira')?(double.parse(amountStr) * 100).toInt():(double.parse(amountStr) * 100).toInt();
     initLoading();
     Map<String, dynamic> initDetails = {'amount': amount, 'email': email};
     print(initDetails);
@@ -158,7 +158,9 @@ class _PaymentPromptState extends State<PaymentPrompt> {
         ..amount = amount
         ..reference = reference
         ..accessCode = accessCode
-        ..email = email;
+        ..email = email
+      ..locale = (_character!=null && _character?.currency == 'Naira')?'en_NG':'en_US'
+      ..currency = (_character!=null && _character?.currency == 'Naira')?'NGN':'USD';
       CheckoutResponse response = await paystackPlugin.checkout(
         context,
         method:
@@ -174,7 +176,7 @@ class _PaymentPromptState extends State<PaymentPrompt> {
       return null;
     }
   }
-  paymentOptions? _character = paymentOptions.Consultants;
+  Fee? _character;
   @override
   Widget build(BuildContext context) {
 
@@ -433,12 +435,13 @@ class _PaymentPromptState extends State<PaymentPrompt> {
                                   Container(
                                     child: Column(
                                       children: <Widget>[
+                                        for(Fee fee in fees)
                                         ListTile(
                                           visualDensity: VisualDensity(horizontal: 0, vertical: -4),
                                           focusColor: mainColor,
                                           contentPadding: EdgeInsets.zero,
                                           title: Text(
-                                            'Conference fees Consultants: ₦50000.00',
+                                            '${fee.name} fees Consultants: ${(fee.currency == 'Naira')?'₦':'\$'}${fee.fee}',
                                             style: GoogleFonts.montserrat(
                                               color: textColor,
                                               fontSize: SizeConfig
@@ -447,64 +450,12 @@ class _PaymentPromptState extends State<PaymentPrompt> {
                                               fontWeight: FontWeight.w700,
                                             ),
                                           ),
-                                          leading: Radio<paymentOptions>(
+                                          leading: Radio<Fee>(
                                             fillColor: MaterialStateColor.resolveWith((states) => secondaryColor),
                                             focusColor: MaterialStateColor.resolveWith((states) => secondaryColor),
-                                            value: paymentOptions.Consultants,
+                                            value: fee,
                                             groupValue: _character,
-                                            onChanged: (paymentOptions? value) {
-                                              setState(() {
-                                                _character = value;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        ListTile(
-                                          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                                          contentPadding: EdgeInsets.zero,
-                                          minVerticalPadding: 0,
-                                          title: Text(
-                                              'Residents and other Participants: ₦30000.00',
-                                            style: GoogleFonts.montserrat(
-                                              color: textColor,
-                                              fontSize: SizeConfig
-                                                  .safeBlockHorizontal! *
-                                                  3,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                          leading: Radio<paymentOptions>(
-                                            fillColor: MaterialStateColor.resolveWith((states) => secondaryColor),
-                                            focusColor: MaterialStateColor.resolveWith((states) => secondaryColor),
-                                            value: paymentOptions.Participants,
-                                            groupValue: _character,
-                                            onChanged: (paymentOptions? value) {
-                                              setState(() {
-                                                _character = value;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        ListTile(
-                                          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                                          contentPadding: EdgeInsets.zero,
-                                          minVerticalPadding: 0,
-                                          title: Text(
-                                              'Diaspora: USD100.00',
-                                            style: GoogleFonts.montserrat(
-                                              color: textColor,
-                                              fontSize: SizeConfig
-                                                  .safeBlockHorizontal! *
-                                                  3,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                          leading: Radio<paymentOptions>(
-                                            fillColor: MaterialStateColor.resolveWith((states) => secondaryColor),
-                                            focusColor: MaterialStateColor.resolveWith((states) => secondaryColor),
-                                            value: paymentOptions.Diaspora,
-                                            groupValue: _character,
-                                            onChanged: (paymentOptions? value) {
+                                            onChanged: (Fee? value) {
                                               setState(() {
                                                 _character = value;
                                               });
@@ -564,6 +515,10 @@ class _PaymentPromptState extends State<PaymentPrompt> {
                                        Expanded(
                                             child: GestureDetector(
                                                 onTap: (){
+                                                  if(_character == null){
+                                                    displaySnackbar(_key, 'Select a payment plan', secondaryColor);
+                                                    return;
+                                                  }
                                                   getPaystackKey();
                                                 },
                                                 child:Container(
