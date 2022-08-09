@@ -233,11 +233,15 @@ class _PaymentPromptState extends State<PaymentPrompt> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                _key.currentState!.openDrawer();
+                                Navigator.of(
+                                  context,
+                                ).pop(
+                                  context,
+                                );
                               },
                               child: Image(
-                                image:
-                                    AssetImage('assets/images/menu_icon.png'),
+                                image: AssetImage(
+                                    'assets/images/menu_icon_back.png'),
                                 width: SizeConfig.safeBlockHorizontal! * 7,
                               ),
                             ),

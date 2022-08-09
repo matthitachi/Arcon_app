@@ -156,9 +156,17 @@ class _EventSingleState extends State<EventSingle> {
                                 width: SizeConfig.safeBlockHorizontal! * 7,
                               ),
                             ),
+                            Text(
+                              "",
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: SizeConfig.safeBlockHorizontal! * 5,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                             Image(
-                              image: AssetImage('assets/images/save_icon.png'),
-                              width: SizeConfig.safeBlockHorizontal! * 7,
+                              image: AssetImage('assets/images/logo.png'),
+                              width: SizeConfig.safeBlockHorizontal! * 15,
                             ),
                           ],
                         ),
