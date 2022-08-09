@@ -1,5 +1,6 @@
 import 'package:conference/Helpers/helper.dart';
 import 'package:conference/Models/event.dart';
+import 'package:conference/Models/fee.dart';
 import 'package:conference/Models/response.dart';
 import 'package:conference/Models/speaker.dart';
 import 'package:conference/Models/user.dart';
@@ -41,6 +42,7 @@ class _PaymentPromptState extends State<PaymentPrompt> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   User? user;
   Event event;
+  List<Fee> fees = [];
   String publicKey = '';
   String encryptionKey = '';
   final paystackPlugin = PaystackPlugin();
@@ -50,6 +52,17 @@ class _PaymentPromptState extends State<PaymentPrompt> {
     setState(() {
       selectedIndex = index;
     });
+  }
+  getFees() async {
+    EventService service = EventService();
+    Response rs = await service.getFees({'event': event.id});
+    if (rs.status == 200) {
+      setState(() {
+        fees = List.from(rs.data).map((elem) {
+          return Fee.fromJson(elem);
+        }).toList();
+      });
+    }
   }
   getUser() async {
     User? getUser = await AuthData.getUser();
@@ -80,7 +93,10 @@ class _PaymentPromptState extends State<PaymentPrompt> {
   void initState() {
     super.initState();
     getUser();
+    getFees();
   }
+
+
 
   getPaystackKey() async {
     initLoading();
