@@ -28,6 +28,8 @@ class PaymentPrompt extends StatefulWidget {
   State<PaymentPrompt> createState() => _PaymentPromptState(this.event);
 }
 
+enum paymentOptions { Consultants, Participants, Diaspora }
+
 class _PaymentPromptState extends State<PaymentPrompt> {
 
   final int PAYMENT_METHOD_PAYSTACK = 0;
@@ -176,6 +178,7 @@ class _PaymentPromptState extends State<PaymentPrompt> {
 
   @override
   Widget build(BuildContext context) {
+    paymentOptions? _character = paymentOptions.Consultants;
     SizeConfig().init(context);
     return Scaffold(
       key: _key,
@@ -243,7 +246,7 @@ class _PaymentPromptState extends State<PaymentPrompt> {
 
                 // body
                 Container(
-                  height: SizeConfig.safeBlockVertical! * 96.9,
+                  height: SizeConfig.safeBlockVertical! * 96.5,
                   width: SizeConfig.safeBlockHorizontal! * 100,
                   color: Colors.white,
                   child: Padding(
@@ -326,32 +329,46 @@ class _PaymentPromptState extends State<PaymentPrompt> {
                                                   .2,
                                           color: Colors.black38,
                                         ),
-                                      )),
+                                      )
+                                  ),
                                   // horizontal line end
                                   SizedBox(
                                     height: SizeConfig.safeBlockVertical! * 1.5,
                                   ),
-                                  Container(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Event: ",
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+
+                                      Container(
+                                        width:
+                                            SizeConfig.blockSizeHorizontal! *
+                                                70,
+                                        child: Text(
+                                          event.name,
                                           style: GoogleFonts.montserrat(
                                             color: textColor,
                                             fontSize: SizeConfig
                                                     .safeBlockHorizontal! *
-                                                3,
-                                            fontWeight: FontWeight.w500,
+                                                4,
+                                            fontWeight: FontWeight.w700,
                                           ),
                                         ),
-                                        Container(
-                                          width:
-                                              SizeConfig.blockSizeHorizontal! *
-                                                  70,
-                                          child: Text(
-                                            event.name,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.safeBlockVertical! * 1.5,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Start Date: ",
                                             style: GoogleFonts.montserrat(
                                               color: textColor,
                                               fontSize: SizeConfig
@@ -360,34 +377,29 @@ class _PaymentPromptState extends State<PaymentPrompt> {
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: SizeConfig.safeBlockVertical! * 1.5,
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Start Date: ",
-                                          style: GoogleFonts.montserrat(
-                                            color: textColor,
-                                            fontSize: SizeConfig
-                                                    .safeBlockHorizontal! *
-                                                3,
-                                            fontWeight: FontWeight.w500,
+                                          SizedBox(
+                                            child: Text(
+                                              DateFormat('d MMM yyyy').format(DateTime.parse(event.startDate??'')),
+                                              style: GoogleFonts.montserrat(
+                                                color: textColor,
+                                                fontSize: SizeConfig
+                                                        .safeBlockHorizontal! *
+                                                    3,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                        Container(
-                                          width:
-                                              SizeConfig.blockSizeHorizontal! *
-                                                  70,
-                                          child: Text(
-                                            DateFormat('d MMM yyyy').format(DateTime.parse(event.startDate??'')),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: SizeConfig.safeBlockVertical! * 1.5,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "End Date: ",
                                             style: GoogleFonts.montserrat(
                                               color: textColor,
                                               fontSize: SizeConfig
@@ -396,77 +408,104 @@ class _PaymentPromptState extends State<PaymentPrompt> {
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: SizeConfig.safeBlockVertical! * 1.5,
+                                          SizedBox(
+                                            child: Text(
+                                              DateFormat('d MMM yyyy').format(DateTime.parse(event.endDate??'')),
+                                              style: GoogleFonts.montserrat(
+                                                color: textColor,
+                                                fontSize: SizeConfig
+                                                        .safeBlockHorizontal! *
+                                                    3,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: SizeConfig.safeBlockVertical! * 1.5,
+                                      ),
+                                    ],
                                   ),
                                   Container(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "End Date: ",
-                                          style: GoogleFonts.montserrat(
-                                            color: textColor,
-                                            fontSize: SizeConfig
-                                                    .safeBlockHorizontal! *
-                                                3,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        Container(
-                                          width:
-                                              SizeConfig.blockSizeHorizontal! *
-                                                  70,
-                                          child: Text(
-                                            DateFormat('d MMM yyyy').format(DateTime.parse(event.endDate??'')),
+                                    child: Column(
+                                      children: <Widget>[
+                                        ListTile(
+                                          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                                          focusColor: mainColor,
+                                          contentPadding: EdgeInsets.zero,
+                                          title: Text(
+                                            'Conference fees Consultants: ₦50000.00',
                                             style: GoogleFonts.montserrat(
                                               color: textColor,
                                               fontSize: SizeConfig
-                                                      .safeBlockHorizontal! *
+                                                  .safeBlockHorizontal! *
                                                   3,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w700,
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: SizeConfig.safeBlockVertical! * 1.5,
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Amount: ",
-                                          style: GoogleFonts.montserrat(
-                                            color: textColor,
-                                            fontSize: SizeConfig
-                                                    .safeBlockHorizontal! *
-                                                3,
-                                            fontWeight: FontWeight.w500,
+                                          leading: Radio<paymentOptions>(
+                                            fillColor: MaterialStateColor.resolveWith((states) => secondaryColor),
+                                            focusColor: MaterialStateColor.resolveWith((states) => secondaryColor),
+                                            value: paymentOptions.Consultants,
+                                            groupValue: _character,
+                                            onChanged: (paymentOptions? value) {
+                                              setState(() {
+                                                _character = value;
+                                              });
+                                            },
                                           ),
                                         ),
-                                        Container(
-                                          width:
-                                              SizeConfig.blockSizeHorizontal! *
-                                                  70,
-                                          child: Text(
-                                            currencyFMT(event.amount),
-                                            style: TextStyle(
+                                        ListTile(
+                                          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                                          contentPadding: EdgeInsets.zero,
+                                          minVerticalPadding: 0,
+                                          title: Text(
+                                              'Residents and other Participants: ₦30000.00',
+                                            style: GoogleFonts.montserrat(
                                               color: textColor,
                                               fontSize: SizeConfig
-                                                      .safeBlockHorizontal! *
+                                                  .safeBlockHorizontal! *
                                                   3,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w700,
                                             ),
+                                          ),
+                                          leading: Radio<paymentOptions>(
+                                            fillColor: MaterialStateColor.resolveWith((states) => secondaryColor),
+                                            focusColor: MaterialStateColor.resolveWith((states) => secondaryColor),
+                                            value: paymentOptions.Participants,
+                                            groupValue: _character,
+                                            onChanged: (paymentOptions? value) {
+                                              setState(() {
+                                                _character = value;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        ListTile(
+                                          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                                          contentPadding: EdgeInsets.zero,
+                                          minVerticalPadding: 0,
+                                          title: Text(
+                                              'Diaspora: USD100.00',
+                                            style: GoogleFonts.montserrat(
+                                              color: textColor,
+                                              fontSize: SizeConfig
+                                                  .safeBlockHorizontal! *
+                                                  3,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          leading: Radio<paymentOptions>(
+                                            fillColor: MaterialStateColor.resolveWith((states) => secondaryColor),
+                                            focusColor: MaterialStateColor.resolveWith((states) => secondaryColor),
+                                            value: paymentOptions.Diaspora,
+                                            groupValue: _character,
+                                            onChanged: (paymentOptions? value) {
+                                              setState(() {
+                                                _character = value;
+                                              });
+                                            },
                                           ),
                                         ),
                                       ],

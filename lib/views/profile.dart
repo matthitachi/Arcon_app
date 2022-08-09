@@ -294,881 +294,853 @@ bool obscureText = true;
                     ),
 
                     // body
-                    Container(
-                      height: SizeConfig.safeBlockVertical! * 70,
-                      width: SizeConfig.safeBlockHorizontal! * 100,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 5, vertical: 0),
-                        child: ListView(
-                          padding: EdgeInsets.zero,
-                          children: [
-                            SizedBox(
-                            height: SizeConfig.safeBlockVertical! * 2,
-                            ),
-                            Column(
-                              children: [
-                                // Row(
-                                //   children: [
-                                //     Text(
-                                //       "Edit Profile",
-                                //       style: GoogleFonts.montserrat(
-                                //         fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                //         fontWeight: FontWeight.w700,
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                                SizedBox(
-                                  height: SizeConfig.safeBlockVertical! * 2,
-                                ),
-                                Form(key: _formkey,
-                                    child:Container(
-                                      height: SizeConfig.safeBlockVertical! * 90,
-                                      color: Colors.white,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: SizeConfig.safeBlockHorizontal! * 0),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.only(
-                                                                right: 8.0),
-                                                            child: Container(
-                                                              child: Column(
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        "First Name",
-                                                                        style: GoogleFonts
-                                                                            .montserrat(
-                                                                          color: mainColor,
-                                                                          fontSize: SizeConfig
-                                                                              .safeBlockHorizontal! *
-                                                                              3,
-                                                                          fontWeight:
-                                                                          FontWeight.w300,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: SizeConfig
-                                                                        .safeBlockVertical! *
-                                                                        1.5,
-                                                                  ),
-                                                                  Container(
-                                                                    height: SizeConfig
-                                                                        .safeBlockVertical! *
-                                                                        5,
-                                                                    child: TextFormField(
-                                                                      controller: firstName,
-                                                                      validator: (value) {
-                                                                        List isEmpty =
-                                                                        Validator.isEmpty(
-                                                                            value);
-                                                                        if (isEmpty[0]) {
-                                                                          return isEmpty[1]
-                                                                              .toString();
-                                                                        }
-                                                                        return null;
-                                                                      },
-                                                                      style: GoogleFonts
-                                                                          .montserrat(
-                                                                        color: mainColor,
-                                                                        fontSize: SizeConfig
-                                                                            .safeBlockHorizontal! *
-                                                                            3,
-                                                                        fontWeight:
-                                                                        FontWeight.w300,
-                                                                      ),
-                                                                      keyboardType:
-                                                                      TextInputType.name,
-                                                                      cursorColor: mainColor,
-                                                                      decoration:
-                                                                      InputDecoration(
-                                                                        filled: true,
-                                                                        fillColor:
-                                                                        Colors.transparent,
-                                                                        contentPadding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                            left: 14.0,
-                                                                            bottom: 5.0,
-                                                                            top: 5.0),
-                                                                        focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                          borderSide:
-                                                                          BorderSide(
-                                                                            color: Color(
-                                                                                0xFFECE2DC),
-                                                                            width: 0.8,
-                                                                          ),
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(5),
-                                                                        ),
-                                                                        enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                          borderSide:
-                                                                          BorderSide(
-                                                                            color: Color(
-                                                                                0xFFECE2DC),
-                                                                            width: 0.8,
-                                                                          ),
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(5),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.only(
-                                                                right: 8.0),
-                                                            child: Container(
-                                                              child: Column(
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        "Last Name",
-                                                                        style: GoogleFonts
-                                                                            .montserrat(
-                                                                          color: mainColor,
-                                                                          fontSize: SizeConfig
-                                                                              .safeBlockHorizontal! *
-                                                                              3,
-                                                                          fontWeight:
-                                                                          FontWeight.w300,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: SizeConfig.safeBlockVertical! * 1.5,
-                                                                  ),
-                                                                  Container(
-                                                                    height: SizeConfig
-                                                                        .safeBlockVertical! *
-                                                                        5,
-                                                                    child: TextFormField(
-                                                                      controller: lastName,
-                                                                      validator: (value) {
-                                                                        List isEmpty =
-                                                                        Validator.isEmpty(
-                                                                            value);
-                                                                        if (isEmpty[0]) {
-                                                                          return isEmpty[1]
-                                                                              .toString();
-                                                                        }
-                                                                        return null;
-                                                                      },
-                                                                      style: GoogleFonts
-                                                                          .montserrat(
-                                                                        color: mainColor,
-                                                                        fontSize: SizeConfig
-                                                                            .safeBlockHorizontal! *
-                                                                            3,
-                                                                        fontWeight:
-                                                                        FontWeight.w300,
-                                                                      ),
-                                                                      keyboardType:
-                                                                      TextInputType.name,
-                                                                      cursorColor: mainColor,
-                                                                      decoration:
-                                                                      InputDecoration(
-                                                                        filled: true,
-                                                                        fillColor:
-                                                                        Colors.transparent,
-                                                                        contentPadding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                            left: 14.0,
-                                                                            bottom: 5.0,
-                                                                            top: 5.0),
-                                                                        focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                          borderSide:
-                                                                          BorderSide(
-                                                                            color: Color(
-                                                                                0xFFECE2DC),
-                                                                            width: 0.8,
-                                                                          ),
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(5),
-                                                                        ),
-                                                                        enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                          borderSide:
-                                                                          BorderSide(
-                                                                            color: Color(
-                                                                                0xFFECE2DC),
-                                                                            width: 0.8,
-                                                                          ),
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(5),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height:
-                                                      SizeConfig.safeBlockVertical! * 1.5,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.symmetric(vertical: 8.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Email Address",
-                                                            style: GoogleFonts.montserrat(
-                                                              color: mainColor,
-                                                              fontSize: SizeConfig
-                                                                  .safeBlockHorizontal! *
-                                                                  3,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1.5,
-                                                      ),
-                                                      Container(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 5,
-                                                        child: TextFormField(
-                                                          controller: email,
-                                                          validator: (value) {
-                                                            List isEmpty =
-                                                            Validator.isEmpty(value);
-                                                            if (isEmpty[0]) {
-                                                              return isEmpty[1].toString();
-                                                            }
-                                                            return null;
-                                                          },
-                                                          style: GoogleFonts.montserrat(
-                                                            color: mainColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                3,
-                                                            fontWeight: FontWeight.w300,
-                                                          ),
-                                                          keyboardType: TextInputType.name,
-                                                          cursorColor: mainColor,
-                                                          decoration: InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors.transparent,
-                                                            contentPadding:
-                                                            const EdgeInsets.only(
-                                                                left: 14.0,
-                                                                bottom: 5.0,
-                                                                top: 5.0),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.symmetric(vertical: 8.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Phone Number",
-                                                            style: GoogleFonts.montserrat(
-                                                              color: mainColor,
-                                                              fontSize: SizeConfig
-                                                                  .safeBlockHorizontal! *
-                                                                  3,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1.5,
-                                                      ),
-                                                      Container(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 5,
-                                                        child: TextFormField(
-                                                          controller: phone,
-                                                          validator: (value) {
-                                                            List isEmpty =
-                                                            Validator.isEmpty(value);
-                                                            if (isEmpty[0]) {
-                                                              return isEmpty[1].toString();
-                                                            }
-                                                            return null;
-                                                          },
-                                                          style: GoogleFonts.montserrat(
-                                                            color: mainColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                3,
-                                                            fontWeight: FontWeight.w300,
-                                                          ),
-                                                          keyboardType: TextInputType.number,
-                                                          cursorColor: mainColor,
-                                                          decoration: InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors.transparent,
-                                                            contentPadding:
-                                                            const EdgeInsets.only(
-                                                                left: 14.0,
-                                                                bottom: 5.0,
-                                                                top: 5.0),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.symmetric(vertical: 8.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Profession",
-                                                            style: GoogleFonts.montserrat(
-                                                              color: mainColor,
-                                                              fontSize: SizeConfig
-                                                                  .safeBlockHorizontal! *
-                                                                  3,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1.5,
-                                                      ),
-                                                      Container(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 5,
-                                                        child: TextFormField(
-                                                          controller: profession,
-                                                          validator: (value) {
-                                                            List isEmpty =
-                                                            Validator.isEmpty(value);
-                                                            if (isEmpty[0]) {
-                                                              return isEmpty[1].toString();
-                                                            }
-                                                            return null;
-                                                          },
-                                                          style: GoogleFonts.montserrat(
-                                                            color: mainColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                3,
-                                                            fontWeight: FontWeight.w300,
-                                                          ),
-                                                          keyboardType: TextInputType.name,
-                                                          cursorColor: mainColor,
-                                                          decoration: InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors.transparent,
-                                                            contentPadding:
-                                                            const EdgeInsets.only(
-                                                                left: 14.0,
-                                                                bottom: 5.0,
-                                                                top: 5.0),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.symmetric(vertical: 8.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Speciality",
-                                                            style: GoogleFonts.montserrat(
-                                                              color: mainColor,
-                                                              fontSize: SizeConfig
-                                                                  .safeBlockHorizontal! *
-                                                                  3,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1.5,
-                                                      ),
-                                                      Container(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 5,
-                                                        child: TextFormField(
-                                                          controller: speciality,
-                                                          validator: (value) {
-                                                            List isEmpty =
-                                                            Validator.isEmpty(value);
-                                                            if (isEmpty[0]) {
-                                                              return isEmpty[1].toString();
-                                                            }
-                                                            return null;
-                                                          },
-                                                          style: GoogleFonts.montserrat(
-                                                            color: mainColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                3,
-                                                            fontWeight: FontWeight.w300,
-                                                          ),
-                                                          keyboardType: TextInputType.name,
-                                                          cursorColor: mainColor,
-                                                          decoration: InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors.transparent,
-                                                            contentPadding:
-                                                            const EdgeInsets.only(
-                                                                left: 14.0,
-                                                                bottom: 5.0,
-                                                                top: 5.0),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.symmetric(vertical: 8.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Location",
-                                                            style: GoogleFonts.montserrat(
-                                                              color: mainColor,
-                                                              fontSize: SizeConfig
-                                                                  .safeBlockHorizontal! *
-                                                                  3,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1.5,
-                                                      ),
-                                                      Container(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 5,
-                                                        child: TextFormField(
-                                                          controller: address,
-                                                          validator: (value) {
-                                                            List isEmpty =
-                                                            Validator.isEmpty(value);
-                                                            if (isEmpty[0]) {
-                                                              return isEmpty[1].toString();
-                                                            }
-                                                            return null;
-                                                          },
-                                                          style: GoogleFonts.montserrat(
-                                                            color: mainColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                3,
-                                                            fontWeight: FontWeight.w300,
-                                                          ),
-                                                          keyboardType: TextInputType.name,
-                                                          cursorColor: mainColor,
-                                                          decoration: InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors.transparent,
-                                                            contentPadding:
-                                                            const EdgeInsets.only(
-                                                                left: 14.0,
-                                                                bottom: 5.0,
-                                                                top: 5.0),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.symmetric(vertical: 8.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "State",
-                                                            style: GoogleFonts.montserrat(
-                                                              color: mainColor,
-                                                              fontSize: SizeConfig
-                                                                  .safeBlockHorizontal! *
-                                                                  3,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1.5,
-                                                      ),
-                                                      Container(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 5,
-                                                        child: TextFormField(
-                                                          controller: state,
-                                                          validator: (value) {
-                                                            List isEmpty =
-                                                            Validator.isEmpty(value);
-                                                            if (isEmpty[0]) {
-                                                              return isEmpty[1].toString();
-                                                            }
-                                                            return null;
-                                                          },
-                                                          style: GoogleFonts.montserrat(
-                                                            color: mainColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                3,
-                                                            fontWeight: FontWeight.w300,
-                                                          ),
-                                                          keyboardType: TextInputType.name,
-                                                          cursorColor: mainColor,
-                                                          decoration: InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors.transparent,
-                                                            contentPadding:
-                                                            const EdgeInsets.only(
-                                                                left: 14.0,
-                                                                bottom: 5.0,
-                                                                top: 5.0),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.symmetric(vertical: 8.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Country",
-                                                            style: GoogleFonts.montserrat(
-                                                              color: mainColor,
-                                                              fontSize: SizeConfig
-                                                                  .safeBlockHorizontal! *
-                                                                  3,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 1.5,
-                                                      ),
-                                                      Container(
-                                                        height:
-                                                        SizeConfig.safeBlockVertical! * 5,
-                                                        child: TextFormField(
-                                                          controller: country,
-                                                          validator: (value) {
-                                                            List isEmpty =
-                                                            Validator.isEmpty(value);
-                                                            if (isEmpty[0]) {
-                                                              return isEmpty[1].toString();
-                                                            }
-                                                            return null;
-                                                          },
-                                                          style: GoogleFonts.montserrat(
-                                                            color: mainColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                3,
-                                                            fontWeight: FontWeight.w300,
-                                                          ),
-                                                          keyboardType: TextInputType.name,
-                                                          cursorColor: mainColor,
-                                                          decoration: InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors.transparent,
-                                                            contentPadding:
-                                                            const EdgeInsets.only(
-                                                                left: 14.0,
-                                                                bottom: 5.0,
-                                                                top: 5.0),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                color: Color(0xFFECE2DC),
-                                                                width: 0.8,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Column(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          "Update",
-                                                          textAlign: TextAlign.left,
-                                                          style: GoogleFonts.montserrat(
-                                                            color: textColor,
-                                                            fontSize: SizeConfig
-                                                                .safeBlockHorizontal! *
-                                                                5.5,
-                                                            fontWeight: FontWeight.w700,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                RawMaterialButton(
-                                                  onPressed: () async {
-                                                    if (_formkey.currentState!
-                                                        .validate()) {
-                                                      initLoading();
-                                                      Map<String, dynamic> formInfo = {
-                                                        'first_name':
-                                                        firstName.text,
-                                                        'last_name':
-                                                        lastName.text,
-                                                        'email': email.text,
-                                                        'phone':
-                                                        phone.text,
-                                                        'speciality':
-                                                        speciality.text,
-                                                        'profession':
-                                                        profession.text,
-                                                        'country':
-                                                        country.text,
-                                                        'state':
-                                                        state.text,
-                                                      };
-                                                      print(formInfo);
-                                                      Auth auth = Auth();
-                                                      Response rs =
-                                                          await auth.updateProfile(formInfo);
-                                                      closeLoading();
-                                                      if (rs.status == 200) {
-                                                        displaySnackbar(
-                                                            _key,
-                                                            "Profile update successful.",
-                                                            Colors.greenAccent);
-
-                                                      } else {
-
-                                                        displaySnackbar(
-                                                            _key,
-                                                            rs.message,
-                                                            Colors.orange
-                                                                .withOpacity(0.6));
-                                                      }
-                                                    }
-                                                  },
-                                                  elevation: 2.0,
-                                                  fillColor: secondaryColor,
-                                                  child: Icon(
-                                                    Icons.arrow_forward_rounded,
-                                                    size: 35.0,
-                                                    color: Colors.white,
-                                                  ),
-                                                  padding: EdgeInsets.all(15.0),
-                                                  shape: CircleBorder(),
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height:
-                                              SizeConfig.safeBlockVertical! * 10,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ))
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.safeBlockVertical! * 4,
-                            ),
-                          ],
-                        )
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: 10,
                       ),
+                      child: Container(
+                        color: Colors.white,
+                        child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 5, vertical: 0),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: SizeConfig.safeBlockVertical! * 4,
+                                ),
+                                Form(
+                                  key: _formkey,
+                                  child:Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          right: 8.0),
+                                                      child: Container(
+                                                        child: Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "First Name",
+                                                                  style: GoogleFonts
+                                                                      .montserrat(
+                                                                    color: mainColor,
+                                                                    fontSize: SizeConfig
+                                                                        .safeBlockHorizontal! *
+                                                                        3,
+                                                                    fontWeight:
+                                                                    FontWeight.w300,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              height: SizeConfig
+                                                                  .safeBlockVertical! *
+                                                                  1.5,
+                                                            ),
+                                                            Container(
+                                                              height: SizeConfig
+                                                                  .safeBlockVertical! *
+                                                                  5,
+                                                              child: TextFormField(
+                                                                controller: firstName,
+                                                                validator: (value) {
+                                                                  List isEmpty =
+                                                                  Validator.isEmpty(
+                                                                      value);
+                                                                  if (isEmpty[0]) {
+                                                                    return isEmpty[1]
+                                                                        .toString();
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                                style: GoogleFonts
+                                                                    .montserrat(
+                                                                  color: mainColor,
+                                                                  fontSize: SizeConfig
+                                                                      .safeBlockHorizontal! *
+                                                                      3,
+                                                                  fontWeight:
+                                                                  FontWeight.w300,
+                                                                ),
+                                                                keyboardType:
+                                                                TextInputType.name,
+                                                                cursorColor: mainColor,
+                                                                decoration:
+                                                                InputDecoration(
+                                                                  filled: true,
+                                                                  fillColor:
+                                                                  Colors.transparent,
+                                                                  contentPadding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 14.0,
+                                                                      bottom: 5.0,
+                                                                      top: 5.0),
+                                                                  focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                    borderSide:
+                                                                    BorderSide(
+                                                                      color: Color(
+                                                                          0xFFECE2DC),
+                                                                      width: 0.8,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(5),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                    borderSide:
+                                                                    BorderSide(
+                                                                      color: Color(
+                                                                          0xFFECE2DC),
+                                                                      width: 0.8,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(5),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          right: 8.0),
+                                                      child: Container(
+                                                        child: Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Last Name",
+                                                                  style: GoogleFonts
+                                                                      .montserrat(
+                                                                    color: mainColor,
+                                                                    fontSize: SizeConfig
+                                                                        .safeBlockHorizontal! *
+                                                                        3,
+                                                                    fontWeight:
+                                                                    FontWeight.w300,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              height: SizeConfig.safeBlockVertical! * 1.5,
+                                                            ),
+                                                            Container(
+                                                              height: SizeConfig
+                                                                  .safeBlockVertical! *
+                                                                  5,
+                                                              child: TextFormField(
+                                                                controller: lastName,
+                                                                validator: (value) {
+                                                                  List isEmpty =
+                                                                  Validator.isEmpty(
+                                                                      value);
+                                                                  if (isEmpty[0]) {
+                                                                    return isEmpty[1]
+                                                                        .toString();
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                                style: GoogleFonts
+                                                                    .montserrat(
+                                                                  color: mainColor,
+                                                                  fontSize: SizeConfig
+                                                                      .safeBlockHorizontal! *
+                                                                      3,
+                                                                  fontWeight:
+                                                                  FontWeight.w300,
+                                                                ),
+                                                                keyboardType:
+                                                                TextInputType.name,
+                                                                cursorColor: mainColor,
+                                                                decoration:
+                                                                InputDecoration(
+                                                                  filled: true,
+                                                                  fillColor:
+                                                                  Colors.transparent,
+                                                                  contentPadding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 14.0,
+                                                                      bottom: 5.0,
+                                                                      top: 5.0),
+                                                                  focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                    borderSide:
+                                                                    BorderSide(
+                                                                      color: Color(
+                                                                          0xFFECE2DC),
+                                                                      width: 0.8,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(5),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                    borderSide:
+                                                                    BorderSide(
+                                                                      color: Color(
+                                                                          0xFFECE2DC),
+                                                                      width: 0.8,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(5),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height:
+                                                SizeConfig.safeBlockVertical! * 1.5,
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Email Address",
+                                                      style: GoogleFonts.montserrat(
+                                                        color: mainColor,
+                                                        fontSize: SizeConfig
+                                                            .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 1.5,
+                                                ),
+                                                Container(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 5,
+                                                  child: TextFormField(
+                                                    controller: email,
+                                                    validator: (value) {
+                                                      List isEmpty =
+                                                      Validator.isEmpty(value);
+                                                      if (isEmpty[0]) {
+                                                        return isEmpty[1].toString();
+                                                      }
+                                                      return null;
+                                                    },
+                                                    style: GoogleFonts.montserrat(
+                                                      color: mainColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          3,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                    keyboardType: TextInputType.name,
+                                                    cursorColor: mainColor,
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 14.0,
+                                                          bottom: 5.0,
+                                                          top: 5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Phone Number",
+                                                      style: GoogleFonts.montserrat(
+                                                        color: mainColor,
+                                                        fontSize: SizeConfig
+                                                            .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 1.5,
+                                                ),
+                                                Container(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 5,
+                                                  child: TextFormField(
+                                                    controller: phone,
+                                                    validator: (value) {
+                                                      List isEmpty =
+                                                      Validator.isEmpty(value);
+                                                      if (isEmpty[0]) {
+                                                        return isEmpty[1].toString();
+                                                      }
+                                                      return null;
+                                                    },
+                                                    style: GoogleFonts.montserrat(
+                                                      color: mainColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          3,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                    keyboardType: TextInputType.number,
+                                                    cursorColor: mainColor,
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 14.0,
+                                                          bottom: 5.0,
+                                                          top: 5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Profession",
+                                                      style: GoogleFonts.montserrat(
+                                                        color: mainColor,
+                                                        fontSize: SizeConfig
+                                                            .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 1.5,
+                                                ),
+                                                Container(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 5,
+                                                  child: TextFormField(
+                                                    controller: profession,
+                                                    validator: (value) {
+                                                      List isEmpty =
+                                                      Validator.isEmpty(value);
+                                                      if (isEmpty[0]) {
+                                                        return isEmpty[1].toString();
+                                                      }
+                                                      return null;
+                                                    },
+                                                    style: GoogleFonts.montserrat(
+                                                      color: mainColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          3,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                    keyboardType: TextInputType.name,
+                                                    cursorColor: mainColor,
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 14.0,
+                                                          bottom: 5.0,
+                                                          top: 5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Speciality",
+                                                      style: GoogleFonts.montserrat(
+                                                        color: mainColor,
+                                                        fontSize: SizeConfig
+                                                            .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 1.5,
+                                                ),
+                                                Container(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 5,
+                                                  child: TextFormField(
+                                                    controller: speciality,
+                                                    validator: (value) {
+                                                      List isEmpty =
+                                                      Validator.isEmpty(value);
+                                                      if (isEmpty[0]) {
+                                                        return isEmpty[1].toString();
+                                                      }
+                                                      return null;
+                                                    },
+                                                    style: GoogleFonts.montserrat(
+                                                      color: mainColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          3,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                    keyboardType: TextInputType.name,
+                                                    cursorColor: mainColor,
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 14.0,
+                                                          bottom: 5.0,
+                                                          top: 5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Location",
+                                                      style: GoogleFonts.montserrat(
+                                                        color: mainColor,
+                                                        fontSize: SizeConfig
+                                                            .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 1.5,
+                                                ),
+                                                Container(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 5,
+                                                  child: TextFormField(
+                                                    controller: address,
+                                                    validator: (value) {
+                                                      List isEmpty =
+                                                      Validator.isEmpty(value);
+                                                      if (isEmpty[0]) {
+                                                        return isEmpty[1].toString();
+                                                      }
+                                                      return null;
+                                                    },
+                                                    style: GoogleFonts.montserrat(
+                                                      color: mainColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          3,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                    keyboardType: TextInputType.name,
+                                                    cursorColor: mainColor,
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 14.0,
+                                                          bottom: 5.0,
+                                                          top: 5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "State",
+                                                      style: GoogleFonts.montserrat(
+                                                        color: mainColor,
+                                                        fontSize: SizeConfig
+                                                            .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 1.5,
+                                                ),
+                                                Container(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 5,
+                                                  child: TextFormField(
+                                                    controller: state,
+                                                    validator: (value) {
+                                                      List isEmpty =
+                                                      Validator.isEmpty(value);
+                                                      if (isEmpty[0]) {
+                                                        return isEmpty[1].toString();
+                                                      }
+                                                      return null;
+                                                    },
+                                                    style: GoogleFonts.montserrat(
+                                                      color: mainColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          3,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                    keyboardType: TextInputType.name,
+                                                    cursorColor: mainColor,
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 14.0,
+                                                          bottom: 5.0,
+                                                          top: 5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Country",
+                                                      style: GoogleFonts.montserrat(
+                                                        color: mainColor,
+                                                        fontSize: SizeConfig
+                                                            .safeBlockHorizontal! *
+                                                            3,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 1.5,
+                                                ),
+                                                Container(
+                                                  height:
+                                                  SizeConfig.safeBlockVertical! * 5,
+                                                  child: TextFormField(
+                                                    controller: country,
+                                                    validator: (value) {
+                                                      List isEmpty =
+                                                      Validator.isEmpty(value);
+                                                      if (isEmpty[0]) {
+                                                        return isEmpty[1].toString();
+                                                      }
+                                                      return null;
+                                                    },
+                                                    style: GoogleFonts.montserrat(
+                                                      color: mainColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          3,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                    keyboardType: TextInputType.name,
+                                                    cursorColor: mainColor,
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 14.0,
+                                                          bottom: 5.0,
+                                                          top: 5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFECE2DC),
+                                                          width: 0.8,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Update",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.montserrat(
+                                                      color: textColor,
+                                                      fontSize: SizeConfig
+                                                          .safeBlockHorizontal! *
+                                                          5.5,
+                                                      fontWeight: FontWeight.w700,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          RawMaterialButton(
+                                            onPressed: () async {
+                                              if (_formkey.currentState!
+                                                  .validate()) {
+                                                initLoading();
+                                                Map<String, dynamic> formInfo = {
+                                                  'first_name':
+                                                  firstName.text,
+                                                  'last_name':
+                                                  lastName.text,
+                                                  'email': email.text,
+                                                  'phone':
+                                                  phone.text,
+                                                  'speciality':
+                                                  speciality.text,
+                                                  'profession':
+                                                  profession.text,
+                                                  'country':
+                                                  country.text,
+                                                  'state':
+                                                  state.text,
+                                                };
+                                                print(formInfo);
+                                                Auth auth = Auth();
+                                                Response rs =
+                                                await auth.updateProfile(formInfo);
+                                                closeLoading();
+                                                if (rs.status == 200) {
+                                                  displaySnackbar(
+                                                      _key,
+                                                      "Profile update successful.",
+                                                      Colors.greenAccent);
 
-                    )
+                                                } else {
+
+                                                  displaySnackbar(
+                                                      _key,
+                                                      rs.message,
+                                                      Colors.orange
+                                                          .withOpacity(0.6));
+                                                }
+                                              }
+                                            },
+                                            elevation: 2.0,
+                                            fillColor: secondaryColor,
+                                            child: Icon(
+                                              Icons.arrow_forward_rounded,
+                                              size: 35.0,
+                                              color: Colors.white,
+                                            ),
+                                            padding: EdgeInsets.all(15.0),
+                                            shape: CircleBorder(),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: SizeConfig.safeBlockVertical! * 20,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
