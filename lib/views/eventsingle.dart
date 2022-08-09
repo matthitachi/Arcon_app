@@ -8,6 +8,7 @@ import 'package:conference/views/liveevent.dart';
 import 'package:conference/views/livestream.dart';
 import 'package:conference/views/speakers.dart';
 import 'package:conference/views/speakersingle.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -106,6 +107,7 @@ class _EventSingleState extends State<EventSingle> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SizeConfig().init(context);
     return Scaffold(
       key: _key,

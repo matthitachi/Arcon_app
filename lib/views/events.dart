@@ -4,6 +4,7 @@ import 'package:conference/Models/response.dart';
 import 'package:conference/Service/event.dart';
 import 'package:conference/views/eventsingle.dart';
 import 'package:conference/widgets/events.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -102,6 +103,7 @@ class _eventsState extends State<events> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SizeConfig().init(context);
     return Scaffold(
       key: _key,

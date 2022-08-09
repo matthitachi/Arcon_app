@@ -6,6 +6,7 @@ import 'package:conference/Models/user.dart';
 import 'package:conference/Service/authdata.dart';
 import 'package:conference/Service/event.dart';
 import 'package:conference/widgets/events.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -94,6 +95,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SizeConfig().init(context);
     return Scaffold(
       key: _key,

@@ -74,12 +74,8 @@ class _LiveStreamState extends State<LiveStream> {
   @override
 
   Widget build(BuildContext context) {
-    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
     SizeConfig().init(context);
     return Scaffold(
       key: _key,
@@ -96,7 +92,7 @@ class _LiveStreamState extends State<LiveStream> {
 
           // BODY
           Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SafeArea(
                 child: Padding(
@@ -107,18 +103,21 @@ class _LiveStreamState extends State<LiveStream> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(
-                                context,
-                              ).pop(
-                                context,
-                              );
-                            },
-                            child: Image(
-                              image: AssetImage(
-                                  'assets/images/menu_icon_back.png'),
-                              width: SizeConfig.safeBlockHorizontal! * 7,
+                          RotatedBox(
+                            quarterTurns: 3,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(
+                                  context,
+                                ).pop(
+                                  context,
+                                );
+                              },
+                              child: Image(
+                                image: AssetImage(
+                                    'assets/images/menu_icon_back.png'),
+                                width: SizeConfig.safeBlockHorizontal! * 7,
+                              ),
                             ),
                           ),
                           Text(
@@ -129,9 +128,12 @@ class _LiveStreamState extends State<LiveStream> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Image(
-                            image: AssetImage('assets/images/logo.png'),
-                            width: SizeConfig.safeBlockHorizontal! * 15,
+                          RotatedBox(
+                            quarterTurns: 3,
+                            child: Image(
+                              image: AssetImage('assets/images/logo.png'),
+                              width: SizeConfig.safeBlockHorizontal! * 15,
+                            ),
                           ),
                         ],
                       ),
@@ -143,13 +145,15 @@ class _LiveStreamState extends State<LiveStream> {
               // body
 
               ConstrainedBox(
-
                 constraints: BoxConstraints(
-                  maxWidth: SizeConfig.blockSizeHorizontal!*100
+                  minHeight: SizeConfig.blockSizeVertical! * 83
                 ),
-                child: Center(
+                child: RotatedBox(
+                  quarterTurns: 3,
                     child: YoutubePlayerBuilder(
                         player: YoutubePlayer(
+                          width: SizeConfig.blockSizeHorizontal!*100,
+                          aspectRatio: 4/3,
                           controller: controller,
                         ),
                         builder: (context, player) {
