@@ -29,7 +29,6 @@ Widget eventWidget(Event event, context, {width = 100}) {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => PaymentPrompt(event)));
           }
-
         },
         child: Container(
           decoration: BoxDecoration(
@@ -63,7 +62,7 @@ Widget eventWidget(Event event, context, {width = 100}) {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: Row(
                   children: [
                     Column(

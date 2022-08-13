@@ -115,7 +115,7 @@ class _liveEventState extends State<liveEvent> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 96.9,
+                    height: SizeConfig.safeBlockVertical! * 95,
                     width: SizeConfig.safeBlockHorizontal! *100,
                     color: Colors.white,
                     child: Column(

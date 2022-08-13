@@ -158,10 +158,7 @@ class _EventSingleState extends State<EventSingle> {
                                 width: SizeConfig.safeBlockHorizontal! * 7,
                               ),
                             ),
-                            Image(
-                              image: AssetImage('assets/images/save_icon.png'),
-                              width: SizeConfig.safeBlockHorizontal! * 7,
-                            ),
+
                           ],
                         ),
                         SizedBox(
