@@ -223,13 +223,13 @@ class _SignInState extends State<SignIn> {
                                             controller: passwordController,
                                             validator: (value) {
                                               List isEmpty = Validator.isEmpty(value);
-                                              List min = Validator.min(value, 8);
+                                              // List min = Validator.min(value, 8);
                                               if (isEmpty[0]) {
                                                 return isEmpty[1].toString();
                                               }
-                                              if (min[0]) {
-                                                return min[1].toString();
-                                              }
+                                              // if (min[0]) {
+                                              //   return min[1].toString();
+                                              // }
                                               return null;
                                             },
                                             obscureText: obscureText,

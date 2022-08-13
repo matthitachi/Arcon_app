@@ -173,36 +173,36 @@ class _drawerState extends State<drawer> {
                       height: SizeConfig.safeBlockVertical! * 4,
                     ),
 
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => members()));
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.supervised_user_circle_sharp,
-                            size: SizeConfig.safeBlockVertical! * 3,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: SizeConfig.safeBlockVertical! * 1,
-                          ),
-                          Text(
-                            "Members",
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: SizeConfig.safeBlockHorizontal! * 4,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: SizeConfig.safeBlockVertical! * 4,
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.pushReplacement(context,
+                    //         MaterialPageRoute(builder: (context) => members()));
+                    //   },
+                    //   child: Row(
+                    //     children: [
+                    //       Icon(
+                    //         Icons.supervised_user_circle_sharp,
+                    //         size: SizeConfig.safeBlockVertical! * 3,
+                    //         color: Colors.white,
+                    //       ),
+                    //       SizedBox(
+                    //         width: SizeConfig.safeBlockVertical! * 1,
+                    //       ),
+                    //       Text(
+                    //         "Members",
+                    //         textAlign: TextAlign.left,
+                    //         style: GoogleFonts.montserrat(
+                    //           color: Colors.white,
+                    //           fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                    //           fontWeight: FontWeight.w400,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: SizeConfig.safeBlockVertical! * 4,
+                    // ),
 
                     GestureDetector(
                       onTap: () {
