@@ -88,7 +88,8 @@ class _SignInState extends State<SignIn> {
                           ],
                         ),
                       ),
-                      Form(key: formKey,
+                      Form(
+                          key: formKey,
                           child:Container(
                         height: SizeConfig.safeBlockVertical! * 60,
                         color: Colors.white,

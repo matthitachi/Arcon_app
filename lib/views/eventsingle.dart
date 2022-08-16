@@ -378,45 +378,63 @@ class _EventSingleState extends State<EventSingle> {
                                                           width: SizeConfig
                                                                   .safeBlockHorizontal! *
                                                               20,
-                                                          child: Expanded(
-                                                            child: Column(
-                                                              children: [
-                                                                Container(
-                                                                  height: 20,
-                                                                  child: Stack(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .center,
-                                                                      children: [
-                                                                        for (Speaker speaker
-                                                                            in event?.speakers?.take(4) ??
-                                                                                [])
-                                                                          Positioned(
-                                                                              left: 0,
-                                                                              child: Avatar(urlImage: speaker.image ?? '', radius: SizeConfig.safeBlockHorizontal! * 2.1))
-                                                                      ]),
-                                                                ),
-                                                                Text(
-                                                                  "${event?.speakers?.length ?? 0} Speakers",
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style:
-                                                                      GoogleFonts
-                                                                          .dmSans(
-                                                                    color:
-                                                                        textColor,
-                                                                    fontSize:
-                                                                        SizeConfig.safeBlockHorizontal! *
-                                                                            2.5,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                          child: Text(
+                                                            "${event?.speakers?.length ?? 0} Speakers",
+                                                            textAlign:
+                                                            TextAlign
+                                                                .left,
+                                                            style:
+                                                            GoogleFonts
+                                                                .dmSans(
+                                                              color:
+                                                              textColor,
+                                                              fontSize:
+                                                              SizeConfig.safeBlockHorizontal! *
+                                                                  2.5,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w300,
                                                             ),
                                                           ),
+                                                          // Expanded(
+                                                          //   child: Column(
+                                                          //     children: [
+                                                          //       Container(
+                                                          //         height: 20,
+                                                          //         child: Stack(
+                                                          //             alignment:
+                                                          //                 Alignment
+                                                          //                     .center,
+                                                          //             children: [
+                                                          //               for (Speaker speaker
+                                                          //                   in event?.speakers?.take(4) ??
+                                                          //                       [])
+                                                          //                 Positioned(
+                                                          //                     left: 0,
+                                                          //                     child: Avatar(urlImage: speaker.image ?? '', radius: SizeConfig.safeBlockHorizontal! * 2.1))
+                                                          //             ]),
+                                                          //       ),
+                                                          //       Text(
+                                                          //         "${event?.speakers?.length ?? 0} Speakers",
+                                                          //         textAlign:
+                                                          //             TextAlign
+                                                          //                 .left,
+                                                          //         style:
+                                                          //             GoogleFonts
+                                                          //                 .dmSans(
+                                                          //           color:
+                                                          //               textColor,
+                                                          //           fontSize:
+                                                          //               SizeConfig.safeBlockHorizontal! *
+                                                          //                   2.5,
+                                                          //           fontWeight:
+                                                          //               FontWeight
+                                                          //                   .w300,
+                                                          //         ),
+                                                          //       ),
+                                                          //     ],
+                                                          //   ),
+                                                          // ),
                                                         ),
                                                       )
                                                     ],
