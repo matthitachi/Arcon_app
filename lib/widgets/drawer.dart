@@ -10,6 +10,7 @@ import 'package:conference/views/eventsingle.dart';
 import 'package:conference/views/exhibitors.dart';
 import 'package:conference/views/floor_plan.dart';
 import 'package:conference/views/members.dart';
+import 'package:conference/views/members_old.dart';
 import 'package:conference/views/policy.dart';
 import 'package:conference/views/sponsor.dart';
 import 'package:conference/views/terms.dart';
@@ -173,36 +174,38 @@ class _drawerState extends State<drawer> {
                       height: SizeConfig.safeBlockVertical! * 4,
                     ),
 
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.pushReplacement(context,
-                    //         MaterialPageRoute(builder: (context) => members()));
-                    //   },
-                    //   child: Row(
-                    //     children: [
-                    //       Icon(
-                    //         Icons.supervised_user_circle_sharp,
-                    //         size: SizeConfig.safeBlockVertical! * 3,
-                    //         color: Colors.white,
-                    //       ),
-                    //       SizedBox(
-                    //         width: SizeConfig.safeBlockVertical! * 1,
-                    //       ),
-                    //       Text(
-                    //         "Members",
-                    //         textAlign: TextAlign.left,
-                    //         style: GoogleFonts.montserrat(
-                    //           color: Colors.white,
-                    //           fontSize: SizeConfig.safeBlockHorizontal! * 4,
-                    //           fontWeight: FontWeight.w400,
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: SizeConfig.safeBlockVertical! * 4,
-                    // ),
+                    GestureDetector(
+                      onTap: () {
+    if ((event?.transaction ?? 0) > 0) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Members(event?.id ?? 1)));
+    }
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.supervised_user_circle_sharp,
+                            size: SizeConfig.safeBlockVertical! * 3,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: SizeConfig.safeBlockVertical! * 1,
+                          ),
+                          Text(
+                            "Members",
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: SizeConfig.safeBlockVertical! * 4,
+                    ),
 
                     GestureDetector(
                       onTap: () {

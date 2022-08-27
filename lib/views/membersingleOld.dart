@@ -1,10 +1,6 @@
 
-import 'package:conference/Models/Itinerary.dart';
-import 'package:conference/Models/member.dart';
-import 'package:conference/Models/speaker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../Helpers/validator.dart';
 import '../../utils/SizeConfig.dart';
@@ -12,21 +8,16 @@ import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
 
-class MemberSingle extends StatefulWidget {
-  Member member;
-
-  MemberSingle(this.member, {Key? key}) : super(key: key);
+class membersSingle extends StatefulWidget {
   @override
-  State<MemberSingle> createState() => _MemberSingleState(this.member);
+  State<membersSingle> createState() => _membersSingleState();
 }
 
-class _MemberSingleState extends State<MemberSingle> {
+class _membersSingleState extends State<membersSingle> {
   bool obscureText = true;
   bool _isVisible = true;
   int selectedIndex = 0;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
-  Member member;
-  _MemberSingleState(this.member); // Create a key
+  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
 
 
   void onClicked(int index) {
@@ -107,7 +98,7 @@ class _MemberSingleState extends State<MemberSingle> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Avatar(urlImage: member.image??'https://via.placeholder.com/150', radius: SizeConfig.safeBlockHorizontal! * 10),
+                              Avatar(urlImage: 'https://via.placeholder.com/150', radius: SizeConfig.safeBlockHorizontal! * 10),
                               SizedBox(
                                 width: SizeConfig.safeBlockHorizontal! * 5,
                               ),
@@ -117,7 +108,7 @@ class _MemberSingleState extends State<MemberSingle> {
                                   Row(
                                     children: [
                                       Text(
-                                        member.name,
+                                        "Dr. Peter Ahmed",
                                         style: GoogleFonts.montserrat(
                                           color: Colors.white,
                                           fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
@@ -134,7 +125,7 @@ class _MemberSingleState extends State<MemberSingle> {
                                       Container(
                                         width: SizeConfig.safeBlockHorizontal! * 50,
                                         child: Text(
-                                          member.title??'',
+                                          "HOD physio department, University of michigan",
                                           textAlign: TextAlign.left,
                                           style: GoogleFonts.dmSans(
                                             color: Colors.white,
@@ -170,7 +161,7 @@ class _MemberSingleState extends State<MemberSingle> {
                                           Row(
                                             children: [
                                               Text(
-                                                member.email??'',
+                                                "ahmed@yahoo.com",
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.white,
@@ -199,7 +190,7 @@ class _MemberSingleState extends State<MemberSingle> {
                                           Row(
                                             children: [
                                               Text(
-                                                member.country??'',
+                                                "Nigerian",
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.white,
@@ -233,7 +224,7 @@ class _MemberSingleState extends State<MemberSingle> {
                                           Row(
                                             children: [
                                               Text(
-                                                member.phone??'',
+                                                "+2349023452436",
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.white,
@@ -288,7 +279,16 @@ class _MemberSingleState extends State<MemberSingle> {
                                 height: SizeConfig.safeBlockVertical! * .5,
                               ),
                               Text(
-                                member.bio??'',
+                                "Lorem Ipsum is simply dummy text of the printing"
+                                    " and typesetting industry. Lorem Ipsum has been"
+                                    " the industry's standard dummy text ever since"
+                                    " the 1500s, when an unknown printer took a galley"
+                                    " of type and scrambled it to make a type specimen"
+                                    " book. It has survived not only five centuries, "
+                                    "but also the leap into electronic typesetting, "
+                                    "remaining essentially unchanged. It was popularised"
+                                    " in the 1960s with the release of Letraset sheets "
+                                    "containing Lorem Ipsum passages,",
                                 textAlign: TextAlign.left,
                                 style: GoogleFonts.dmSans(
                                   color: mainColor,
@@ -297,9 +297,6 @@ class _MemberSingleState extends State<MemberSingle> {
                                 ),
                               ),
                             ],
-                          ),
-                          SizedBox(
-                            height: SizeConfig.safeBlockVertical! * 4,
                           ),
                         ],
                       )
@@ -312,6 +309,7 @@ class _MemberSingleState extends State<MemberSingle> {
             ],
           ),
         ),
+      drawer: drawer(),
       // bottomNavigationBar: Navigation(selectedIndex: selectedIndex, onClicked: onClicked,),
     );
   }

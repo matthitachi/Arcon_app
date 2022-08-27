@@ -7,9 +7,9 @@ class Api {
 
   // String Host = 'http://10.0.2.2:8000/api/';
   // String Host = 'http://192.168.87.160:8000/api/';
-  // String Host = 'http://192.168.8.100:8000/api/';
+  // String Host = 'http://192.168.8.101:8000/api/';
   // String Host = 'http://192.168.100.69:8000/api/';
-  // String Host = 'http://192.168.0.150:8000/api/';
+  // String Host = 'http://192.168.0.179:8000/api/';
  String Host = 'https://conference.arconigeria.org/api/';
 
 

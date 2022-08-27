@@ -1,4 +1,9 @@
-import 'package:conference/views/membersingle.dart';
+import 'package:conference/Helpers/helper.dart';
+import 'package:conference/Models/response.dart';
+import 'package:conference/Models/member.dart';
+import 'package:conference/Service/event.dart';
+import 'package:conference/views/membersingleOld.dart';
+import 'package:conference/widgets/events.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -8,16 +13,21 @@ import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
 
-class members extends StatefulWidget {
+class Members extends StatefulWidget {
+  int id;
+  Members(this.id, {Key? key}) : super(key: key);
+
   @override
-  State<members> createState() => _membersState();
+  State<Members> createState() => _MembersState(id);
 }
 
-class _membersState extends State<members> {
+class _MembersState extends State<Members> {
   bool obscureText = true;
-
+  int id;
   int selectedIndex = 0;
-  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  _MembersState(this.id); // Create a key
 
 
   void onClicked(int index) {
@@ -29,13 +39,75 @@ class _membersState extends State<members> {
   @override
   void initState(){
     super.initState();
+    initScrollController();
+    initList();
   }
 
 
+  List<Member> memberList = [];
+  int page = 1;
+  int lastPage = 0;
+  bool moreLoading = false;
+
+  Future<bool> initList() async {
+    initLoading();
+    List<Member> val = await getMemberList();
+    closeLoading();
+    setState(() {
+      memberList = val;
+    });
+    return true;
+  }
+
+  final ScrollController _scrollController = ScrollController();
+  initScrollController() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.hasViewportDimension &&
+          _scrollController.position.pixels >=
+              _scrollController.position.maxScrollExtent - 0.01 &&
+          page <= lastPage) {
+        moreLists();
+      }
+    });
+  }
+
+  moreLists() {
+    page++;
+    if (page <= lastPage) {
+      moreLoading = true;
+      getMemberList(page: page).then((val) {
+        setState(() {
+          print(val);
+          memberList.addAll(val);
+          moreLoading = false;
+        });
+      });
+    }
+    print('more List {$page} {$lastPage}');
+  }
+
+  Future<List<Member>> getMemberList({int page: 1}) async {
+    Map<String, dynamic> param = {'id':id, 'page': page};
+    EventService service = EventService();
+    Response rs = await service.getMembers(param);
+    if (rs.status == 200) {
+      Map paginateData = rs.data;
+      lastPage = paginateData['last_page'];
+      List dataList = paginateData['data'];
+
+      if (dataList != null) {
+        return List.from(dataList).map((elem) {
+          return Member.fromJson(elem);
+        }).toList();
+      } else {
+        return <Member>[];
+      }
+    } else {
+      return <Member>[];
+    }
+  }
 
   @override
-
-
   Widget build(BuildContext context)  {
     SizeConfig().init(context);
     return Scaffold(
@@ -105,98 +177,26 @@ class _membersState extends State<members> {
                     height: SizeConfig.safeBlockVertical! * 95,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
-                    child: Padding(
+                    child:(memberList.isNotEmpty)? Padding(
                       padding: EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 5, vertical: 0),
-                      child: ListView(
-                        padding: EdgeInsets.zero,
-                        children: [
-                          SizedBox(
-                            height: SizeConfig.safeBlockVertical! * 2,
-                          ),
-
-                          // each speaker
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 2),
-                            child: Container(
-                              width: SizeConfig.safeBlockHorizontal! * 100,
-                              child: GestureDetector(
-                                onTap: () async {
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) => membersSingle()));
-                                },
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () async {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(builder: (context) => membersSingle()));
-                                            },
-                                            child: Avatar(urlImage: 'https://via.placeholder.com/150', radius: SizeConfig.safeBlockHorizontal! * 5)),
-                                        SizedBox(
-                                          width: SizeConfig.safeBlockHorizontal! * 2,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Dr. Peter Ahmed",
-                                                  style: GoogleFonts.montserrat(
-                                                    color: textColor,
-                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: SizeConfig.safeBlockHorizontal! * 70,
-                                                  child: Text(
-                                                    "HOD physio department, University of michigan",
-                                                    textAlign: TextAlign.left,
-                                                    style: GoogleFonts.dmSans(
-                                                      color: textColor,
-                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                      fontWeight: FontWeight.w300,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    // horizontal line
-                                    Padding(
-                                        padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 5),
-                                        child: Container(
-                                          width: SizeConfig.safeBlockVertical! * 90,
-                                          child: Divider(
-                                            height: 1,
-                                            thickness:
-                                            SizeConfig.safeBlockHorizontal! *
-                                                .2,
-                                            color:Colors.black38,
-                                          ),
-                                        )
-                                    ),
-                                    // horizontal line end
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
+                      child: RefreshIndicator(
+                          onRefresh: initList,
+                          child: ListView.builder(
+                        padding: EdgeInsets.only(top: SizeConfig.safeBlockVertical! * 2),
+                            shrinkWrap: true,
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            controller: _scrollController,
+                        itemCount: memberList.length,
+                        itemBuilder: (BuildContext context, int index) =>membersWidget(context, memberList[index])
+                            ,
+                        // children: [
+                        //   SizedBox(
+                        //     height: SizeConfig.safeBlockVertical! * 2,
+                        //   ),
+                        //
+                        // ],
+                      )),
+                    ):const Center(child: Text("No Member found"),),
 
                   )
                 ],
@@ -214,10 +214,8 @@ class _membersState extends State<members> {
                           height: SizeConfig.safeBlockVertical! * 9,
                           decoration: BoxDecoration(
                             color: mainColorSub,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                SizeConfig.safeBlockVertical! * 6)
-                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                SizeConfig.safeBlockVertical! * 6)),
                           ),
                           child: Navigation(selectedIndex: selectedIndex, onClicked: onClicked,)
                       ),
@@ -231,7 +229,7 @@ class _membersState extends State<members> {
             ],
           ),
         ),
-      drawer: drawer(),
+      drawer: const drawer(),
       // bottomNavigationBar: Navigation(selectedIndex: selectedIndex, onClicked: onClicked,),
     );
   }

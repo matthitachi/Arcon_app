@@ -159,6 +159,7 @@ class _PaymentPromptState extends State<PaymentPrompt> {
         ..reference = reference
         ..accessCode = accessCode
         ..email = email
+        ..putMetaData('Payment Company', "Arcon Nigeria")
       ..locale = (_character!=null && _character?.currency == 'Naira')?'en_NG':'en_US'
       ..currency = (_character!=null && _character?.currency == 'Naira')?'NGN':'USD';
       CheckoutResponse response = await paystackPlugin.checkout(

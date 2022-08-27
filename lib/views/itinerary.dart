@@ -229,6 +229,7 @@ class _ItineryState extends State<Itinery> {
                                   ),
                                   for(Itinerary itinerary in itineraries)
                                     Container(
+                                      margin: EdgeInsets.only(bottom:10),
                                       decoration: BoxDecoration(
                                         color: grayColor,
                                         borderRadius: BorderRadius.all(Radius.circular(
@@ -242,10 +243,10 @@ class _ItineryState extends State<Itinery> {
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Container(),
-                                                  Image(
-                                                    image: AssetImage('assets/images/save_icon_d.png'),
-                                                    width: SizeConfig.safeBlockHorizontal! * 7,
-                                                  ),
+                                                  // Image(
+                                                  //   image: AssetImage('assets/images/save_icon_d.png'),
+                                                  //   width: SizeConfig.safeBlockHorizontal! * 7,
+                                                  // ),
                                                 ],
                                               ),
 
@@ -293,6 +294,18 @@ class _ItineryState extends State<Itinery> {
                                                         ],
                                                       ),SizedBox(
                                                         height: SizeConfig.safeBlockVertical! * 2,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            itinerary.title??'',
+                                                            style: GoogleFonts.montserrat(
+                                                              color: textColor,
+                                                              fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                              fontWeight: FontWeight.w500,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                       Container(
                                                         width: SizeConfig.safeBlockHorizontal! * 70,

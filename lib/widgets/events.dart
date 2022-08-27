@@ -1,8 +1,10 @@
 import 'package:conference/Models/event.dart';
+import 'package:conference/Models/member.dart';
 import 'package:conference/Models/product.dart';
 import 'package:conference/Models/speaker.dart';
 import 'package:conference/Models/sponsor.dart';
 import 'package:conference/views/eventsingle.dart';
+import 'package:conference/views/membersingle.dart';
 import 'package:conference/views/payment_prompt.dart';
 import 'package:conference/views/product.dart';
 import 'package:conference/views/speakersingle.dart';
@@ -464,6 +466,88 @@ Widget speakersWidget(BuildContext context, Speaker speaker) {
                           width: SizeConfig.safeBlockHorizontal! * 60,
                           child: Text(
                             speaker.title ?? '',
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.dmSans(
+                              color: textColor,
+                              fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            // horizontal line
+            Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: SizeConfig.safeBlockHorizontal! * 5),
+                child: Container(
+                  width: SizeConfig.safeBlockVertical! * 90,
+                  child: Divider(
+                    height: 1,
+                    thickness: SizeConfig.safeBlockHorizontal! * .2,
+                    color: Colors.black38,
+                  ),
+                )),
+            // horizontal line end
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget membersWidget(BuildContext context, Member member) {
+  return Padding(
+    padding:
+        EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 2),
+    child: Container(
+      width: SizeConfig.safeBlockHorizontal! * 100,
+      child: GestureDetector(
+        onTap: () async {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => MemberSingle(member)));
+        },
+        child: Column(
+          children: [
+            Row(
+              children: [
+                GestureDetector(
+                    onTap: () async {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MemberSingle(member)));
+                    },
+                    child: Avatar(
+                        urlImage:
+                            member.image ?? 'https://via.placeholder.com/150',
+                        radius: SizeConfig.safeBlockHorizontal! * 7)),
+                SizedBox(
+                  width: SizeConfig.safeBlockHorizontal! * 2,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          member.name,
+                          style: GoogleFonts.montserrat(
+                            color: textColor,
+                            fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: SizeConfig.safeBlockHorizontal! * 60,
+                          child: Text(
+                            member.title ?? '',
                             textAlign: TextAlign.left,
                             style: GoogleFonts.dmSans(
                               color: textColor,

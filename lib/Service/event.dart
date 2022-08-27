@@ -57,6 +57,13 @@ class EventService {
 //     print(data);
     return Response.fromJson(Map<String, dynamic>.from(data));
   }
+  getMembers(Map<String, dynamic> body) async {
+    String path = 'eventmembers';
+    Api api = Api();
+    Map data = await api.get(path, body: body);
+//     print(data);
+    return Response.fromJson(Map<String, dynamic>.from(data));
+  }
   getSponsors(Map<String, dynamic> body) async {
     String path = 'eventsponsors';
     Api api = Api();
