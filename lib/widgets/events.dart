@@ -2,7 +2,6 @@ import 'package:conference/Models/event.dart';
 import 'package:conference/Models/product.dart';
 import 'package:conference/Models/speaker.dart';
 import 'package:conference/Models/sponsor.dart';
-import 'package:conference/views/events.dart';
 import 'package:conference/views/eventsingle.dart';
 import 'package:conference/views/payment_prompt.dart';
 import 'package:conference/views/product.dart';
@@ -221,6 +220,8 @@ Widget eventWidgetFull(Event event, context, {width = 100}) {
       width: SizeConfig.safeBlockHorizontal! * width,
       child: GestureDetector(
         onTap: () async {
+          print("transaction count");
+          print(event.transaction);
           if(event.transaction! > 0){
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => EventSingle(event.id)));
