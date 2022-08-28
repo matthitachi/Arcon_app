@@ -298,7 +298,7 @@ class _ItineryState extends State<Itinery> {
                                                       Row(
                                                         children: [
                                                           Text(
-                                                            itinerary.title??'',
+                                                            itinerary.title,
                                                             style: GoogleFonts.montserrat(
                                                               color: textColor,
                                                               fontSize: SizeConfig.safeBlockHorizontal! * 3.5,

@@ -288,7 +288,7 @@ class _MemberSingleState extends State<MemberSingle> {
                                 height: SizeConfig.safeBlockVertical! * .5,
                               ),
                               Text(
-                                member.bio??'',
+                                (member.bio != null && member.bio !='')? member.bio??'' : 'No bio yet for this member',
                                 textAlign: TextAlign.left,
                                 style: GoogleFonts.dmSans(
                                   color: mainColor,

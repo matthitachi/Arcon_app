@@ -11,6 +11,7 @@ import 'package:conference/views/exhibitors.dart';
 import 'package:conference/views/floor_plan.dart';
 import 'package:conference/views/members.dart';
 import 'package:conference/views/members_old.dart';
+import 'package:conference/views/payment_prompt.dart';
 import 'package:conference/views/policy.dart';
 import 'package:conference/views/sponsor.dart';
 import 'package:conference/views/terms.dart';
@@ -146,6 +147,12 @@ class _drawerState extends State<drawer> {
                         if ((event?.transaction ?? 0) > 0) {
                           Navigator.of(context).pushReplacement(MaterialPageRoute(
                               builder: (context) => Speakers(event?.id ?? 1)));
+                        }else{
+                          if(event != null) {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
+                          }
                         }
                       },
                       child: Row(
@@ -179,6 +186,12 @@ class _drawerState extends State<drawer> {
     if ((event?.transaction ?? 0) > 0) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => Members(event?.id ?? 1)));
+    }else{
+      if(event != null) {
+        Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
+      }
     }
                       },
                       child: Row(
@@ -212,6 +225,12 @@ class _drawerState extends State<drawer> {
                         if ((event?.transaction ?? 0) > 0) {
                           Navigator.of(context).pushReplacement(MaterialPageRoute(
                               builder: (context) => Sponsors(event?.id ?? 1)));
+                        }else{
+                          if(event != null) {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
+                          }
                         }
                       },
                       child: Row(
@@ -250,6 +269,12 @@ class _drawerState extends State<drawer> {
                               MaterialPageRoute(
                                   builder: (context) =>
                                       FloorPlan(event?.floorPlan ?? '')));
+                        }else{
+                          if(event != null) {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
+                          }
                         }
                       },
                       child: Row(
