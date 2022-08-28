@@ -297,12 +297,15 @@ class _ItineryState extends State<Itinery> {
                                                       ),
                                                       Row(
                                                         children: [
-                                                          Text(
-                                                            itinerary.title,
-                                                            style: GoogleFonts.montserrat(
-                                                              color: textColor,
-                                                              fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                                              fontWeight: FontWeight.w500,
+                                                          Container(
+                                                            width: SizeConfig.blockSizeHorizontal!*80,
+                                                            child: Text(
+                                                              itinerary.title,
+                                                              style: GoogleFonts.montserrat(
+                                                                color: textColor,
+                                                                fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                                fontWeight: FontWeight.w500,
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
