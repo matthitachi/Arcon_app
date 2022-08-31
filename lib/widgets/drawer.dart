@@ -145,13 +145,15 @@ class _drawerState extends State<drawer> {
                     GestureDetector(
                       onTap: () {
                         if ((event?.transaction ?? 0) > 0) {
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(
-                              builder: (context) => Speakers(event?.id ?? 1)));
-                        }else{
-                          if(event != null) {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Speakers(event?.id ?? 1)));
+                        } else {
+                          if (event != null) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    PaymentPrompt(event ?? Event(0, ''))));
                           }
                         }
                       },
@@ -183,16 +185,19 @@ class _drawerState extends State<drawer> {
 
                     GestureDetector(
                       onTap: () {
-    if ((event?.transaction ?? 0) > 0) {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => Members(event?.id ?? 1)));
-    }else{
-      if(event != null) {
-        Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
-      }
-    }
+                        if ((event?.transaction ?? 0) > 0) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Members(event?.id ?? 1)));
+                        } else {
+                          if (event != null) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    PaymentPrompt(event ?? Event(0, ''))));
+                          }
+                        }
                       },
                       child: Row(
                         children: [
@@ -223,13 +228,15 @@ class _drawerState extends State<drawer> {
                     GestureDetector(
                       onTap: () {
                         if ((event?.transaction ?? 0) > 0) {
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(
-                              builder: (context) => Sponsors(event?.id ?? 1)));
-                        }else{
-                          if(event != null) {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Sponsors(event?.id ?? 1)));
+                        } else {
+                          if (event != null) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    PaymentPrompt(event ?? Event(0, ''))));
                           }
                         }
                       },
@@ -263,17 +270,19 @@ class _drawerState extends State<drawer> {
                       onTap: () {
                         print('floor plan');
                         print(event?.floorPlan);
-                        if (event?.floorPlan != null) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      FloorPlan(event?.floorPlan ?? '')));
-                        }else{
-                          if(event != null) {
-                            Navigator.of(context).push(
+                        if ((event?.transaction ?? 0) > 0) {
+                          if (event?.floorPlan != null) {
+                            Navigator.pushReplacement(
+                                context,
                                 MaterialPageRoute(
-                                    builder: (context) => PaymentPrompt(event ?? Event(0, ''))));
+                                    builder: (context) =>
+                                        FloorPlan(event?.floorPlan ?? '')));
+                          }
+                        } else {
+                          if (event != null) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    PaymentPrompt(event ?? Event(0, ''))));
                           }
                         }
                       },
@@ -352,10 +361,8 @@ class _drawerState extends State<drawer> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => policy()));
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => policy()));
                       },
                       child: Row(
                         children: [
@@ -376,10 +383,8 @@ class _drawerState extends State<drawer> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Terms()));
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => Terms()));
                       },
                       child: Row(
                         children: [

@@ -199,7 +199,7 @@ class _SponsorsState extends State<Sponsors> {
                             //
                             // ],
                           )),
-                    ):const Center(child: Text("No Speaker found"),),
+                    ):const Center(child: Text("No Sponsor found"),),
 
                   )
                 ],
