@@ -1,6 +1,7 @@
 
 import 'package:conference/views/home.dart';
 import 'package:conference/views/onboading/forgot.dart';
+import 'package:conference/views/onboading/reset.dart';
 import 'package:conference/views/onboading/signin.dart';
 import 'package:conference/views/onboading/signup.dart';
 import 'package:conference/views/onboading/splash.dart';
@@ -31,17 +32,5 @@ Map <String, WidgetBuilder> routes = <String, WidgetBuilder>{
   LOGIN: (BuildContext context) =>  const SignIn(),
   REGISTER: (BuildContext context) =>  SignUp(),
   WELCOME: (BuildContext context) =>  Welcome(),
-  // OTP: (BuildContext context) =>  Otp(),
-  // RESETSCREEN: (BuildContext context) => const ResetPage(),
-  // INVESTMENTPAGE: (BuildContext context) => const investmentpage(),
-  // WALLET: (BuildContext context) => const wallet(),
-  // VERIFICATION: (BuildContext context) => verification(),
-  // REFERRAL: (BuildContext context) => referral(),
-  // PASSWORD: (BuildContext context) =>  password(),
-  // TRANSACTIONS: (BuildContext context) =>  transactions(),
-  // BASICDETAILS: (BuildContext context) =>  basicdetails(),
-  // PHONE: (BuildContext context) =>  phone(),
-  // BVN: (BuildContext context) =>  bvn(),
-  // IDVERIFICATION: (BuildContext context) => id_verification(),
-  // PHONEVERIFICATION: (BuildContext context) =>  const PhoneVerification(),
+  RESETSCREEN: (BuildContext context) => const Reset(),
 };
