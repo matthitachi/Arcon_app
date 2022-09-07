@@ -15,19 +15,21 @@ import '../widgets/navigation.dart';
 
 class Members extends StatefulWidget {
   int id;
-  Members(this.id, {Key? key}) : super(key: key);
+  int type;
+  Members(this.id, this.type, {Key? key}) : super(key: key);
 
   @override
-  State<Members> createState() => _MembersState(id);
+  State<Members> createState() => _MembersState(id, type);
 }
 
 class _MembersState extends State<Members> {
   bool obscureText = true;
   int id;
+  int type;
   int selectedIndex = 0;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  _MembersState(this.id); // Create a key
+  _MembersState(this.id, this.type); // Create a key
 
 
   void onClicked(int index) {
@@ -89,7 +91,13 @@ class _MembersState extends State<Members> {
   Future<List<Member>> getMemberList({int page: 1}) async {
     Map<String, dynamic> param = {'id':id, 'page': page};
     EventService service = EventService();
-    Response rs = await service.getMembers(param);
+    Response rs;
+    if(type == 0){
+       rs = await service.getMembers(param);
+    }else{
+       rs = await service.getExcos(param);
+    }
+
     if (rs.status == 200) {
       Map paginateData = rs.data;
       lastPage = paginateData['last_page'];

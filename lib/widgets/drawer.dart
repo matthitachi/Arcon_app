@@ -190,7 +190,7 @@ class _drawerState extends State<drawer> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      Members(event?.id ?? 1)));
+                                      Members(event?.id ?? 1, 0)));
                         } else {
                           if (event != null) {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -210,7 +210,49 @@ class _drawerState extends State<drawer> {
                             width: SizeConfig.safeBlockVertical! * 1,
                           ),
                           Text(
-                            "Members",
+                            "LOC Members",
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: SizeConfig.safeBlockVertical! * 4,
+                    ),
+
+                    GestureDetector(
+                      onTap: () {
+                        if ((event?.transaction ?? 0) > 0) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Members(event?.id ?? 1, 1)));
+                        } else {
+                          if (event != null) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    PaymentPrompt(event ?? Event(0, ''))));
+                          }
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.supervised_user_circle_sharp,
+                            size: SizeConfig.safeBlockVertical! * 3,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: SizeConfig.safeBlockVertical! * 1,
+                          ),
+                          Text(
+                            "EXCO Members",
                             textAlign: TextAlign.left,
                             style: GoogleFonts.montserrat(
                               color: Colors.white,

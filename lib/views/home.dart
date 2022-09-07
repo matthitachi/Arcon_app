@@ -5,6 +5,7 @@ import 'package:conference/Models/sponsor.dart';
 import 'package:conference/Models/user.dart';
 import 'package:conference/Service/authdata.dart';
 import 'package:conference/Service/event.dart';
+import 'package:conference/views/sponsor.dart';
 import 'package:conference/widgets/events.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -236,6 +237,12 @@ class _HomeState extends State<Home> {
                                             ),
                                           ),
                                           GestureDetector(
+                                            onTap: (){
+                                              Navigator.of(context).pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Sponsors(event?.id ?? 1)));
+                                            },
                                             child: Text(
                                               "view all",
                                               textAlign: TextAlign.left,
@@ -268,7 +275,7 @@ class _HomeState extends State<Home> {
                                               crossAxisSpacing: 14.0,
                                               mainAxisSpacing: 10),
                                             itemCount: sponsors.length,
-                                            itemBuilder: (BuildContext ctx, index) => sponsorsWidget(sponsors[index])),
+                                            itemBuilder: (BuildContext ctx, index) => sponsorsWidget(sponsors[index], ctx)),
                                       )
                                     ],
                                   ),

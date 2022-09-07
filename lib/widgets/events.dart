@@ -398,8 +398,13 @@ Widget eventWidgetFull(Event event, context, {width = 100}) {
   );
 }
 
-Widget sponsorsWidget(Sponsor sponsor) {
-  return Container(
+Widget sponsorsWidget(Sponsor sponsor, context) {
+  return GestureDetector(
+      onTap: (){
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => SponsorsSingle(sponsor)));
+      },
+      child:Container(
     decoration: BoxDecoration(
       color: grayColor,
       borderRadius:
@@ -415,7 +420,7 @@ Widget sponsorsWidget(Sponsor sponsor) {
         return const Icon(Icons.error);
       },
     )),
-  );
+  ));
 }
 
 Widget speakersWidget(BuildContext context, Speaker speaker) {
