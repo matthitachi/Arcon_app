@@ -174,7 +174,7 @@ class _SpeakersState extends State<Speakers> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 95,
+                    height: SizeConfig.safeBlockVertical! * 83,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
                     child:(speakerList.isNotEmpty)? Padding(
@@ -198,6 +198,9 @@ class _SpeakersState extends State<Speakers> {
                       )),
                     ):const Center(child: Text("No Speaker found"),),
 
+                  ),
+                  SizedBox(
+                    height: SizeConfig.safeBlockVertical!*12,
                   )
                 ],
               ),

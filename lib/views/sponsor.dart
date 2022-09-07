@@ -177,7 +177,7 @@ class _SponsorsState extends State<Sponsors> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 95,
+                    height: SizeConfig.safeBlockVertical! * 83,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
                     child:(sponsorList.isNotEmpty)? Padding(
@@ -201,6 +201,9 @@ class _SponsorsState extends State<Sponsors> {
                           )),
                     ):const Center(child: Text("No Sponsor found"),),
 
+                  ),
+                  SizedBox(
+                    height: SizeConfig.safeBlockVertical!*12,
                   )
                 ],
               ),
