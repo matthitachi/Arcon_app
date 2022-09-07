@@ -105,6 +105,7 @@ class _PaymentPromptState extends State<PaymentPrompt> {
           Map<String, dynamic> payInfo = {
             'event_id': event.id,
             'reference': reference,
+            'fee': _character?.id,
             'amount': _character?.fee.toString()??'0.00',
             'status': TRANSACTION_COMPLETED,
             'payment_method': PAYMENT_METHOD_PAYSTACK,
