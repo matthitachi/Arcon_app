@@ -182,7 +182,7 @@ class _MembersState extends State<Members> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 95,
+                    height: SizeConfig.safeBlockVertical! * 83,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
                     child:(memberList.isNotEmpty)? Padding(
@@ -206,6 +206,9 @@ class _MembersState extends State<Members> {
                       )),
                     ):const Center(child: Text("No Member found"),),
 
+                  ),
+                  SizedBox(
+                    height: SizeConfig.safeBlockVertical!*12,
                   )
                 ],
               ),

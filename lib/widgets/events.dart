@@ -413,7 +413,7 @@ Widget sponsorsWidget(Sponsor sponsor, context) {
     child: Center(
         child: Image.network(
       sponsor.logo ?? '',
-      fit: BoxFit.cover,
+      fit: BoxFit.fitWidth,
       height: SizeConfig.safeBlockVertical! * 7,
       errorBuilder:
           (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -591,65 +591,72 @@ Widget sponsorsWidgetFull(BuildContext context, Sponsor sponsor) {
   return Padding(
     padding:
         EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 2),
-    child: Container(
-      width: SizeConfig.safeBlockHorizontal! * 100,
-      child: GestureDetector(
-        onTap: () async {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => SponsorsSingle(sponsor)));
-        },
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () async {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SponsorsSingle(sponsor)));
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+    child: Column(
+      children: [
+        Container(
+          width: SizeConfig.safeBlockHorizontal! * 100,
+          child: GestureDetector(
+            onTap: () async {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => SponsorsSingle(sponsor)));
+            },
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SponsorsSingle(sponsor)));
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        sponsor.name??'',
-                        style: GoogleFonts.montserrat(
-                          color: textColor,
-                          fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                          fontWeight: FontWeight.w500,
+                      Row(
+                        children: [
+                          Container(
+                            width: SizeConfig.safeBlockHorizontal!*50,
+                            child: Text(
+                              sponsor.name??'',
+                              style: GoogleFonts.montserrat(
+                                color: textColor,
+                                fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: Image.network(
+                          sponsor.logo ?? '',
+                          fit: BoxFit.cover,
+                          height: SizeConfig.safeBlockVertical! * 4,
+                          errorBuilder:
+                              (BuildContext context, Object exception, StackTrace? stackTrace) {
+                            return const Icon(Icons.error);
+                          },
                         ),
                       ),
                     ],
                   ),
-                  Center(
-                    child: Image.network(
-                      sponsor.logo ?? '',
-                      fit: BoxFit.cover,
-                      height: SizeConfig.safeBlockVertical! * 4,
-                      errorBuilder:
-                          (BuildContext context, Object exception, StackTrace? stackTrace) {
-                        return const Icon(Icons.error);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                ),
 // horizontal line
-            Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: SizeConfig.safeBlockHorizontal! * 3),
-                child: Container(
-                  width: SizeConfig.safeBlockVertical! * 90,
-                  child: Divider(
-                    height: 1,
-                    thickness: SizeConfig.safeBlockHorizontal! * .2,
-                    color: Colors.black38,
-                  ),
-                )),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: SizeConfig.safeBlockHorizontal! * 3),
+                    child: Container(
+                      width: SizeConfig.safeBlockVertical! * 90,
+                      child: Divider(
+                        height: 1,
+                        thickness: SizeConfig.safeBlockHorizontal! * .2,
+                        color: Colors.black38,
+                      ),
+                    )),
 // horizontal line end
-          ],
+              ],
+            ),
+          ),
         ),
-      ),
+      ],
     ),
   );
 }

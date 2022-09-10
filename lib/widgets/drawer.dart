@@ -244,7 +244,7 @@ class _drawerState extends State<drawer> {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.supervised_user_circle_sharp,
+                            Icons.supervised_user_circle_outlined,
                             size: SizeConfig.safeBlockVertical! * 3,
                             color: Colors.white,
                           ),

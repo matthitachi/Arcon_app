@@ -146,7 +146,7 @@ class _LiveStreamState extends State<LiveStream> {
 
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: SizeConfig.blockSizeVertical! * 83
+                  minHeight: SizeConfig.blockSizeVertical! * 80
                 ),
                 child: RotatedBox(
                   quarterTurns: 3,
