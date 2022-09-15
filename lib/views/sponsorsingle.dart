@@ -5,12 +5,14 @@ import 'package:conference/views/product.dart';
 import 'package:conference/widgets/events.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../Helpers/validator.dart';
 import '../../utils/SizeConfig.dart';
 import '../../utils/constants.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigation.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SponsorsSingle extends StatefulWidget {
   Sponsor sponsor;
@@ -27,7 +29,9 @@ class _SponsorsSingleState extends State<SponsorsSingle> {
   int selectedIndex = 0;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   Sponsor sponsor;
-  _SponsorsSingleState(this.sponsor); // Create a key
+  _SponsorsSingleState(this.sponsor); //
+  // Create a key
+  late final YoutubePlayerController controller;
 
 
   void onClicked(int index) {
@@ -40,6 +44,13 @@ class _SponsorsSingleState extends State<SponsorsSingle> {
   @override
   void initState(){
     super.initState();
+    controller = YoutubePlayerController(
+      initialVideoId: "",
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
   }
 
 
@@ -99,176 +110,177 @@ class _SponsorsSingleState extends State<SponsorsSingle> {
                             ],
                           ),
                           SizedBox(
-                            height: SizeConfig.safeBlockVertical! * 7,
+                            height: SizeConfig.safeBlockVertical! * 1,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.network(
-                                sponsor.logo ?? '',
-                                fit: BoxFit.cover,
-                                height: SizeConfig.safeBlockVertical! * 4,
-                                errorBuilder:
-                                    (BuildContext context, Object exception, StackTrace? stackTrace) {
-                                  return const Icon(Icons.error);
-                                },
-                              ),
-                              SizedBox(
-                                width: SizeConfig.safeBlockHorizontal! * 5,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        sponsor.name??'',
-                                        style: GoogleFonts.montserrat(
-                                          color: Colors.white,
-                                          fontSize: SizeConfig.safeBlockHorizontal! * 4,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
+                          Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Image.network(
+                                    sponsor.logo ?? '',
+                                    fit: BoxFit.cover,
+                                    height: SizeConfig.safeBlockVertical!*8,
+                                    errorBuilder:
+                                        (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                      return const Icon(Icons.error);
+                                    },
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.safeBlockVertical! * 3,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Website",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                sponsor.website??"",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: SizeConfig.safeBlockVertical! * 1,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Country",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                sponsor.country??"",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                ),
+                                SizedBox(
+                                  height: SizeConfig.safeBlockHorizontal! * 2,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      sponsor.name??'',
+                                      style: GoogleFonts.montserrat(
+                                        color: Colors.white,
+                                        fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      SizedBox(
-                                        width: SizeConfig.safeBlockHorizontal! * 5,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Email",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                sponsor.email??"",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: SizeConfig.safeBlockVertical! * 1,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Address",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: SizeConfig.safeBlockHorizontal! * 25,
-                                                child: Text(
-                                                  sponsor.address??"",
+                                    ),
+                                    SizedBox(
+                                      height: SizeConfig.safeBlockVertical! * 3,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Website: ",
                                                   textAlign: TextAlign.left,
-                                                  style: GoogleFonts.dmSans(
+                                                  style: GoogleFonts.montserrat(
                                                     color: Colors.white,
-                                                    fontSize: SizeConfig.safeBlockHorizontal! * 2.5,
-                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                    fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                                Container(
+                                                  width: SizeConfig.safeBlockHorizontal! * 70,
+                                                  child: GestureDetector(
+                                                    onTap: () async {
+                                                      String url = sponsor.website??"";
+                                                      var urllaunchable = await canLaunchUrl(Uri.parse(url));
+                                                      if(urllaunchable){
+                                                        await launchUrl(Uri.parse(url));
+                                                      }else{
+                                                        print("URL can't be launched.");
+                                                      }
+                                                    },
+                                                    child: Text(
+                                                      sponsor.website??"",
+                                                      textAlign: TextAlign.left,
+                                                      style: GoogleFonts.dmSans(
+                                                        color: Colors.white,
+                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: SizeConfig.safeBlockVertical! * 1,
+                                            ),
 
-                            ],
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Country: ",
+                                                  textAlign: TextAlign.left,
+                                                  style: GoogleFonts.montserrat(
+                                                    color: Colors.white,
+                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: SizeConfig.safeBlockHorizontal! * 70,
+                                                  child: Text(
+                                                    sponsor.country??"",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.dmSans(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: SizeConfig.safeBlockVertical! * 1,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Email: ",
+                                                  textAlign: TextAlign.left,
+                                                  style: GoogleFonts.montserrat(
+                                                    color: Colors.white,
+                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: SizeConfig.safeBlockHorizontal! * 70,
+                                                  child: Text(
+                                                    sponsor.email??"",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.dmSans(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: SizeConfig.safeBlockVertical! * 1,
+                                            ),
+                                            Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Address: ",
+                                                  textAlign: TextAlign.left,
+                                                  style: GoogleFonts.montserrat(
+                                                    color: Colors.white,
+                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: SizeConfig.safeBlockHorizontal! * 70,
+                                                  child: Text(
+                                                    sponsor.address??"",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.dmSans(
+                                                      color: Colors.white,
+                                                      fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+
+                              ],
+                            ),
                           ),
 
                         ],
@@ -278,7 +290,7 @@ class _SponsorsSingleState extends State<SponsorsSingle> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 70,
+                    height: SizeConfig.safeBlockVertical! * 60,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
                     child: Padding(
@@ -319,7 +331,7 @@ class _SponsorsSingleState extends State<SponsorsSingle> {
                           SizedBox(
                             height: SizeConfig.safeBlockVertical! * 3,
                           ),
-                          Column(
+                          (sponsor.products ==null)?Column(
                             children: [
                               Row(
                                 children: [
@@ -351,6 +363,34 @@ class _SponsorsSingleState extends State<SponsorsSingle> {
                                 ),
                               )
                             ],
+                          ):Container(),
+                          SizedBox(
+                            height: SizeConfig.safeBlockVertical! * 3,
+                          ),
+
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                                minHeight: SizeConfig.blockSizeVertical! * 20
+                            ),
+                            child: YoutubePlayerBuilder(
+                                player: YoutubePlayer(
+                                  width: SizeConfig.blockSizeHorizontal!*100,
+                                  aspectRatio: 4/3,
+                                  controller: controller,
+                                ),
+                                builder: (context, player) {
+                                  return Column(
+                                    children: [
+                                      // some widgets
+                                      player,
+                                      //some other widgets
+                                    ],
+                                  );
+                                }
+                            ),
+                          ),
+                          SizedBox(
+                            height: SizeConfig.safeBlockVertical! * 3,
                           ),
                         ],
                       )
