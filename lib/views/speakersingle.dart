@@ -56,7 +56,7 @@ class _SpeakerSingleState extends State<SpeakerSingle> {
                 child: Image(
                   image: AssetImage('assets/images/background.png'),
                   width: 1600,
-                  height: 1200,
+                  height: 1500,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -259,7 +259,7 @@ class _SpeakerSingleState extends State<SpeakerSingle> {
 
                   // body
                   Container(
-                    height: SizeConfig.safeBlockVertical! * 70,
+                    height: SizeConfig.safeBlockVertical! * 65,
                     width: SizeConfig.safeBlockHorizontal! * 100,
                     color: Colors.white,
                     child: Padding(

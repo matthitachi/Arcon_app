@@ -33,7 +33,7 @@ class _WelcomeState extends State<Welcome> {
                 child: Image(
                   image: AssetImage('assets/images/background.png'),
                   width: 1600,
-                  height: 1200,
+                  height: 1400,
                   fit: BoxFit.cover,
                 ),
               ),

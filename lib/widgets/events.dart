@@ -217,7 +217,7 @@ Widget eventWidgetFull(Event event, context, {width = 100}) {
         EdgeInsets.symmetric(vertical: SizeConfig.safeBlockHorizontal! * 2),
     child: Container(
       constraints: BoxConstraints(
-        maxHeight: SizeConfig.safeBlockVertical! * 30
+        minHeight: SizeConfig.safeBlockVertical! * 20
       ),
       width: SizeConfig.safeBlockHorizontal! * width,
       child: GestureDetector(

@@ -127,7 +127,7 @@ class _MembersState extends State<Members> {
                 child: Image(
                   image: AssetImage('assets/images/background.png'),
                   width: 1600,
-                  height: 1200,
+                  height: 1500,
                   fit: BoxFit.cover,
                 ),
               ),

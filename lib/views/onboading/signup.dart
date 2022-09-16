@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
                 child: Image(
                   image: AssetImage('assets/images/background.png'),
                   width: 1600,
-                  height: 1200,
+                  height: 1500,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       Form(key: formKey,
                           child:Container(
-                        height: SizeConfig.safeBlockVertical! * 60,
+                        height: SizeConfig.safeBlockVertical! * 65,
                         color: Colors.white,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
