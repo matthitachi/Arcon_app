@@ -115,11 +115,13 @@ class _policyState extends State<policy> {
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child:
                           Text(
-                            "Association of Radiation and Clinical Oncologists of Nigeria built the Arcon app as an Ad Supported app. This SERVICE is provided by Association of Radiation and Clinical Oncologists of Nigeria at no cost and is intended for use as is."
-                                "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service."
-                                "If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy."
-                                "The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which are accessible at Arcon unless otherwise defined in this Privacy Policy."
-                            ,
+                            "The ARCON app was built by the ASSOCIATION OF RADIATION AND CLINICAL ONCOLOGISTS OF NIGERIA "
+                                "as an Ad supported app. This service is provided by ARCON at no cost and is intended for such use. Communication "
+                                "regarding our policies with respect to the collection, use and disclosure of personal information about "
+                                "visitors to the app is provided on this page. By opting to use this app, you agree to allow us collect and "
+                                "use information for the purpose of providing and improving the service. No part of the information collected will "
+                                "be used or shared with anyone except as described in this private policy. The terms used in this private policy have "
+                                "the same meanings as in our Terms and Conditions, which are accessible at ARCON unless otherwise defined in this private policy.",
                             textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
                               color: mainColor,
@@ -183,7 +185,8 @@ class _policyState extends State<policy> {
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child:
                           Text(
-                            "We want to inform you that whenever you use our Service, in a case of an error in the app we collect data and information (through third-party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics."
+                            "Kindly be informed that in case of an error in the app while using our service, we collect data and information (through third party products) on your phone called log data. This data may include information such as your "
+                                "device internet protocol (‘IP’) address, device name, operating system version, configuration of the app while using our service, date of service utilization, time of service utilization and other relevant statistics."
                             ,
                             textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
@@ -344,7 +347,8 @@ class _policyState extends State<policy> {
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child:
                           Text(
-                            "These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13 years of age. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do the necessary actions."
+                            "These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13 years of age.  If we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers."
+                                " If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do the necessary actions."
                             ,
                             textAlign: TextAlign.justify,
                             style: GoogleFonts.poppins(
@@ -375,7 +379,8 @@ class _policyState extends State<policy> {
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child:
                           Text(
-                            "We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page."
+                            "We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. "
+                                "We will notify you of such changes by posting the new Privacy Policy on this page."
                                 "This policy is effective as of 2022-08-04"
                             ,
                             textAlign: TextAlign.justify,

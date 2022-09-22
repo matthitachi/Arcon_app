@@ -67,6 +67,7 @@ bool obscureText = true;
     }
   }
 
+
   @override
   void initState() {
     getUserProfile();
@@ -122,170 +123,128 @@ bool obscureText = true;
                                     width: SizeConfig.safeBlockHorizontal! * 7,
                                   ),
                                 ),
-                                Image(
-                                  image: AssetImage('assets/images/logo.png'),
-                                  width: SizeConfig.safeBlockHorizontal! * 23,
+                                GestureDetector(
+                                  onTap: (){
+                                    showDialog(context: context,
+                                        builder: (BuildContext context){
+                                          return CustomDialogBox();
+                                        }
+                                    );
+                                  },
+                                  child: Text(
+                                    "Delete Account",
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.dmSans(
+                                      decoration:
+                                      TextDecoration.underline,
+                                      color: secondaryColor,
+                                      fontSize: SizeConfig
+                                          .safeBlockHorizontal! *
+                                          3.5,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
                             SizedBox(
                               height: SizeConfig.safeBlockVertical! * 3,
                             ),
-                            Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Avatar(urlImage: 'https://i.ibb.co/NrvcLXH/noAvatar.png', radius: SizeConfig.safeBlockHorizontal! * 10),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: SizeConfig.safeBlockHorizontal! * 5,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "${(user != null)?user!.first_name  :''} ${(user != null)?user!.last_name  :''}",
-                                              style: GoogleFonts.montserrat(
-                                                color: Colors.white,
-                                                fontSize: SizeConfig.safeBlockHorizontal! * 4,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ],
+                            Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Center(
+                                    child: Avatar(urlImage: 'https://i.ibb.co/NrvcLXH/noAvatar.png', radius: SizeConfig.safeBlockHorizontal! * 10),
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.safeBlockHorizontal! * 2,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "${(user != null)?user!.first_name  :''} ${(user != null)?user!.last_name  :''}",
+                                        style: GoogleFonts.montserrat(
+                                          color: Colors.white,
+                                          fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                                          fontWeight: FontWeight.w500,
                                         ),
-                                        SizedBox(
-                                          height: SizeConfig.safeBlockVertical! * 1,
+                                      ),
+                                      Container(
+                                        width: SizeConfig.safeBlockHorizontal! * 50,
+                                        child: Text(
+                                          '${(user != null)?user!.profession  :''}',
+                                          textAlign: TextAlign.left,
+                                          style: GoogleFonts.dmSans(
+                                            color: Colors.white,
+                                            fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                            fontWeight: FontWeight.w300,
+                                          ),
                                         ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: SizeConfig.safeBlockHorizontal! * 50,
-                                              child: Text(
-                                                '${(user != null)?user!.profession  :''}',
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.dmSans(
+                                      ),
+                                      SizedBox(
+                                        height: SizeConfig.safeBlockVertical! * 1,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          (user!.email !=null)?Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Email: ",
+                                                style: GoogleFonts.montserrat(
                                                   color: Colors.white,
                                                   fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: SizeConfig.safeBlockVertical! * 3,
-                                        ),
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "Email",
-                                                      textAlign: TextAlign.left,
-                                                      style: GoogleFonts.montserrat(
-                                                        color: Colors.white,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                                        fontWeight: FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ],
+                                              Container(
+                                                child: Text(
+                                                  '${(user != null)?user!.email  :''}',
+                                                  style: GoogleFonts.dmSans(
+                                                    color: Colors.white,
+                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      '${(user != null)?user!.email  :''}',
-                                                      textAlign: TextAlign.left,
-                                                      style: GoogleFonts.dmSans(
-                                                        color: Colors.white,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                        fontWeight: FontWeight.w300,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: SizeConfig.safeBlockVertical! * 1,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "Country",
-                                                      textAlign: TextAlign.left,
-                                                      style: GoogleFonts.montserrat(
-                                                        color: Colors.white,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                                        fontWeight: FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      '${(user != null)?user!.country  :''}',
-                                                      textAlign: TextAlign.left,
-                                                      style: GoogleFonts.dmSans(
-                                                        color: Colors.white,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                        fontWeight: FontWeight.w300,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: SizeConfig.safeBlockHorizontal! * 5,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "Phone",
-                                                      textAlign: TextAlign.left,
-                                                      style: GoogleFonts.montserrat(
-                                                        color: Colors.white,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
-                                                        fontWeight: FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      '${(user != null)?user!.phone  :''}',
-                                                      textAlign: TextAlign.left,
-                                                      style: GoogleFonts.dmSans(
-                                                        color: Colors.white,
-                                                        fontSize: SizeConfig.safeBlockHorizontal! * 3,
-                                                        fontWeight: FontWeight.w300,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                              ),
+                                            ],
+                                          ): Container(),
 
-                                  ],
-                                ),
-                              ],
+                                          SizedBox(
+                                            height: SizeConfig.safeBlockVertical! * 1,
+                                          ),
+                                          (user!.country !=null)?Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Country: ",
+                                                style: GoogleFonts.montserrat(
+                                                  color: Colors.white,
+                                                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Text(
+                                                  '${(user != null)?user!.country  :''}',
+                                                  style: GoogleFonts.dmSans(
+                                                    color: Colors.white,
+                                                    fontSize: SizeConfig.safeBlockHorizontal! * 3.5,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ): Container(),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+
+                                ],
+                              ),
                             ),
 
                           ],
@@ -1173,6 +1132,92 @@ bool obscureText = true;
         ),
       drawer: drawer(),
       // bottomNavigationBar: Navigation(selectedIndex: selectedIndex, onClicked: onClicked,),
+    );
+  }
+}
+
+
+class CustomDialogBox extends StatefulWidget {
+
+  @override
+  _CustomDialogBoxState createState() => _CustomDialogBoxState();
+}
+
+class _CustomDialogBoxState extends State<CustomDialogBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
+    );
+  }
+  contentBox(context){
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(left: 20,top: 20 + 20, right: 20,bottom: 20),
+          margin: EdgeInsets.only(top: 30),
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(color: Colors.black,offset: Offset(0,10),
+                    blurRadius: 10
+                ),
+              ]
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text ("Are you sure you want to delete your account",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.dmSans(
+                    color: textColor,
+                    fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                    fontWeight: FontWeight.w300,
+                  ),
+              ),
+              SizedBox(height: 22,),
+
+              Row(
+                children: [
+                  Expanded(child: OutlinedButton(onPressed: (){},
+                    child: Text("Yes",
+                      style: GoogleFonts.dmSans(
+                        color: mainColor,
+                        fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    )
+                  )
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(child: ElevatedButton(onPressed: (){},
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(mainColor)
+                      ),
+                    child: Text("Cancel",
+                      style: GoogleFonts.dmSans(
+                        color: Colors.white,
+                        fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                        fontWeight: FontWeight.w300,
+                      ),
+                  )
+                  )
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
